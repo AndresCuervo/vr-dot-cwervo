@@ -62,9 +62,6 @@
     [:body
      [:a-scene.whatever
       [:a-sky {:src "/images/panoramas/manic-night/archway.jpg" :rotation "0 -130 0"}]
-      ;; FUCK yeah, this is it! Static HTML with caching and everything
-      ;; TODO ---- port over the main page, a couple scenes, etc.
-
       [:a-cone {:color "#2EAFAC"
                 :position "-2 0 -4"
 

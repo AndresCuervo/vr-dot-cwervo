@@ -1,5 +1,5 @@
 (set-env!
-  :source-paths #{"src" "content"}
+  :source-paths #{"src" "content" "resources"}
   :dependencies '[[perun "0.4.2-SNAPSHOT" :scope "test"]
                   [hiccup "1.0.5"]
                   ;; When this merges:
@@ -24,8 +24,8 @@
     (render :renderer 'site.core/page)
     ;; (collection :renderer 'site.index/render :page "vr-capstone.html")
     (static :renderer 'site.index/render :page "vr-capstone.html")
+    (images-dimensions) ;; Just print the meta data for images
     (target)
-    (images-dimensions)
     ))
 
 (deftask dev
