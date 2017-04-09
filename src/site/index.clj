@@ -1,70 +1,70 @@
 (ns site.index
   (:use [hiccup.core :only (html)]
         [hiccup.page :only (html5)]
-        [clojure.string :as string]))
+        [clojure.string :as str]))
 
-(defn make-box-row [n result]
-  ;; Ohh, you can do trees like this, in raw html, maybe?
-(let [size (* 0.1 n)
-      pos (string/join
-                  " "
-                  [(+ -2 n 1) (+ 0.5 (Math/cos n)) -3])]
-  (if (> n 0)
-    (make-box-row (dec n) (list #_[:a-cone {:color "tomato"
-                                            :radius-bottom "2"
-                                            :radius-top size
-                                            :position pos}]
-                                [:a-box
-                                 {:color "#4CC3D9"
-                                  :depth size
-                                  :height size
-                                  :width size
-                                  :rotation "0 45 0"
-                                  ;; :animation__rotate_lol (str
-                                  ;;                          "property: rotation;
-                                  ;;                          from: 0 45 0;
-                                  ;;                          loop: true;
-                                  ;;                          easing: linear;
-                                  ;;                          to: 0 " (+ 360 (*  45 (Math/cos n))) " 0;")
-                                  :position pos}] result))
-    result))
-  )
-
-(def srcs
-  [;; Here be dragons.
-   ;;
-   ;; JK, here are all the extenal scripts, maybe they'll move to CLJSJS compilation
-   ;; some day, if I can muster it.
-   "https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"
-   ;; Custom scripts to be ported over:
-   ;; [:script {:src"/a-frame-js/click-component.js"}]
-   ;; [:script {:src"/a-frame-js/specifyPosition.js"}]
-   ;; <!-- [:script {:src"/a-frame-js/tree-geom.js"}] -->
-   ;; <!-- Working with .ply models -->
-   "https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js"
-   ;; <!-- Entity generator -->
-   "https://unpkg.com/aframe-entity-generator-component@^3.0.0/dist/aframe-entity-generator-component.min.js"
-   "https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"
-   "https://unpkg.com/aframe-layout-component@4.0.1/dist/aframe-layout-component.min.js"
-   "https://unpkg.com/aframe-template-component@^3.1.1/dist/aframe-template-component.min.js"
-   ])
-
-(defn render [{global-meta :meta posts :entries}]
+(defn render__defunct [{global-meta :meta posts :entries}]
   (html
     [:head
-      [:title (:site-title global-meta)]
-      [:meta {:charset "utf-8"}]
-      [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
-      [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
-      [:script {:src "https://aframe.io/releases/0.5.0/aframe.min.js"}]
-      (for [src srcs]
-        [:script {:src src}])]
+     [:title (:site-title global-meta)]
+     [:meta {:charset "utf-8"}]
+     [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
+     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
+     [:link {:rel "stylesheet"
+             :href "/css/main.css"}]
+     [:script {:src "https://aframe.io/releases/0.5.0/aframe.min.js"}]]
     [:body
-     [:a-scene.whatever
-      [:a-sky {:src "/images/panoramas/manic-night/archway.jpg" :rotation "0 -130 0"}]
-      [:a-cone {:color "#2EAFAC"
-                :position "-2 0 -4"
+     [:div.page ;; needs to return a single element, so this wraps it !
+      [:div#wrapper.center
+       [:section
+        [:span
+         "Oh, hello there! :)"]
+        [:p
+         "Here are some links to other VR things I've done:"
+         [:ul.vr_list
+          [:li
+           [:a {:href "/homepage.html"}
+            "Homepage (update this to actually take over the homepage lol,
+            (e.g. get rid of the index.md) and it won't be so bad to write a new task for each new page,
+            that feels like over optimization @ this point, so just go for it!)"]]
+          [:li
+           [:a {:href "/vr-capstone.html"} ;; turn this into an index, inside a scenes directory! Gotta use sitemap generator probs?
+            "My VR CRWR capstone"]]
+          [:li
+           [:a {:href "/about/index.html"}
+            "about"]]]]]]
+      [:a-scene.background-scene
+       [:a-sky {:src "/images/panoramas/abandoned-room.jpg"}]]]]))
 
-                :radius-bottom "2" :radius-top "0.5"
-                :data-radius-bottom "2"}]
-      (make-box-row 20 '())]]))
+;; This might take over for the main index page, because that's effectively all its doing?
+;; Collecting the previous page, I mean.
+(defn render [{global-meta :meta entries :entries}]
+  (html
+    [:head
+     [:title (:site-title global-meta)]
+     [:meta {:charset "utf-8"}]
+     [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
+     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0, user-scalable=no"}]
+     [:link {:rel "stylesheet"
+             :href "/css/main.css"}]
+     [:script {:src "https://aframe.io/releases/0.5.0/aframe.min.js"}]]
+    [:body
+     [:div.page ;; needs to return a single element, so this wraps it !
+      [:div#wrapper.center
+       [:section
+        [:span
+         "Oh, hello there! :)"]
+        [:p
+         "Here are some links to other VR things I've done:"
+         [:ul.vr_list
+          (for [entry entries]
+        (when (and (contains? entry :title)
+                   ;; Wow, I can add my own metadata keys, so fun!
+                   (not (:draft? entry)))
+          [:li
+           [:a {:href (:permalink entry)}
+           (:title entry)]]))]]]]
+      [:a-scene.background-scene
+       [:a-sky {:src "/images/panoramas/abandoned-room.jpg"}]]]]))
+
+

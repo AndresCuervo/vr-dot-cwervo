@@ -25,10 +25,16 @@
     ;; (collection :renderer 'site.core/page :page "index.html")
     (markdown)
     (render :renderer 'site.core/page)
+
+    ;; (collection :renderer 'site.index/collect-pages :page "not-index-for-now.html")
     ;; (collection :renderer 'site.index/render :page "vr-capstone.html")
-    (static :renderer 'site.index/render :page "vr-capstone.html")
+
+    ;; It JUST works with arbitrary paths <3 FUCK YEAH
+    ;; (static :renderer 'site.index/render :page "homepage.html")
+    (collection :renderer 'site.index/render :page "index.html")
+
     ;; this is confusing b/c it overrides the index.markdown file, fix the semantics
-    (static :renderer 'site.capstone.index/render);; :page "index.html")
+    (static :renderer 'site.capstone.index/render :page "scenes/vr-capstone.html");; :page "index.html")
     (images-dimensions) ;; Just print the meta data for images
     (target)
     ))
