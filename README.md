@@ -31,6 +31,6 @@ to `target/public/`~~ Nope! Solved by adding the "resources" to `build.boot`'s
 # TODOS:
 
 - [x] port over the homepage
-- [~] port over SASS
-- [ ] add a couple of the panorama scenes, etc.
+- [x] port over SASS
+- [~] add a couple of the panorama scenes, etc.
 - [ ] and then, finally add the vr-capstone scene so you can iterate on it using Clojure forms 😍

@@ -17,15 +17,13 @@
          '[site.index :as index]
          '[deraen.boot-livereload :refer [livereload]])
 
-(deftask build
-  "Build test blog. This task is just for testing different plugins together."
+(deftask base-build
+  "Generic build tasks, with no custom option, gets build every time"
   []
   (comp
-    (sass)
     ;; (collection :renderer 'site.core/page :page "index.html")
     (markdown)
     (render :renderer 'site.core/page)
-
     ;; (collection :renderer 'site.index/collect-pages :page "not-index-for-now.html")
     ;; (collection :renderer 'site.index/render :page "vr-capstone.html")
 
@@ -33,14 +31,28 @@
     ;; (static :renderer 'site.index/render :page "homepage.html")
     (collection :renderer 'site.index/render :page "index.html")
 
-    ;; this is confusing b/c it overrides the index.markdown file, fix the semantics
-    (static :renderer 'site.capstone.index/render :page "scenes/vr-capstone.html");; :page "index.html")
-    (images-dimensions) ;; Just print the meta data for images
+    (static :renderer 'site.capstone.index/render :page "scenes/vr-capstone.html")
+    (static :renderer 'site.capstone.index/render-squiggles :page "scenes/squiggles-vr-capstone.html")
+    ;; (images-dimensions) ;; Just print the meta data for images
     (target)
     ))
+
+(deftask dev-build
+  "Dev build task, doesn't compress SCSS to make debugging easier."
+  []
+  (comp
+    (sass)
+    (base-build)))
+
+(deftask build
+  "Production build task, does compress SCSS."
+  []
+  (comp
+    (sass :output-style :compressed)
+    (base-build)))
 
 (deftask dev
   []
   (comp (watch)
-        (build)
+        (dev-build)
         (serve :resource-root "public")))
