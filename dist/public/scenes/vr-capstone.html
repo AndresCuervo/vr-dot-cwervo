@@ -83,5 +83,15 @@
                                                            from: 0 45 0;
                                                            loop: true;
                                                            easing: linear;
-                                                           to: 0 378.36369278160265 0;" color="#4CC3D9" depth="2.0" height="2.0" position="19 0.908082061813392 -3" rotation="0 45 0" width="2.0"></a-box><a-entity geometry="primitive: circle; radius: 10; segments: 30" id="sun" material="color: #F79F24" position="0  15 -12" rotation="25 0 10"></a-entity><a-entity geometry="primitive: circle; radius: 10; segments: 30" id="sun" material="color: #F79F24" position="0  15 -12" rotation="25 15 15"></a-entity><a-entity geometry="primitive: circle; radius: 1;" id="egg-whites" material="color: white;wireframe: false;" position="0  2 -3.5"><a-entity geometry="primitive: sphere; radius: 0.5;" id="egg-yolk" material="color: yellow;wireframe: false;" position="-0.3  0.2 -0.2"></a-entity></a-entity><a-camera><a-cursor geometry="primitive: ring" material="color: #FFC0CB;
+                                                           to: 0 378.36369278160265 0;" color="#4CC3D9" depth="2.0" height="2.0" position="19 0.908082061813392 -3" rotation="0 45 0" width="2.0"></a-box><a-circle animation__segs="property: geometry.segments;
+                           loop: true;
+                           easing: linear;
+                           from: 30; to: 3;
+                           dir: alternate;
+                           dur: 3000;" class="sun" geometry="radius: 10; segments: 30" material="color: #F79F24" position="0  15 -12" rotation="25 0 10"></a-circle><a-circle animation__segs="property: geometry.segments;
+                           loop: true;
+                           easing: linear;
+                           from: 30; to: 3;
+                           dir: alternate;
+                           dur: 3000;" class="sun" geometry="radius: 10; segments: 30" material="color: #F79F24" position="0  15 -12" rotation="25 15 15"></a-circle><a-entity geometry="primitive: circle; radius: 1;" id="egg-whites" material="color: white;wireframe: false;" position="0  2 -3.5"><a-entity geometry="primitive: sphere; radius: 0.5;" id="egg-yolk" material="color: yellow;wireframe: false;" position="-0.3  0.2 -0.2"></a-entity></a-entity><a-camera><a-cursor geometry="primitive: ring" material="color: #FFC0CB;
                              shader: flat" scale="1.5 1.5 1.5"></a-cursor></a-camera></a-scene></body>
