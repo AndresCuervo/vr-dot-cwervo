@@ -77,17 +77,17 @@
 
       ;; Sun???
       (for [rotation ["25 0 10" "25 15 15"]]
-        [:a-entity#sun
-         {:geometry "primitive: circle; radius: 10; segments: 30"
+        [:a-circle.sun
+         {:geometry "radius: 10; segments: 30"
           :material "color: #F79F24"
           :position "0  15 -12"
           :rotation rotation
-          ;; :animation__segs "property: geometry.segments;
-          ;;                  loop: true;
-          ;;                  easing: linear;
-          ;;                  from: 30; to: 3;
-          ;;                  dir: alternate;
-          ;;                  dur: 3000;"
+          :animation__segs "property: geometry.segments;
+                           loop: true;
+                           easing: linear;
+                           from: 30; to: 3;
+                           dir: alternate;
+                           dur: 3000;"
           }])
 
       (let [wireframe false]
