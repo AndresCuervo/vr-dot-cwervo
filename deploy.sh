@@ -15,7 +15,7 @@ fi
 boot build
 cp -rf target/public "$out"
 cp -rf resources/public/images/ "$out"/images
-touch "$out"/CNAME
+rm -f "$out"/CNAME # Remove old CNAME, -f to quiet the warnings
 echo "vrr.cwervo.com" > "$out"/CNAME
 git add "$out"
 git commit -m "Deploy commit $(date)"
