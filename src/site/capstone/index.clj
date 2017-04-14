@@ -10,9 +10,9 @@
    ;; some day, if I can muster it.
    "https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"
    ;; Custom scripts to be ported over:
-   ;; [:script {:src"/a-frame-js/click-component.js"}]
-   ;; [:script {:src"/a-frame-js/specifyPosition.js"}]
-   ;; <!-- [:script {:src"/a-frame-js/tree-geom.js"}] -->
+   "/js/a-frame-js/click-component.js"
+   "/js/a-frame-js/specifyPosition.js"
+   "/js/a-frame-js/randomDataPos.js"
    ;; <!-- Working with .ply models -->
    "https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js"
    ;; <!-- Entity generator -->
@@ -60,9 +60,42 @@
      (for [src srcs]
        [:script {:src src}])]
     [:body
-     [:a-scene.whatever
+     [:a-scene
+
+      [:a-assets
+       [:img {:id "pine-needles-texture" :src "/images/textures/pine-needles.jpg"}]
+       [:img {:id "bark-cylinder-texture" :src "/images/textures/bark.jpg"}]
+       [:a-mixin {:id "tree-texture" :material "src:#pine-needles-texture"}]
+       [:a-mixin {:id "bark-texture" :material "src:#bark-cylinder-texture"}]
+
+       [:script {:id "treeTemplate"
+                 :type "html"}
+         #_"<a-entity id=\"conicTree-${number}\" position=\"${pos}\">
+                <a-cone mixin=\"tree-texture\" radius-bottom=\"2\" radius-top=\"0\" height=\"2\">
+                    <a-cone mixin=\"tree-texture\" radius-bottom=\"2\" radius-top=\"0\" position=\"0 -1   0\"></a-cone>
+                    <a-cone mixin=\"tree-texture\" radius-bottom=\"2\" radius-top=\"0\" position=\"0 -1.5 0\"></a-cone>
+                    <!-- <a-cylinder mixin=\"bark-color\" height=\"1\" radius=\"0.5\" position=\"0 -2.5 0\"     ></a-cylinder> -->
+                    <a-cylinder random-rotation=\"min: 0 0 0; max: 0 360 0\" mixin=\"bark-texture\" height=\"2\" radius=\"0.5\" position=\"0 -2.5 0\"     ></a-cylinder>
+                </a-cone>
+            </a-entity>"
+         [:a-entity {:id "conicTree-${number}" :position "${pos}"}
+          [:a-cone {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :height "2"}
+           [:a-cone {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :position "0 -1   0"}]
+           [:a-cone {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :position "0 -1.5 0"}]
+           [:a-cylinder {:random-rotation "min: 0 0 0; max: 0 360 0" :mixin "bark-texture" :height "2" :radius "0.5" :position "0 -2.5 0"}]]]]]
+
+
       [:a-sky {:src "/images/panoramas/manic-night/archway.jpg" :rotation "0 -130 0"}]
-      [:a-cone {:color "#2EAFAC"
+
+      [:a-entity {:template "src: #treeTemplate" :data-number "1" :data-pos "-2 3 -4"}]
+      [:a-entity {:template "src: #treeTemplate" :data-number "2" :data-pos "1 3 -4"}]
+      [:a-entity {:template "src: #treeTemplate" :data-number "3" :data-pos "0 3 -4"}]
+
+      (for [n (range 4 96)]
+        [:a-entity {:rand-data-pos "" :template "src: #treeTemplate" :data-number n}])
+
+      ;; Funny expanding cone
+      #_[:a-cone {:color "#2EAFAC"
                 :position "-2 0 -4"
 
                 :radius-bottom "2" :radius-top "0"
@@ -73,7 +106,8 @@
                                    dir: alternate;
                                    dur: 1000;"
                 :data-radius-bottom "2"}]
-      (make-box-row 20 '())
+
+      #_(make-box-row 20 '())
 
       ;; Sun???
       (for [rotation ["25 0 10" "25 15 15"]]
