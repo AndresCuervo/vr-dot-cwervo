@@ -32,7 +32,8 @@
     (collection :renderer 'site.index/render :page "index.html")
 
     (static :renderer 'site.capstone.index/render :page "scenes/vr-capstone.html")
-    (static :renderer 'site.capstone.index/render-squiggles :page "scenes/squiggles-vr-capstone.html")
+    (static :renderer 'site.capstone.offshoots/render-squiggles :page "scenes/squiggles-vr-capstone.html")
+    (static :renderer 'site.capstone.offshoots/render-leah :page "scenes/anotherWorld.html")
     ;; (images-dimensions) ;; Just print the meta data for images
     (target)
     ))
