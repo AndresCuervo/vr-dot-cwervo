@@ -30,7 +30,16 @@ to `target/public/`~~ Nope! Solved by adding the "resources" to `build.boot`'s
 
 # TODOS:
 
+- (new as of 2017-04-22)
+- [ ] Add a title screen, fade from black with (4 things of) text to the opening scene
+- [ ] Make a progression between at least 3 scenes, with (glowing?) red spheres as callouts
+- [ ] `idk, other stuff 😬`
+
+------
+
+- (old as of 2017-04-22)
 - [x] port over the homepage
 - [x] port over SASS
-- [~] add a couple of the panorama scenes, etc.
-- [ ] and then, finally add the vr-capstone scene so you can iterate on it using Clojure forms 😍
+- [x] add a couple of the panorama scenes, etc.
+- [x] and then, finally add the vr-capstone scene so you can iterate on it using Clojure forms 😍
+
