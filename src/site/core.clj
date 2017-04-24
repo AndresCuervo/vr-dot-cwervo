@@ -44,11 +44,11 @@
     ;; (println "using threading: " (-> data
     ;;                                  :entry
     ;;                                  :tite))
-    (println (str title
-                  " in panoramas dir? : "
-                  panorama?
-                  #_(not (nil? (re-find (re-pattern "^public/panoramas") parent-path)))))
-    (println "\n -----")
+    ;; (println (str title
+    ;;               " in panoramas dir? : "
+    ;;               panorama?
+    ;;               #_(not (nil? (re-find (re-pattern "^public/panoramas") parent-path)))))
+    ;; (println "\n -----")
     ;; If it's in the "panoramas" folder, apply a panoramas specific render-fn???
     (if panorama?
       (build-panorama title content)

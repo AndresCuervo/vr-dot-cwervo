@@ -3,6 +3,7 @@
   :dependencies '[[perun "0.4.2-SNAPSHOT" :scope "test"]
                   [hiccup "1.0.5"]
                   [deraen/boot-sass "0.2.1"]
+                  [deraen/boot-livereload "0.1.2"]
                   ;; When this merges:
 
                   ;; https://github.com/pandeiro/boot-http/pull/61
@@ -54,6 +55,8 @@
 
 (deftask dev
   []
-  (comp (watch)
+  (comp (repl :server true)
+        (watch)
         (dev-build)
+        (livereload :asset-path "public" :filter #"\.(css|html|js)$")
         (serve :resource-root "public")))

@@ -9,11 +9,10 @@
    ;; JK, here are all the extenal scripts, maybe they'll move to CLJSJS compilation
    ;; some day, if I can muster it.
    "https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"
-   ;; Custom scripts to be ported over:
-   "/js/a-frame-js/click-component.js"
-   "/js/a-frame-js/specifyPosition.js"
-   "/js/a-frame-js/randomDataPos.js"
-   "/js/a-frame-js/changeOnLook.js"
+   ;; JS State Machine! :)
+   ;; https://github.com/jakesgordon/javascript-state-machine
+   "https://cdn.rawgit.com/jakesgordon/javascript-state-machine/master/state-machine.js"
+
    ;; <!-- Working with .ply models -->
    "https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js"
    ;; <!-- Entity generator -->
@@ -21,6 +20,13 @@
    "https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"
    "https://unpkg.com/aframe-layout-component@4.0.1/dist/aframe-layout-component.min.js"
    "https://unpkg.com/aframe-template-component@^3.1.1/dist/aframe-template-component.min.js"
+
+   ;; Custom scripts to be ported over:
+   "/js/a-frame-js/click-component.js"
+   "/js/a-frame-js/specifyPosition.js"
+   "/js/a-frame-js/randomDataPos.js"
+   "/js/a-frame-js/changeOnLook.js"
+   "/js/states.js"
    ])
 
 (def head-el
@@ -29,6 +35,8 @@
    [:meta {:charset "utf-8"}]
    [:meta {:http-equiv "X-UA-Compatible" :content "IE=edge,chrome=1"}]
    [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
+   [:link {:rel "stylesheet"
+           :href "/css/capstone.css"}]
    [:script {:src "https://aframe.io/releases/0.5.0/aframe.min.js"}]
    (for [src srcs]
      [:script {:src src}])])
@@ -103,6 +111,68 @@
                                  dir: alternate;
                                  dur: 1500;
                                  loop: true;"}]
+      [:a-sphere#black_mask.clickable {:radius 3
+                  :position "0 1.6 0"
+                  ;; :material "side: back;"
+                  :material "side: double;
+                            "
+                            ;; opacity: 0;
+                  :color "black"
+                  ;; startEvents: removetitle, onremovetitle, onenterremovetitle;
+                  #_#_:animation__fade "property: material.opacity;
+                                       from: 1.0;
+                                       to: 0.0;
+                                       dir: alternate;
+                                       dur: 3000;"}
+       (let [head-y 1.6
+             make-rotation #(str "0 " % " 0")
+             make-rev-rotation #(str "0 " "-"% " 0")
+             distance-from-center 0.7
+             pos [(str "0 0 " (- 0 distance-from-center)) ;; front
+                  (str distance-from-center " 0 0") ;; right
+                  (str "0 " head-y " " distance-from-center) ;; back
+                  (str (- 0 distance-from-center) " 0 0") ;; left
+                  ]
+             rot ["0"
+                  "-90"
+                  "180"
+                  "90"
+                  ]]
+         (for [n (range 4)]
+           [:a-text.title_text {:value "Imagine Trees Like These
+                                       \n An Obelrin CRWR Capstone Project by:
+                                       \n Andres Cuervo | Advisor: Sylvia Watanabe"
+                                :font "sourcecodepro"
+                                :align "center"
+                                :width 1
+                                :position (nth pos n)
+                                :id (str "title-"n)
+                                :rotation  (make-rotation (nth rot n))
+                                :side "double"
+                                #_#_:animation__rotate (str "property: rotation;"
+                                                            "from: " (make-rotation (nth rot n)) ";"
+                                                            "to: " (make-rev-rotation (nth rot n)) ";"
+                                                            "loop: true;
+                                                            dir: alternate;
+                                                            dur:" (* n 1000) " ;"
+                                                            )
+                                }
+            [:a-plane.clickable.title_plane {:position "0 -1 -1"
+                                             :color "white"
+                                             :fuse-trigger "event: removetitle;"}
+             [:a-text.title_plane_text {:color "black"
+                                        :width 2
+                                        :position "0 0 0"
+                                        :align "center"
+                                        :value "Stare here for 1 second
+                                              \nto enter the scene."}]]]))]
+
+      #_[:a-light {:type "ambient"
+                 :color "#EEE"
+                 :animation__go "property: position;
+                                from: -1 1.6 0;
+                                to:    1 1.6 0;
+                                loop: true;"}]
 
       (for [n (range 1 96)]
         [:a-entity {:rand-data-pos "" :template "src: #treeTemplate"
@@ -112,15 +182,16 @@
 
       ;; Funny expanding cone
       (for [n (range -50 150 20)]
-        [:a-cone {:color "#2EAFAC"
-                  :change-on-look ""
-                  :change-color-on-click ""
+        [:a-cone.clickable {:color "#2EAFAC"
+                  ;; :change-on-look ""
+                  ;; :change-color-on-click ""
                   :wireframe "true"
                   :position (string/join " "
                                          [(/ n 5)
                                           (Math/cos n)
                                           -3])
                   :radius-bottom "2" :radius-top "0"
+                  ;; I guess, you could just do mouseEnter events?
                   :animation__pointy "startEvents: mouseenter;
                                      pauseEvents: mouseleave;
                                      property: radius-top;
@@ -131,7 +202,7 @@
                                      dur: 1000;"
                   :data-radius-bottom "2"}])
 
-      (make-box-row 20 '())
+      #_(make-box-row 20 '())
 
       #_(for [n (range 0 600 60)]
           [:a-cone {:color "#2EAFAC"
@@ -163,7 +234,7 @@
                            dur: 3000;"
           }])
 
-      (let [wireframe true]
+      #_(let [wireframe false]
         [:a-entity#egg-whites
          {:geometry "primitive: circle; radius: 1;"
           :material (str "color: white;"
@@ -176,21 +247,23 @@
            :position "-0.3  0.2 -0.2"
            }]])
 
-      #_[:a-entity#sun
-         {:geometry "primitive: circle; radius: 10; segments: 30"
-          :material "color: #F79F24"
-          :position "0 15 -12"
-          :rotation "25 0 10"
-          :animation__segs "property: geometry.segments;
-                           loop: true;
-                           easing: linear;
-                           from: 30; to: 3;
-                           dir: alternate;
-                           dur: 3000;"}]
-
       ;; Camera
-      [:a-camera#camera {:look-controls "reverseMouseDrag: true;"}
-       [:a-cursor {:scale "1.5 1.5 1.5"
+      [:a-camera#camera {
+                         ;; :look-controls "reverseMouseDrag: true;"
+                         }
+       (let [cursor-size 0.05]
+         [:a-entity {;;:cursor "fuse: true; fuseTimeout: 500;"
+                   :cursor "fuse: true;"
+                   :raycaster "objects: .clickable"
+                   :fill "backwards"
+                   :position "0 0 -1"
+                   :scale (string/join " "
+                                       (repeat 3 cursor-size))
                    :geometry "primitive: ring"
                    :material "color: #FFC0CB;
-                             shader: flat"}]]]]))
+                             shader: flat"
+                   :animation (str ""
+                                       "property: scale;
+                                       from: " cursor-size ";"
+                                       "to: " (+ cursor-size 0.5) ";"
+                                       "dir: alternate;")}])]]]))

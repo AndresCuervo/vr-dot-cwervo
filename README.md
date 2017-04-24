@@ -32,6 +32,7 @@ to `target/public/`~~ Nope! Solved by adding the "resources" to `build.boot`'s
 
 - (new as of 2017-04-22)
 - [ ] Add a title screen, fade from black with (4 things of) text to the opening scene
+  - [ ] Use [JS State Machine](https://github.com/jakesgordon/javascript-state-machine)!
 - [ ] Make a progression between at least 3 scenes, with (glowing?) red spheres as callouts
 - [ ] `idk, other stuff 😬`
 

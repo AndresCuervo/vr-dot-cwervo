@@ -28,6 +28,16 @@
                       (not (:draft? entry)))
              [:li
               [:a {:href (:permalink entry)}
-               (:title entry)]]))]]]]
+               (:title entry)]]))
+         [:li
+          [:a {:href "/scenes/vr-capstone.html"}
+           "VR Capstone"]]
+         [:li
+          [:a {:href "/scenes/squiggles-vr-capstone.html"}
+           "Squiggly VR Capstone"]]
+         [:li
+          [:a {:href "/scenes/anotherWorld.html"}
+           "[AnotherWorld]"]]
+         ]]]]
      [:a-scene.background-scene
       [:a-sky {:src "/images/panoramas/abandoned-room.jpg"}]]]))
