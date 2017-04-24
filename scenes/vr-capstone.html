@@ -1,0 +1,119 @@
+<head><title>VR Capstone</title><meta charset="utf-8" /><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible" /><meta content="width=device-width, initial-scale=1.0" name="viewport" /><link href="/css/capstone.css" rel="stylesheet" /><script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script><script src="https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"></script><script src="https://cdn.rawgit.com/jakesgordon/javascript-state-machine/master/state-machine.js"></script><script src="https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js"></script><script src="https://unpkg.com/aframe-entity-generator-component@^3.0.0/dist/aframe-entity-generator-component.min.js"></script><script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script><script src="https://unpkg.com/aframe-layout-component@4.0.1/dist/aframe-layout-component.min.js"></script><script src="https://unpkg.com/aframe-template-component@^3.1.1/dist/aframe-template-component.min.js"></script><script src="/js/a-frame-js/click-component.js"></script><script src="/js/a-frame-js/specifyPosition.js"></script><script src="/js/a-frame-js/randomDataPos.js"></script><script src="/js/a-frame-js/changeOnLook.js"></script><script src="/js/states.js"></script></head><body><a-scene><a-assets><img id="pine-needles-texture" src="/images/textures/pine-needles-conic.jpg" /><img id="bark-cylinder-texture" src="/images/textures/bark.jpg" /><a-mixin id="tree-texture" material="src:#pine-needles-texture"></a-mixin><a-mixin id="bark-texture" material="src:#bark-cylinder-texture"></a-mixin><script id="treeTemplate" type="html"><a-entity id="conicTree-${number}" position="${pos}"><a-cone height="2" mixin="tree-texture" radius-bottom="2" radius-top="0" wireframe="${wireframe}"><a-cone animation__wow="property: position;
+                                from: ${pos};
+                                to: 0 -1 ;
+                                dir: alternate;
+                                dur: 2000;
+                                loop: true;" mixin="tree-texture" position="0 -1   0" radius-bottom="2" radius-top="0" wireframe="${wireframe}"></a-cone><a-cone mixin="tree-texture" position="0 -1.5 0" radius-bottom="2" radius-top="0" wireframe="${wireframe}"></a-cone><a-cylinder height="2" mixin="bark-texture" position="0 -2.5 0" radius="0.5" random-rotation="min: 0 0 0; max: 0 360 0" wireframe="${wireframe}"></a-cylinder></a-cone></a-entity></script></a-assets><a-sky animation__color="property: color;
+                                 from: #2EAFAC;
+                                 to: #BBAAEE;
+                                 easing: linear;
+                                 dir: alternate;
+                                 dur: 1500;
+                                 loop: true;" rotation="0 -130 0" src="/images/panoramas/test-arb1.jpg"></a-sky><a-sphere class="clickable" color="black" id="black_mask" material="side: double;
+                            " position="0 1.6 0" radius="3"><a-text align="center" class="title_text" font="sourcecodepro" id="title-0" position="0 0 -0.7" rotation="0 0 0" side="double" value="Imagine Trees Like These
+                                       
+ An Obelrin CRWR Capstone Project by:
+                                       
+ Andres Cuervo | Advisor: Sylvia Watanabe" width="1"><a-plane class="clickable title_plane" color="white" fuse-trigger="event: removetitle;" position="0 -1 -1"><a-text align="center" class="title_plane_text" color="black" position="0 0 0" value="Stare here for 1 second
+                                              
+to enter the scene." width="2"></a-text></a-plane></a-text><a-text align="center" class="title_text" font="sourcecodepro" id="title-1" position="0.7 0 0" rotation="0 -90 0" side="double" value="Imagine Trees Like These
+                                       
+ An Obelrin CRWR Capstone Project by:
+                                       
+ Andres Cuervo | Advisor: Sylvia Watanabe" width="1"><a-plane class="clickable title_plane" color="white" fuse-trigger="event: removetitle;" position="0 -1 -1"><a-text align="center" class="title_plane_text" color="black" position="0 0 0" value="Stare here for 1 second
+                                              
+to enter the scene." width="2"></a-text></a-plane></a-text><a-text align="center" class="title_text" font="sourcecodepro" id="title-2" position="0 1.6 0.7" rotation="0 180 0" side="double" value="Imagine Trees Like These
+                                       
+ An Obelrin CRWR Capstone Project by:
+                                       
+ Andres Cuervo | Advisor: Sylvia Watanabe" width="1"><a-plane class="clickable title_plane" color="white" fuse-trigger="event: removetitle;" position="0 -1 -1"><a-text align="center" class="title_plane_text" color="black" position="0 0 0" value="Stare here for 1 second
+                                              
+to enter the scene." width="2"></a-text></a-plane></a-text><a-text align="center" class="title_text" font="sourcecodepro" id="title-3" position="-0.7 0 0" rotation="0 90 0" side="double" value="Imagine Trees Like These
+                                       
+ An Obelrin CRWR Capstone Project by:
+                                       
+ Andres Cuervo | Advisor: Sylvia Watanabe" width="1"><a-plane class="clickable title_plane" color="white" fuse-trigger="event: removetitle;" position="0 -1 -1"><a-text align="center" class="title_plane_text" color="black" position="0 0 0" value="Stare here for 1 second
+                                              
+to enter the scene." width="2"></a-text></a-plane></a-text></a-sphere><a-entity data-number="1" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="2" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="3" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="4" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="5" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="6" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="7" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="8" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="9" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="10" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="11" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="12" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="13" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="14" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="15" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="16" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="17" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="18" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="19" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="20" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="21" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="22" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="23" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="24" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="25" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="26" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="27" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="28" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="29" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="30" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="31" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="32" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="33" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="34" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="35" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="36" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="37" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="38" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="39" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="40" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="41" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="42" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="43" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="44" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="45" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="46" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="47" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="48" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="49" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="50" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="51" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="52" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="53" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="54" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="55" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="56" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="57" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="58" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="59" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="60" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="61" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="62" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="63" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="64" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="65" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="66" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="67" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="68" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="69" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="70" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="71" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="72" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="73" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="74" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="75" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="76" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="77" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="78" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="79" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="80" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="81" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="82" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="83" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="84" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="85" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="86" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="87" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="88" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="89" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="90" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="91" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="92" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="93" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="94" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-entity data-number="95" data-wireframe="false" rand-data-pos="" template="src: #treeTemplate"></a-entity><a-cone animation__pointy="startEvents: mouseenter;
+                                     pauseEvents: mouseleave;
+                                     property: radius-top;
+                                     loop: true;
+                                     easing: linear;
+                                     from: 0; to: 3;
+                                     dir: alternate;
+                                     dur: 1000;" class="clickable" color="#2EAFAC" data-radius-bottom="2" position="-10 0.9649660284921133 -3" radius-bottom="2" radius-top="0" wireframe="true"></a-cone><a-cone animation__pointy="startEvents: mouseenter;
+                                     pauseEvents: mouseleave;
+                                     property: radius-top;
+                                     loop: true;
+                                     easing: linear;
+                                     from: 0; to: 3;
+                                     dir: alternate;
+                                     dur: 1000;" class="clickable" color="#2EAFAC" data-radius-bottom="2" position="-6 0.15425144988758405 -3" radius-bottom="2" radius-top="0" wireframe="true"></a-cone><a-cone animation__pointy="startEvents: mouseenter;
+                                     pauseEvents: mouseleave;
+                                     property: radius-top;
+                                     loop: true;
+                                     easing: linear;
+                                     from: 0; to: 3;
+                                     dir: alternate;
+                                     dur: 1000;" class="clickable" color="#2EAFAC" data-radius-bottom="2" position="-2 -0.8390715290764524 -3" radius-bottom="2" radius-top="0" wireframe="true"></a-cone><a-cone animation__pointy="startEvents: mouseenter;
+                                     pauseEvents: mouseleave;
+                                     property: radius-top;
+                                     loop: true;
+                                     easing: linear;
+                                     from: 0; to: 3;
+                                     dir: alternate;
+                                     dur: 1000;" class="clickable" color="#2EAFAC" data-radius-bottom="2" position="2 -0.8390715290764524 -3" radius-bottom="2" radius-top="0" wireframe="true"></a-cone><a-cone animation__pointy="startEvents: mouseenter;
+                                     pauseEvents: mouseleave;
+                                     property: radius-top;
+                                     loop: true;
+                                     easing: linear;
+                                     from: 0; to: 3;
+                                     dir: alternate;
+                                     dur: 1000;" class="clickable" color="#2EAFAC" data-radius-bottom="2" position="6 0.15425144988758405 -3" radius-bottom="2" radius-top="0" wireframe="true"></a-cone><a-cone animation__pointy="startEvents: mouseenter;
+                                     pauseEvents: mouseleave;
+                                     property: radius-top;
+                                     loop: true;
+                                     easing: linear;
+                                     from: 0; to: 3;
+                                     dir: alternate;
+                                     dur: 1000;" class="clickable" color="#2EAFAC" data-radius-bottom="2" position="10 0.9649660284921133 -3" radius-bottom="2" radius-top="0" wireframe="true"></a-cone><a-cone animation__pointy="startEvents: mouseenter;
+                                     pauseEvents: mouseleave;
+                                     property: radius-top;
+                                     loop: true;
+                                     easing: linear;
+                                     from: 0; to: 3;
+                                     dir: alternate;
+                                     dur: 1000;" class="clickable" color="#2EAFAC" data-radius-bottom="2" position="14 0.6333192030862999 -3" radius-bottom="2" radius-top="0" wireframe="true"></a-cone><a-cone animation__pointy="startEvents: mouseenter;
+                                     pauseEvents: mouseleave;
+                                     property: radius-top;
+                                     loop: true;
+                                     easing: linear;
+                                     from: 0; to: 3;
+                                     dir: alternate;
+                                     dur: 1000;" class="clickable" color="#2EAFAC" data-radius-bottom="2" position="18 -0.4480736161291702 -3" radius-bottom="2" radius-top="0" wireframe="true"></a-cone><a-cone animation__pointy="startEvents: mouseenter;
+                                     pauseEvents: mouseleave;
+                                     property: radius-top;
+                                     loop: true;
+                                     easing: linear;
+                                     from: 0; to: 3;
+                                     dir: alternate;
+                                     dur: 1000;" class="clickable" color="#2EAFAC" data-radius-bottom="2" position="22 -0.999020813314648 -3" radius-bottom="2" radius-top="0" wireframe="true"></a-cone><a-cone animation__pointy="startEvents: mouseenter;
+                                     pauseEvents: mouseleave;
+                                     property: radius-top;
+                                     loop: true;
+                                     easing: linear;
+                                     from: 0; to: 3;
+                                     dir: alternate;
+                                     dur: 1000;" class="clickable" color="#2EAFAC" data-radius-bottom="2" position="26 -0.3672913304546965 -3" radius-bottom="2" radius-top="0" wireframe="true"></a-cone><a-circle animation__segs="property: geometry.segments;
+                           loop: true;
+                           easing: linear;
+                           from: 30; to: 3;
+                           dir: alternate;
+                           dur: 3000;" class="sun" geometry="radius: 10; segments: 30" material="color: #F79F24" position="0  15 -12" rotation="25 0 10"></a-circle><a-circle animation__segs="property: geometry.segments;
+                           loop: true;
+                           easing: linear;
+                           from: 30; to: 3;
+                           dir: alternate;
+                           dur: 3000;" class="sun" geometry="radius: 10; segments: 30" material="color: #F79F24" position="0  15 -12" rotation="25 15 15"></a-circle><a-camera id="camera"><a-entity animation="property: scale;
+                                       from: 0.05;to: 0.55;dir: alternate;" cursor="fuse: true;" fill="backwards" geometry="primitive: ring" material="color: #FFC0CB;
+                             shader: flat" position="0 0 -1" raycaster="objects: .clickable" scale="0.05 0.05 0.05"></a-entity></a-camera></a-scene></body>
