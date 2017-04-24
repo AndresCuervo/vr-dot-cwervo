@@ -114,26 +114,26 @@
                                  dur: 1500;
                                  loop: true;"}]
       [:a-sphere#black_mask.clickable {:radius 3
-                  :position "0 1.6 0"
-                  ;; :material "side: back;"
-                  :material "side: double;
-                            "
-                            ;; opacity: 0;
-                  :color "black"
-                  ;; startEvents: removetitle, onremovetitle, onenterremovetitle;
-                  #_#_:animation__fade "property: material.opacity;
-                                       from: 1.0;
-                                       to: 0.0;
-                                       dir: alternate;
-                                       dur: 3000;"}
-       (let [head-y 1.6
-             make-rotation #(str "0 " % " 0")
+                                       :position "0 1.6 0"
+                                       ;; :material "side: back;"
+                                       :material "side: double;
+                                                 "
+                                       ;; opacity: 0;
+                                       :color "black"
+                                       ;; startEvents: removetitle, onremovetitle, onenterremovetitle;
+                                       #_#_:animation__fade "property: material.opacity;
+                                                            from: 1.0;
+                                                            to: 0.0;
+                                                            dir: alternate;
+                                                            dur: 3000;"}
+       (let [make-rotation #(str "0 " % " 0")
              make-rev-rotation #(str "0 " "-"% " 0")
              distance-from-center 0.7
+             rl-offset 1.7
              pos [(str "0 0 " (- 0 distance-from-center)) ;; front
-                  (str distance-from-center " 0 0") ;; right
-                  (str "0 " head-y " " distance-from-center) ;; back
-                  (str (- 0 distance-from-center) " 0 0") ;; left
+                  (str (* rl-offset distance-from-center )" 0 0") ;; right
+                  (str "0 0 " distance-from-center) ;; back
+                  (str (* rl-offset (- 0 distance-from-center)) " 0 0") ;; left
                   ]
              rot ["0"
                   "-90"
@@ -142,8 +142,9 @@
                   ]]
          (for [n (range 4)]
            [:a-text.title_text {:value "Imagine Trees Like These
-                                       \n An Obelrin CRWR Capstone Project by:
-                                       \n Andres Cuervo | Advisor: Sylvia Watanabe"
+                                       \nAn Obelrin CRWR Capstone Project by
+                                       \nAndres Cuervo
+                                       \nAdvisor: Sylvia Watanabe"
                                 :font "sourcecodepro"
                                 :align "center"
                                 :width 1
@@ -167,7 +168,7 @@
                                         :position "0 0 0"
                                         :align "center"
                                         :value "Stare here for 1 second
-                                              \nto enter the scene."}]]]))]
+                                               \nto enter the scene."}]]]))]
 
       #_[:a-light {:type "ambient"
                  :color "#EEE"

@@ -31,8 +31,9 @@ to `target/public/`~~ Nope! Solved by adding the "resources" to `build.boot`'s
 # TODOS:
 
 - (new as of 2017-04-22)
-- [ ] Add a title screen, fade from black with (4 things of) text to the opening scene
-  - [ ] Use [JS State Machine](https://github.com/jakesgordon/javascript-state-machine)!
+- [x] Add a title screen, fade from black with (4 things of) text to the opening scene
+  - [x] Use [JS State Machine](https://github.com/jakesgordon/javascript-state-machine)!
+- [ ] Make trees to 360° around, and not closer than starting circle! (.edn? just a fn for pos?)
 - [ ] Make a progression between at least 3 scenes, with (glowing?) red spheres as callouts
 - [ ] `idk, other stuff 😬`
 
