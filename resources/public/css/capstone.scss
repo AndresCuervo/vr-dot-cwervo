@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+    padding: 0;
+}
 .red {
   background-color: red;
 }
@@ -8,4 +12,10 @@
 
 .yellow {
   background-color: yellow;
+}
+
+#debug {
+    color: white;
+    z-index: 1;
+    position: absolute;
 }

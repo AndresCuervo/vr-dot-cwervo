@@ -100,6 +100,8 @@
   (html
     head-el
     [:body
+     [:div#debug
+      "state"]
      [:a-scene
       a-assets-el
 
@@ -184,7 +186,7 @@
       (for [n (range -50 150 20)]
         [:a-cone.clickable {:color "#2EAFAC"
                   ;; :change-on-look ""
-                  ;; :change-color-on-click ""
+                  :change-color-on-click ""
                   :wireframe "true"
                   :position (string/join " "
                                          [(/ n 5)
