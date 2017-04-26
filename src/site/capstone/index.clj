@@ -48,23 +48,45 @@
    [:img {:id "bark-cylinder-texture" :src "/images/textures/bark.jpg"}]
    [:a-mixin {:id "tree-texture" :material "src:#pine-needles-texture"}]
    [:a-mixin {:id "bark-texture" :material "src:#bark-cylinder-texture"}]
-
    [:script {:id "treeTemplate"
              :type "html"}
     [:a-entity {:id "conicTree-${number}" :position "${pos}"}
-     [:a-cone {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :height "2"
-               :wireframe "${wireframe}"}
-      [:a-cone {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :position "0 -1   0"
-                :wireframe "${wireframe}"
-                :animation__wow "property: position;
-                                from: ${pos};
-                                to: 0 -1 ;
-                                dir: alternate;
-                                dur: 2000;
-                                loop: true;"
-                }]
-      [:a-cone {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :position "0 -1.5 0"
-                :wireframe "${wireframe}"}]
+     [:a-cone.clickable {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :height "2"
+                         :animation__pointy "startEvents: mouseenter;
+                                            pauseEvents: mouseleave;
+                                            property: radius-top;
+                                            loop: true;
+                                            easing: linear;
+                                            from: 0; to: 10;
+                                            dir: alternate;
+                                            dur: 1000;"
+                         :wireframe "${wireframe}"}
+      [:a-cone.clickable {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :position "0 -1   0"
+                          :wireframe "${wireframe}"
+                          #_#_:animation__wow "property: position;
+                                              from: ${pos};
+                                              to: 0 -1 ;
+                                              dir: alternate;
+                                              dur: 2000;
+                                              loop: true;"
+                          :animation__pointy "startEvents: mouseenter;
+                                             pauseEvents: mouseleave;
+                                             property: radius-top;
+                                             loop: true;
+                                             easing: linear;
+                                             from: 0; to: 13;
+                                             dir: alternate;
+                                             dur: 1000;"}]
+      [:a-cone.clickable {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :position "0 -1.5 0"
+                          :animation__pointy "startEvents: mouseenter;
+                                             pauseEvents: mouseleave;
+                                             property: radius-top;
+                                             loop: true;
+                                             easing: linear;
+                                             from: 0; to: 15;
+                                             dir: alternate;
+                                             dur: 1000;"
+                          :wireframe "${wireframe}"}]
       [:a-cylinder {:random-rotation "min: 0 0 0; max: 0 360 0" :mixin "bark-texture" :height "2" :radius "0.5" :position "0 -2.5 0"
                     :wireframe "${wireframe}"}]]]]])
 
@@ -113,12 +135,13 @@
                                  dir: alternate;
                                  dur: 1500;
                                  loop: true;"}]
-      [:a-sphere#black_mask.clickable {:radius 3
+      [:a-sphere#intro_mask.clickable {:radius 3
                                        :position "0 1.6 0"
                                        ;; :material "side: back;"
                                        :material "side: double;
                                                  "
                                        ;; opacity: 0;
+                                       ;; :color "#BAE"
                                        :color "black"
                                        ;; startEvents: removetitle, onremovetitle, onenterremovetitle;
                                        #_#_:animation__fade "property: material.opacity;
@@ -142,9 +165,9 @@
                   ]]
          (for [n (range 4)]
            [:a-text.title_text {:value "Imagine Trees Like These
-                                       \nAn Obelrin CRWR Capstone Project by
-                                       \nAndres Cuervo
-                                       \nAdvisor: Sylvia Watanabe"
+                                       \nAn Oberlin CRWR Capstone Project
+                                       \n Made by — Andres Cuervo
+                                       \nAdvisor — Sylvia Watanabe"
                                 :font "sourcecodepro"
                                 :align "center"
                                 :width 1
@@ -162,7 +185,8 @@
                                 }
             [:a-plane.clickable.title_plane {:position "0 -1 -1"
                                              :color "white"
-                                             :fuse-trigger "event: removetitle;"}
+                                             :fsm-event-trigger "event: removetitle;"
+                                             }
              [:a-text.title_plane_text {:color "black"
                                         :width 2
                                         :position "0 0 0"
@@ -177,8 +201,22 @@
                                 to:    1 1.6 0;
                                 loop: true;"}]
 
-      (for [n (range 1 96)]
-        [:a-entity {:rand-data-pos "" :template "src: #treeTemplate"
+      (for [n (range 10 200)
+            ;; n == radius
+            ;; 5 == steps
+            :let [x-coord (+ (* n (Math/cos (* 2 Math/PI (/ n 100)))) (rand-int (/ n 2)))
+                  z-coord (+ (* n (Math/sin (* 2 Math/PI (/ n 100)))) (rand-int (/ n 2)))]]
+        ;; for (var i = 0; i < steps; i++) {
+        ;;          xValues[i] = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
+        ;;          yValues[i] = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
+        ;;          }
+        [:a-entity {
+                    :template "src: #treeTemplate"
+                    ;; :rand-data-pos ""
+                    :data-pos (string/join " "
+                                           [x-coord
+                                            2
+                                            z-coord])
                     :data-number n
                     :data-wireframe "false"
                     }])
@@ -188,13 +226,13 @@
         [:a-cone.clickable {:color "#2EAFAC"
                   ;; :change-on-look ""
                   :change-color-on-click ""
+                  ;; :mixin "tree-texture"
                   :wireframe "true"
                   :position (string/join " "
                                          [(/ n 5)
                                           (Math/cos n)
                                           -3])
                   :radius-bottom "2" :radius-top "0"
-                  ;; I guess, you could just do mouseEnter events?
                   :animation__pointy "startEvents: mouseenter;
                                      pauseEvents: mouseleave;
                                      property: radius-top;
@@ -254,7 +292,7 @@
       [:a-camera#camera {
                          ;; :look-controls "reverseMouseDrag: true;"
                          }
-       (let [cursor-size 0.05]
+       (let [cursor-size 0.025]
          [:a-entity {;;:cursor "fuse: true; fuseTimeout: 500;"
                    :cursor "fuse: true;"
                    :raycaster "objects: .clickable"
