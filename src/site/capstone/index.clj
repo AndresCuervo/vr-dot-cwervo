@@ -166,8 +166,8 @@
          (for [n (range 4)]
            [:a-text.title_text {:value "Imagine Trees Like These
                                        \nAn Oberlin CRWR Capstone Project
-                                       \n Made by — Andres Cuervo
-                                       \nAdvisor — Sylvia Watanabe"
+                                       \nMade by: Andres Cuervo
+                                       \nAdvisor: Sylvia Watanabe"
                                 :font "sourcecodepro"
                                 :align "center"
                                 :width 1
@@ -210,8 +210,7 @@
         ;;          xValues[i] = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
         ;;          yValues[i] = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
         ;;          }
-        [:a-entity {
-                    :template "src: #treeTemplate"
+        [:a-entity {:template "src: #treeTemplate"
                     ;; :rand-data-pos ""
                     :data-pos (string/join " "
                                            [x-coord
