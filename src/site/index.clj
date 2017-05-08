@@ -22,6 +22,9 @@
        [:p
         "Here are some links to other VR things I've done:"
         [:ul.vr_list
+         [:li
+          [:a {:href "/scenes/drag-and-drop/"}
+           "Drag & Drop a VR photo"]]
          (for [entry entries]
            (when (and (contains? entry :title)
                       ;; Wow, I can add my own metadata keys, so fun!
@@ -38,9 +41,6 @@
          [:li
           [:a {:href "/scenes/anotherWorld.html"}
            "[AnotherWorld]"]]
-         [:li
-          [:a {:href "/scenes/drag-and-drop/index.html"}
-           "Drag & Drop a VR photo"]]
          ]]]]
      [:a-scene.background-scene
       [:a-sky {:src "/images/panoramas/abandoned-room.jpg"}]]]))

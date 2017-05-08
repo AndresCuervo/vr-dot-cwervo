@@ -109,42 +109,7 @@
     [:body
      [:div#hud
       [:form#my-awesome-dropzone.dropzone {:action "#"}
-       [:span {:class "dz-message"} "Click on or drop files in this pink rectangle to change the background."]]
-      #_[:div
-       [:div "FOV:"]
-       ;; Set to initial FOV number!
-       ;; Don't forget to change if initial changes, or wire that up ... see, this is why using Vue.js would have been so much easier
-       [:p#fovNum "80"]
-       ;; Ugh, putting a-scene into the Vue element duplicates it or something, causing everything to break :(
-       [:input {:type "range"
-                :value 80
-                :min 1
-                :max 160
-                :oninput "changeFOV(this.value)"
-                ;; :v-model "zRotation"
-                }]]
-
-      ;; common params for a function to automate making this shit:
-      ;; param 1: base id: #hud
-      ;; param 2 : title
-      ;; param 3: initialValue (got to both title with its own class and as value of input)
-      ;; param 4: inputType (usually range, but you can experiment!)
-      ;; param 5: range (an array with 'min' and 'max' attributes! e.g. {'min' : -360, 'max' : 360})
-      ;; param 6: oninput (text value of function to call to maniupulate stuff!)
-      #_[:div
-       [:div "rotation Y"]
-       ;; Set to initial FOV number!
-       ;; Don't forget to change if initial changes, or wire that up ... see, this is why using Vue.js would have been so much easier
-       [:p#xNum "-130"]
-       ;; Ugh, putting a-scene into the Vue element duplicates it or something, causing everything to break :(
-       [:input {:type "range"
-                :value -130
-                :min -360
-                :max 360
-                :oninput "changeRotation('y', this.value)"
-                ;; :v-model "zRotation"
-                }]]
-      ]
+       [:span {:class "dz-message"} "Click on or drop files in this pink rectangle to change the background."]]]
      [:a-scene {:embedded ""}
       [:a-sky#bgImage {:src "/images/panoramas/earth_equirectangular.jpg"
                        :rotation "0 -130 0"}]
