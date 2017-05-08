@@ -1,0 +1,28 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+
+#hud {
+  color: #2EAFAC;
+  background-color: hsla(0, 65, 0, 0.5);
+  display: flex;
+  position: absolute;
+  text-align: center;
+  z-index: 1;
+}
+
+a-scene {
+  // z-index: -1;
+}
+
+.dz-preview {
+  display: none;
+}
+
+.dropzone {
+  background-color: rgba(255, 192, 203, 0.50);
+  color: white;
+  cursor: copy; // I know it's "copy", but it works
+}

@@ -35,6 +35,8 @@
     (static :renderer 'site.capstone.index/render :page "scenes/vr-capstone.html")
     (static :renderer 'site.capstone.offshoots/render-squiggles :page "scenes/squiggles-vr-capstone.html")
     (static :renderer 'site.capstone.offshoots/render-leah :page "scenes/anotherWorld.html")
+    (static :renderer 'site.core/ply-test :page "scenes/ply-test.html")
+    (static :renderer 'site.core/drag-and-drop :page "scenes/drag-and-drop.html")
     ;; (images-dimensions) ;; Just print the meta data for images
     (target)
     ))

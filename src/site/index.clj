@@ -38,6 +38,9 @@
          [:li
           [:a {:href "/scenes/anotherWorld.html"}
            "[AnotherWorld]"]]
+         [:li
+          [:a {:href "/scenes/drag-and-drop/index.html"}
+           "Drag & Drop a VR photo"]]
          ]]]]
      [:a-scene.background-scene
       [:a-sky {:src "/images/panoramas/abandoned-room.jpg"}]]]))
