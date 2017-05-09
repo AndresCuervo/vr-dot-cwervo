@@ -99,7 +99,7 @@
                       entries :entries}]
   (html
     ;; Put all this into a panorama-head fn or def?
-    (root-head-element "Ply Test"
+    (root-head-element "Drag & Drop!"
                        ["<script src='https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js'></script>"
                         "<script src='https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js'></script>"
                         "<script src='https://unpkg.com/vue'></script>"
