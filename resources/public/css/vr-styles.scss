@@ -1,0 +1,60 @@
+body {
+    font-family: sans-serif;
+}
+
+.a-frame-note {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    position: absolute;
+    left: 0;
+    top: 20%;
+    z-index: 1;
+    max-width: 8em;
+    font-size: 0.7em;
+
+    $border-radius: 20px;
+    border-radius: 0 $border-radius $border-radius 0;
+    $padding: ($border-radius / 2);
+    padding:  $padding $padding $padding ($padding / 2);
+
+    @media (min-width: 500px) {
+        font-size: 1em;
+
+        & a:after {
+            display: inline-block;
+            content: '[⛓]';
+            font-size: 0.8em;
+        }
+    }
+
+    a {
+        color: #BAE;
+        text-decoration: none;
+
+        &::after {
+            display: inline-block;
+            content: '[⛓]';
+            font-size: 0.8em;
+        }
+
+        &:hover {
+            COLOR: #CBE;
+        }
+    }
+}
+
+.generated-checkbox {
+    position: absolute;
+    left: 100px;
+    top: 1%;
+}
+
+.generated-label {
+    position: absolute;
+    left: 140px;
+    font-size: 0.9em;
+    top: 1%;
+    max-width: 50%;
+    color: white;
+}

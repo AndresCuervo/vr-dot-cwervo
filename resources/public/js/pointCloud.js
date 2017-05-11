@@ -121,8 +121,8 @@ AFRAME.registerComponent('make-point-cloud', {
                 label.htmlFor = checkboxID;
                 label.appendChild(document.createTextNode('flash the size of the points? (warning: flashes v fast, seizure warning!)'));
 
-                checkbox.style = "position: absolute; left: 10%; top: 1%;";
-                label.style = "position: absolute; left: 12%; top: 1%; color: white;";
+                checkbox.className += "generated-checkbox";
+                label.className += "generated-label";
 
                 container.appendChild(checkbox);
                 container.appendChild(label);

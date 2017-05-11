@@ -148,11 +148,8 @@ AFRAME.registerComponent('make-point-cloud', {
                     points.material.size = time % 0.5;
                 }
                 // points.position.x = time * 0.5;
-
                 // renderer.render( scene, camera );
             }
         }
-
-
     }
 });

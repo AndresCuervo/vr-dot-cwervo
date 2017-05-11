@@ -121,12 +121,23 @@
     ;; Put all this into a panorama-head fn or def?
     (root-head-element "Point Cloudz"
                        ["<script src='https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js'></script>"
+                       "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                         "<script src='/js/Detector.js'></script>"
                         "<script src='/js/stats.min.js'></script>"
                         "<script src='/js/loaders/PLYLoader.js'></script>"
                         "<script src='/js/pointCloud.js'></script>"
+                        "<link rel='stylesheet' href='/css/vr-styles.css'></link>"
                         ])
     [:body
+     [:div.a-frame-note
+      [:span
+       "Made with 3D point cloud by"]
+      [:a {:href "http://sagejenson.com/"} " Sage Jenson, "]
+      [:span
+       "for "]
+      [:a {:href "http://andrescuervo.github.io/twentyfourseven/"} "couchlet"]
+      [:span
+        "."]]
      [:a-scene {:make-point-cloud ""}
       #_[:a-assets
        ;; [:a-asset-item#treePly {:src "/assets/tree-shelled.bake.ply"}]
@@ -136,7 +147,13 @@
                            :specify-position ""
                            :scale "0.05 0.05 0.05"}]]
       [:a-sky#bgImage {:src "/images/panoramas/earth_equirectangular.jpg"
-                       :material "color: #2EAFAC;"
+                       :material "color: #2FACAC;"
+                       :animation__fade "property: color;
+                                        from: #2EAFAC;
+                                        to: #000000;
+                                        dir: alternate;
+                                        dur: 20000;
+                                        loop: true;"
                        :rotation "0 -130 0"}]
       #_[:a-entity#cloudEntity {:mixin "cloud"
                               :material "color: blue;"}]
