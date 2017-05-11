@@ -5,7 +5,7 @@
 
 out="docs"
 if [ -z "$1" ]; then
-    echo "Assuming we're deploying to the $(out) folder, then"
+    echo "Assuming we're deploying to the ${out} folder, then"
 else
     out=$1
     # echo "Run again, specifying the folder you want to deploy to GitHub Pages."
@@ -14,6 +14,7 @@ fi
 
 boot build
 cp -rf target/public/ "$out"
+cp -rf resources/public/assets/"$out"
 cp -rf resources/public/images "$out"
 cp -rf resources/public/js "$out"
 rm -f "$out"/CNAME # Remove old CNAME, -f to quiet the warnings

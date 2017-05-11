@@ -121,7 +121,7 @@
     ;; Put all this into a panorama-head fn or def?
     (root-head-element "Point Cloudz"
                        ["<script src='https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js'></script>"
-                        "<script src='/js/three.js'></script>"
+                        ;; "<script src='/js/three.js'></script>"
                         "<script src='/js/Detector.js'></script>"
                         "<script src='/js/stats.min.js'></script>"
                         "<script src='/js/loaders/PLYLoader.js'></script>"
