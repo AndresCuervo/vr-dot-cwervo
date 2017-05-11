@@ -82,7 +82,7 @@
                            :scale "0.05 0.05 0.05"}]]
 
       [:a-entity#treee {:mixin "baseTree"
-                  :position "-3 2 -3"}]
+                        :position "-3 2 -3"}]
 
       #_[:a-entity#sage {:mixin "sageModel"
                        :material "src: #pine-needles-texture;
@@ -114,3 +114,32 @@
       [:a-sky#bgImage {:src "/images/panoramas/earth_equirectangular.jpg"
                        :rotation "0 -130 0"}]
       [:a-camera#camera {:v-bind:fov "zRotation"}]]]))
+
+(defn point-cloud [{global-meta :meta
+                      entries :entries}]
+  (html
+    ;; Put all this into a panorama-head fn or def?
+    (root-head-element "Point Cloudz"
+                       ["<script src='https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js'></script>"
+                        "<script src='/js/three.js'></script>"
+                        "<script src='/js/Detector.js'></script>"
+                        "<script src='/js/stats.min.js'></script>"
+                        "<script src='/js/loaders/PLYLoader.js'></script>"
+                        "<script src='/js/pointCloud.js'></script>"
+                        ])
+    [:body
+     [:a-scene {:make-point-cloud ""}
+      #_[:a-assets
+       ;; [:a-asset-item#treePly {:src "/assets/tree-shelled.bake.ply"}]
+       [:a-asset-item#cloudPly {:src "/assets/cloud_no_binary.ply"}]
+       [:a-mixin#cloud {:ply-model "src: #cloudPly"
+                           :rotation "-90 0 0"
+                           :specify-position ""
+                           :scale "0.05 0.05 0.05"}]]
+      [:a-sky#bgImage {:src "/images/panoramas/earth_equirectangular.jpg"
+                       :material "color: peachpuff;"
+                       :rotation "0 -130 0"}]
+      #_[:a-entity#cloudEntity {:mixin "cloud"
+                              :material "color: blue;"}]
+      #_[:a-entity#pointLight {:pointlight ""}]
+      [:a-camera#cam {}]]]))

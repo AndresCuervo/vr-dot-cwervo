@@ -37,6 +37,7 @@
     (static :renderer 'site.capstone.offshoots/render-leah :page "scenes/anotherWorld.html")
     (static :renderer 'site.core/ply-test :page "scenes/ply-test.html")
     (static :renderer 'site.core/drag-and-drop :page "scenes/drag-and-drop/index.html")
+    (static :renderer 'site.core/point-cloud :page "scenes/point-cloud/index.html")
     ;; (images-dimensions) ;; Just print the meta data for images
     (target)
     ))

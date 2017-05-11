@@ -3,9 +3,9 @@
 # Inspired by:
 # https://gist.github.com/cobyism/4730490
 
-out="dist"
+out="docs"
 if [ -z "$1" ]; then
-    echo "Assuming we're deploying to the dist folder, then"
+    echo "Assuming we're deploying to the $(out) folder, then"
 else
     out=$1
     # echo "Run again, specifying the folder you want to deploy to GitHub Pages."
@@ -19,6 +19,7 @@ cp -rf resources/public/js "$out"
 rm -f "$out"/CNAME # Remove old CNAME, -f to quiet the warnings
 echo "vr.cwervo.com" > "$out"/CNAME
 git add "$out"
-git commit -m "Deploy commit $(date)"
+git commit -S -m "Deploy commit $(date)"
 # Oh, need a new commit before subtree command to get it to sync!
-git subtree push --prefix "$out" origin gh-pages
+# git subtree push --prefix "$out" origin gh-pages
+git push
