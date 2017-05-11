@@ -25,6 +25,9 @@
          [:li
           [:a {:href "/scenes/drag-and-drop/"}
            "Drag & Drop a VR photo"]]
+          [:li
+          [:a {:href "/scenes/point-cloud/"}
+           "Baby's first point cloud test"]]
          (for [entry entries]
            (when (and (contains? entry :title)
                       ;; Wow, I can add my own metadata keys, so fun!
