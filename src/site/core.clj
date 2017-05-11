@@ -136,7 +136,7 @@
                            :specify-position ""
                            :scale "0.05 0.05 0.05"}]]
       [:a-sky#bgImage {:src "/images/panoramas/earth_equirectangular.jpg"
-                       :material "color: peachpuff;"
+                       :material "color: #2EAFAC;"
                        :rotation "0 -130 0"}]
       #_[:a-entity#cloudEntity {:mixin "cloud"
                               :material "color: blue;"}]

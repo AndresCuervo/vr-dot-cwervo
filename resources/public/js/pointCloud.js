@@ -1,5 +1,6 @@
 // Global points so you can inspect 😬
 var points;
+var flashPoints = false;
 AFRAME.registerComponent('make-point-cloud', {
     init: function () {
         if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
@@ -100,9 +101,31 @@ AFRAME.registerComponent('make-point-cloud', {
 
                 points.rotation.z = 3.2;
 
-                console.log("added points???");
+                container = document.querySelector('body');
                 stats = new Stats();
-                document.querySelector('body').appendChild( stats.dom );
+                container.appendChild( stats.dom );
+
+                var checkbox = document.createElement('input');
+                var checkboxID = "flashPoints"
+                checkbox.type = "checkbox";
+                checkbox.name = "flash-points-checkbox";
+                checkbox.value = flashPoints;
+                checkbox.id = checkboxID;
+                checkbox.onclick = function () {
+                    checkbox.value = !flashPoints;
+                    flashPoints = !flashPoints;
+                    points.material.size = 0.5;
+                };
+
+                var label = document.createElement('label')
+                label.htmlFor = checkboxID;
+                label.appendChild(document.createTextNode('flash the size of the points? (warning: flashes v fast, seizure warning!)'));
+
+                checkbox.style = "position: absolute; left: 10%; top: 1%;";
+                label.style = "position: absolute; left: 12%; top: 1%; color: white;";
+
+                container.appendChild(checkbox);
+                container.appendChild(label);
             } );
 
         }
@@ -121,6 +144,9 @@ AFRAME.registerComponent('make-point-cloud', {
                 var time = document.querySelector('a-scene').time * 0.001;
                 // points.rotation.x = time * 0.025;
                 points.rotation.y = time * 0.05;
+                if (flashPoints) {
+                    points.material.size = time % 0.5;
+                }
                 // points.position.x = time * 0.5;
 
                 // renderer.render( scene, camera );
