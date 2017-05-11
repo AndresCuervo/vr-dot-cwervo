@@ -14,7 +14,7 @@ fi
 
 boot build
 cp -rf target/public/ "$out"
-cp -rf resources/public/assets/ "$out"
+cp -rf resources/public/assets "$out"
 cp -rf resources/public/images "$out"
 cp -rf resources/public/js "$out"
 rm -f "$out"/CNAME # Remove old CNAME, -f to quiet the warnings
