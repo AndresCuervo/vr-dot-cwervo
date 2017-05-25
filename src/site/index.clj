@@ -44,6 +44,9 @@
          [:li
           [:a {:href "/scenes/anotherWorld.html"}
            "[AnotherWorld]"]]
+         [:li
+          [:a {:href "/scenes/three-test/"}
+           "T e s t"]]
          ]]]]
      [:a-scene.background-scene
       [:a-sky {:src "/images/panoramas/abandoned-room.jpg"}]]]))

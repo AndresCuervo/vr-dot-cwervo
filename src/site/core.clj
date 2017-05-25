@@ -16,6 +16,15 @@
        (root-head-element title)
        (concat custom-scripts)))))
 
+(defn root-head-element-no-aframe
+  [title custom-scripts]
+  (conj
+    (into
+      [:head
+       [:title title]
+       [:script {:src "/js/three.js"}]]
+      (concat custom-scripts))))
+
 (defn build-panorama [title content]
   (html5
     ;; Put all this into a panorama-head fn or def?
@@ -159,3 +168,35 @@
                               :material "color: blue;"}]
       #_[:a-entity#pointLight {:pointlight ""}]
       [:a-camera#cam {}]]]))
+
+(defn three-test [{global-meta :meta
+                      entries :entries}]
+  (html
+    (root-head-element-no-aframe "Three BG Test"
+                       ["<script src=''></script>"
+                        "<script src='/js/Detector.js'></script>"
+                        "<script src='/js/stats.min.js'></script>"
+                        "<script src='/js/loaders/PLYLoader.js'></script>"
+                        "<script src='/js/threeTest.js'></script>"
+                        "<link rel='stylesheet' href='/css/vr-styles.css'></link>"
+                        ])
+    [:body
+     [:div#container]
+     [:script#vertexShader {:type "x-shader/x-vertex"}
+      "uniform float time;
+      uniform vec2 resolution;
+      void main() {
+      gl_Position = vec4( position, 1.0 );
+      }"]
+     [:script#fragmentShader {:type "x-shader/x-fragment"}
+      "uniform float time;
+      uniform vec2 resolution;
+      void main() {
+      float x = mod(time + gl_FragCoord.x, 20.) < 10. ? 1. : 0.;
+      float y = mod(time + gl_FragCoord.y, 20.) < 10. ? 1. : 0.;
+      gl_FragColor = vec4(vec3(min(x, y)), 1.);
+      }"]
+     [:section
+      (for [n (range 0 100)]
+        [:div "hello"])
+      ]]))
