@@ -39,6 +39,7 @@
     (static :renderer 'site.core/drag-and-drop :page "scenes/drag-and-drop/index.html")
     (static :renderer 'site.core/point-cloud :page "scenes/point-cloud/index.html")
     (static :renderer 'site.core/three-test :page "scenes/three-test/index.html")
+    (static :renderer 'site.capstone.offshoots/itlt :page "scenes/itlt/index.html")
     ;; (images-dimensions) ;; Just print the meta data for images
     (target)
     ))
@@ -63,4 +64,4 @@
         (watch)
         (dev-build)
         (livereload :asset-path "public" :filter #"\.(css|html|js)$")
-        (serve :resource-root "public")))
+        (serve :port 8888 :resource-root "public")))

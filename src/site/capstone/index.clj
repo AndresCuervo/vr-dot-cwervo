@@ -25,7 +25,7 @@
    "/js/a-frame-js/click-component.js"
    "/js/a-frame-js/specifyPosition.js"
    "/js/a-frame-js/randomDataPos.js"
-   "/js/a-frame-js/changeOnLook.js"
+   ;; "/js/a-frame-js/changeOnLook.js"
    "/js/states.js"
    ])
 

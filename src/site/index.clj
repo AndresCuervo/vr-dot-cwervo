@@ -36,6 +36,9 @@
               [:a {:href (:permalink entry)}
                (:title entry)]]))
          [:li
+          [:a {:href "/scenes/itlt/"}
+           "Imagine Trees Like These"]]
+         [:li
           [:a {:href "/scenes/vr-capstone.html"}
            "VR Capstone"]]
          [:li
@@ -44,7 +47,7 @@
          [:li
           [:a {:href "/scenes/anotherWorld.html"}
            "[AnotherWorld]"]]
-         [:li
+         #_[:li
           [:a {:href "/scenes/three-test/"}
            "T e s t"]]
          ]]]]

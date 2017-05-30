@@ -41,6 +41,8 @@ AFRAME.registerComponent('fsm-event-trigger', {
  *      - Event: the trees, once they're all actually
 */
 
+var enterAudio = new Audio('/assets/sound/effects/door-opening.wav');
+
 function fadeOutElements(selectorString, time) {
     for (el of document.querySelectorAll(selectorString)) {
         // This should be doable with adding
@@ -51,13 +53,16 @@ function fadeOutElements(selectorString, time) {
         el.setAttribute("animation__fade",
             "property: material.opacity; from: 1.0; to: 0.0; dur:" + anim_time+ ";");
 
+        if (params.soundOn) {
+            enterAudio.play();
+        }
+
         setTimeout(function(){
             // Make sure we don't remove it if the parent is already removed!
             if (el.parentNode) {
                 el.parentNode.removeChild(el);
             }
-            console.log(el);
-            console.log("removed?");
+            // console.log("removed?");
         }, anim_time);
     }
 }

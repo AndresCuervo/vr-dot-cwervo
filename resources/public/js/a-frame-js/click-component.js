@@ -14,7 +14,8 @@ AFRAME.registerComponent('change-color-on-click', {
             var randomIndex = Math.floor(Math.random() * COLORS.length);
             var newColor = COLORS[randomIndex];
             this.setAttribute('material', 'color', newColor);
-            console.log('Boop: I was clicked at: ', evt.detail.intersection.point, "and my new color is: ", newColor);
+
+            // console.log('Hola: I was clicked at: ', evt.detail.intersection.point, "and my new color is: ", newColor);
         });
     }
 
