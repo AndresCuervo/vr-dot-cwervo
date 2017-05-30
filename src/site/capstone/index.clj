@@ -223,24 +223,24 @@
       ;; Funny expanding cone
       (for [n (range -50 150 20)]
         [:a-cone.clickable {:color "#2EAFAC"
-                  ;; :change-on-look ""
-                  :change-color-on-click ""
-                  ;; :mixin "tree-texture"
-                  :wireframe "true"
-                  :position (string/join " "
-                                         [(/ n 5)
-                                          (Math/cos n)
-                                          -3])
-                  :radius-bottom "2" :radius-top "0"
-                  :animation__pointy "startEvents: mouseenter;
-                                     pauseEvents: mouseleave;
-                                     property: radius-top;
-                                     loop: true;
-                                     easing: linear;
-                                     from: 0; to: 3;
-                                     dir: alternate;
-                                     dur: 1000;"
-                  :data-radius-bottom "2"}])
+                            ;; :change-on-look ""
+                            :change-color-on-click ""
+                            ;; :mixin "tree-texture"
+                            :wireframe "true"
+                            :position (string/join " "
+                                                   [(/ n 5)
+                                                    (Math/cos n)
+                                                    -3])
+                            :radius-bottom "2" :radius-top "0"
+                            :animation__pointy "startEvents: mouseenter;
+                                               pauseEvents: mouseleave;
+                                               property: radius-top;
+                                               loop: true;
+                                               easing: linear;
+                                               from: 0; to: 3;
+                                               dir: alternate;
+                                               dur: 1000;"
+                            :data-radius-bottom "2"}])
 
       #_(make-box-row 20 '())
 
@@ -266,13 +266,30 @@
           :material "color: #F79F24"
           :position "0  15 -12"
           :rotation rotation
+          ;; wireframe	material.wireframe	false
+          ;; wireframe-linewidth	material.wireframeLinewidth	2
+          :animation__wireframeOn "property: material.wireframe;
+                                   startEvents: mouseenter;
+                                   from: false;
+                                   to: true;
+                                   dur: 0;"
+          :animation__wireframeOnWidth "property: material.wireframeLinewidth;
+                                         from: 0;
+                                         to: 4;
+                                         loop: true;
+                                         dur: 3000;"
+          ;; Alright, this isn't working  out exactly how I'd hoped, figure out another way to animate the wireframeA effect, or something???
+          :animation__wireframeOff "property: material.wireframe;
+                                    startEvents: mouseleave;
+                                    from: true;
+                                    to: false;
+                                    dur: 0;"
           :animation__segs "property: geometry.segments;
                            loop: true;
                            easing: linear;
                            from: 30; to: 3;
                            dir: alternate;
-                           dur: 3000;"
-          }])
+                           dur: 3000;"}])
 
       #_(let [wireframe false]
         [:a-entity#egg-whites
