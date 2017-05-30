@@ -35,6 +35,51 @@ window.onload = function() {
     gui.close();
 }
 
+AFRAME.registerComponent('loading-bar', {
+    init: function () {
+
+        var manager = document.querySelector('a-assets').fileLoader.manager;
+
+        var progress = document.createElement('div');
+        var progressBar = document.createElement('div');
+
+        var note = document.createElement('div');
+
+        var barHeight = 5;
+
+        note.innerText = "Loading ..."
+        note.classNames += "bounce";
+
+        progress.appendChild(note);
+
+        progress.appendChild(progressBar);
+
+        progress.id = "progress";
+        progressBar.id = "progressBar";
+        note.id = "progressNote";
+
+        document.body.appendChild(progress);
+
+        manager.onProgress = function ( item, loaded, total ) {
+            var prog = (loaded / total * 100);
+            progressBar.style.width = prog + '%';
+            // console.log(prog);
+        };
+
+        manager.onLoad = function () {
+            progress.parentElement.removeChild(progress);
+        }
+
+        function addRandomPlaceHoldItImage(){
+            var r = Math.round(Math.random() * 4000);
+            new THREE.ImageLoader(manager).load('http://placehold.it/' + r + 'x' + r);
+        }
+
+        for(var i = 0; i < 10; i++) addRandomPlaceHoldItImage();
+    }
+});
+
+
 // Make a custom mouseenter component that plays a sound lol
 
 // Registering component in foo-component.js

@@ -140,6 +140,63 @@
           ["/js/utils/dat.gui.min.js"
            "/js/itlt.js"]))
 
+(def itlt-assets
+  (conj a-assets-el
+        [:script {:id "treeTemplateWithSound"
+                  :type "html"}
+         [:a-entity {:id "conicTree-${number}"
+                     :position "${pos}"
+                     :sound "${sound}"
+                     :enter-sound ""
+                     }
+          [:a-cone.clickable {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :height "2"
+                              :animation__pointy "startEvents: mouseenter;
+                                                 pauseEvents: mouseleave;
+                                                 property: radius-top;
+                                                 loop: true;
+                                                 easing: linear;
+                                                 from: 0; to: 10;
+                                                 dir: alternate;
+                                                 dur: 1000;"
+                              :wireframe "${wireframe}"}
+           [:a-cone.clickable {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :position "0 -1   0"
+                               :wireframe "${wireframe}"
+                               #_#_:animation__wow "property: position;
+                                                   from: ${pos};
+                                                   to: 0 -1 ;
+                                                   dir: alternate;
+                                                   dur: 2000;
+                                                   loop: true;"
+                               :animation__pointy "startEvents: mouseenter;
+                                                  pauseEvents: mouseleave;
+                                                  property: radius-top;
+                                                  loop: true;
+                                                  easing: linear;
+                                                  from: 0; to: 13;
+                                                  dir: alternate;
+                                                  dur: 1000;"}]
+           [:a-cone.clickable {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :position "0 -1.5 0"
+                               :animation__pointy "startEvents: mouseenter;
+                                                  pauseEvents: mouseleave;
+                                                  property: radius-top;
+                                                  loop: true;
+                                                  easing: linear;
+                                                  from: 0; to: 15;
+                                                  dir: alternate;
+                                                  dur: 1000;"
+                               :wireframe "${wireframe}"}]
+           [:a-cylinder {:random-rotation "min: 0 0 0; max: 0 360 0" :mixin "bark-texture" :height "2" :radius "0.5" :position "0 -2.5 0"
+                         :wireframe "${wireframe}"}]]]]
+
+           [:audio#ping_clang {:preload "auto" :src  "/assets/sound/effects/ping_clang.wav"}]
+           [:audio#ping_edsward {:preload "auto" :src  "/assets/sound/effects/ping_edsward.wav"}]
+           [:audio#ping_gem {:preload "auto" :src  "/assets/sound/effects/ping_gem.wav"}]
+           [:audio#ping_thomas {:preload "auto" :src  "/assets/sound/effects/ping_thomas.wav"}]
+           [:audio#forest_one {:preload "auto" :src  "/assets/sound/effects/forest_one.wav"}]
+           [:audio#forest_two {:preload "auto" :src  "/assets/sound/effects/forest_two.wav"}]
+           [:audio#forest_three {:preload "auto" :src  "/assets/sound/effects/forest_three.wav"}]
+           ))
+
 (def itlt-head-el
   [:head
    [:title "Imagine Trees Like These"]
@@ -148,6 +205,8 @@
    [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
    [:link {:rel "stylesheet"
            :href "/css/capstone.css"}]
+   [:link {:rel "stylesheet"
+           :href "/css/vr-styles.css"}]
    [:script {:src "https://aframe.io/releases/0.5.0/aframe.min.js"}]
    (for [src itlt-srcs]
      [:script {:src src}])])
@@ -159,63 +218,8 @@
     [:body
      [:div#debug
       "state"]
-     [:a-scene
-      (concat
-      a-assets-el
-      [[:script {:id "treeTemplateWithSound"
-                 :type "html"}
-        [:a-entity {:id "conicTree-${number}"
-                    :position "${pos}"
-                    :sound "${sound}"
-                    :enter-sound ""
-                    }
-         [:a-cone.clickable {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :height "2"
-                             :animation__pointy "startEvents: mouseenter;
-                                                pauseEvents: mouseleave;
-                                                property: radius-top;
-                                                loop: true;
-                                                easing: linear;
-                                                from: 0; to: 10;
-                                                dir: alternate;
-                                                dur: 1000;"
-                             :wireframe "${wireframe}"}
-          [:a-cone.clickable {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :position "0 -1   0"
-                              :wireframe "${wireframe}"
-                              #_#_:animation__wow "property: position;
-                                                  from: ${pos};
-                                                  to: 0 -1 ;
-                                                  dir: alternate;
-                                                  dur: 2000;
-                                                  loop: true;"
-                              :animation__pointy "startEvents: mouseenter;
-                                                 pauseEvents: mouseleave;
-                                                 property: radius-top;
-                                                 loop: true;
-                                                 easing: linear;
-                                                 from: 0; to: 13;
-                                                 dir: alternate;
-                                                 dur: 1000;"}]
-          [:a-cone.clickable {:mixin "tree-texture" :radius-bottom "2" :radius-top "0" :position "0 -1.5 0"
-                              :animation__pointy "startEvents: mouseenter;
-                                                 pauseEvents: mouseleave;
-                                                 property: radius-top;
-                                                 loop: true;
-                                                 easing: linear;
-                                                 from: 0; to: 15;
-                                                 dir: alternate;
-                                                 dur: 1000;"
-                              :wireframe "${wireframe}"}]
-          [:a-cylinder {:random-rotation "min: 0 0 0; max: 0 360 0" :mixin "bark-texture" :height "2" :radius "0.5" :position "0 -2.5 0"
-                        :wireframe "${wireframe}"}]]]]
-
-       [:audio#ping_clang {:src  "/assets/sound/effects/ping_clang.wav"}]
-       [:audio#ping_edsward {:src  "/assets/sound/effects/ping_edsward.wav"}]
-       [:audio#ping_gem {:src  "/assets/sound/effects/ping_gem.wav"}]
-       [:audio#ping_thomas {:src  "/assets/sound/effects/ping_thomas.wav"}]
-       [:audio#forest_one {:src  "/assets/sound/effects/forest_one.wav"}]
-       [:audio#forest_two {:src  "/assets/sound/effects/forest_two.wav"}]
-       [:audio#forest_three {:src  "/assets/sound/effects/forest_three.wav"}]
-       ])
+     [:a-scene {:loading-bar ""}
+      itlt-assets
 
       [:a-sky {:src "/images/panoramas/test-arb1.jpg" :rotation "0 -130 0"
                :animation__color "property: color;
@@ -295,8 +299,8 @@
                   forest-sounds ["one" "two" "three"]]]
 
         [:a-entity {:template "src: #treeTemplateWithSound"
-                    :data-sound "src: #forest_three; poolSize: 1;"
-                    ;; :data-sound (str "src: #forest_" (nth forest-sounds (mod (/ n 10) (count forest-sounds))) "; poolSize: 10;")
+                    ;; :data-sound "src: #ping_gem; poolSize: 1;"
+                    :data-sound (str "src: #forest_" (nth forest-sounds (mod (/ n 10) (count forest-sounds))) "; poolSize: 1;")
                     :data-pos (string/join " "
                                            [x-coord
                                             2
