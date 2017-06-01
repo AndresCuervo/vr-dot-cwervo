@@ -211,13 +211,30 @@
    (for [src itlt-srcs]
      [:script {:src src}])])
 
+(defn add-blank [href] {:href href :target "_blank"})
+
 (defn itlt[{global-meta :meta
                entries :entries}]
   (html
     itlt-head-el
     [:body
      [:div#debug
-      "state"]
+      "state placeholder"]
+     [:div#aboutInfo {:style "display: none;"}
+      [:button#closeAbout {:onClick "toggleAboutInfo();"}
+       "Close"]
+      "This project was originally created as the capstone for my Creative Writing degree at Oberlin college"
+      [:a {:href "https://www.youtube.com/watch?v=Ca6quGC_hUk"} "(link to talk about that)"] ". It has turned"
+      " into an interactive web art piece that I hope will give you a small demonstration of the power of virtual"
+      " spaces to create a sort of \"anti-reality\", an experience hopefully as playful, interesting, and \"real\" as any other."
+      [:hr]
+      [:h4 "Tools & links:"]
+      [:ul
+       [:li "Made using the wonderful" [:a (add-blank "https://aframe.io/") "A-Frame"] "WebVR framework, powered by"
+        [:a (add-blank "https://threejs.org/") "Three.js"] "."]
+       [:li [:a (add-blank "http://slides.cwervo.com/capstone.html") "Slides about the origins of this piece."]]
+       [:li [:a (add-blank "http://cwervo.com") "Personal website"]]]
+      ]
      [:a-scene {:loading-bar ""}
       itlt-assets
 
@@ -260,7 +277,9 @@
            [:a-text.title_text {:value "Imagine Trees Like These
                                        \nBy Andres Cuervo
                                        \nLook around by dragging your mouse
-                                       \nor moving your phone."
+                                       \nor moving your phone.
+                                       \nUse the button in the top right
+                                       \nto see 'About' info and more options."
                                 :font "sourcecodepro"
                                 :align "center"
                                 :width 1
@@ -278,13 +297,6 @@
                                         :align "center"
                                         :value "Stare here for 1 second
                                                \nto enter the scene."}]]]))]
-
-      #_[:a-light {:type "ambient"
-                 :color "#EEE"
-                 :animation__go "property: position;
-                                from: -1 1.6 0;
-                                to:    1 1.6 0;
-                                loop: true;"}]
 
       (for [n (range 10 200)
             ;; n == radius
@@ -310,11 +322,11 @@
                     }])
 
       ;; Funny expanding cone
-      (let [pings ["clang" "edsward" "gem" "thomas"]]
+      (let [pings [#_"thomas" "edsward" "gem" #_"clang"]]
         (for [n (range -50 150 20)]
         [:a-cone.clickable {:color "#2EAFAC"
                             :change-color-on-click ""
-                            :sound (str "src: #ping_" (nth pings (mod (/ n 10) (count pings))) "; poolSize: 10;")
+                            :sound (str "src: #ping_" (nth pings (mod (/ n 7) (count pings))) "; poolSize: 10;")
                             :enter-sound ""
                             ;; :mixin "tree-texture"
                             :wireframe "true"

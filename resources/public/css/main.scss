@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+@import "shared";
+
 body {
     text-align: center;
     font-family: sans-serif;
@@ -68,23 +70,5 @@ section {
         list-style: none;
         padding-bottom: 1.2em;
         border-bottom: 2px dotted #F8F8F8;
-    }
-
-    a {
-        color: #2EAFAC;
-        text-decoration: none;
-        border-bottom: 3px solid #2EAFAC;
-
-        &::before, &::after {
-            display: inline;
-            color: blue;
-
-        }
-        &::before {
-            content: '\26D3 [';
-        }
-        &::after {
-            content: ' ]';
-        }
     }
 }

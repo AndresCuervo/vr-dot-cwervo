@@ -1,0 +1,17 @@
+a {
+    color: #2EAFAC;
+    text-decoration: none;
+    border-bottom: 3px solid #2EAFAC;
+
+    &::before, &::after {
+        display: inline;
+        color: blue;
+
+    }
+    &::before {
+        content: '\26D3 [';
+    }
+    &::after {
+        content: ' ]';
+    }
+}
