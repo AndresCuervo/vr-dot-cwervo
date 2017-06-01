@@ -223,16 +223,16 @@
      [:div#aboutInfo {:style "display: none;"}
       [:button#closeAbout {:onClick "toggleAboutInfo();"}
        "Close"]
-      "This project was originally created as the capstone for my Creative Writing degree at Oberlin college"
-      [:a {:href "https://www.youtube.com/watch?v=Ca6quGC_hUk"} "(link to talk about that)"] ". It has turned"
+      "This project was originally created as the capstone for my Creative Writing degree at Oberlin college. It has turned"
       " into an interactive web art piece that I hope will give you a small demonstration of the power of virtual"
       " spaces to create a sort of \"anti-reality\", an experience hopefully as playful, interesting, and \"real\" as any other."
       [:hr]
       [:h4 "Tools & links:"]
       [:ul
        [:li "Made using the wonderful" [:a (add-blank "https://aframe.io/") "A-Frame"] "WebVR framework, powered by"
-        [:a (add-blank "https://threejs.org/") "Three.js"] "."]
-       [:li [:a (add-blank "http://slides.cwervo.com/capstone.html") "Slides about the origins of this piece."]]
+        [:a (add-blank "https://threejs.org/") "Three.js"]]
+       [:li [:a (add-blank "http://slides.cwervo.com/capstone.html") "Slides about the origins of this piece"]]
+       [:li [:a (add-blank "https://www.youtube.com/watch?v=Ca6quGC_hUk") "Recorded talk about this project"]]
        [:li [:a (add-blank "http://cwervo.com") "Personal website"]]]
       ]
      [:a-scene {:loading-bar ""}
