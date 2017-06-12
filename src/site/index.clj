@@ -25,6 +25,9 @@
          [:li
           [:a {:href "/scenes/drag-and-drop/"}
            "Drag & Drop a VR photo"]]
+         [:li
+          [:a {:href "/vive/controls-test/"}
+           "Simple Vive Example"]]
           [:li
           [:a {:href "/scenes/point-cloud/"}
            "Baby's first point cloud test"]]

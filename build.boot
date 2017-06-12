@@ -40,6 +40,7 @@
     (static :renderer 'site.core/point-cloud :page "scenes/point-cloud/index.html")
     (static :renderer 'site.core/three-test :page "scenes/three-test/index.html")
     (static :renderer 'site.capstone.offshoots/itlt :page "scenes/itlt/index.html")
+    (static :renderer 'site.vive.base/controls-test :page "vive/controls-test/index.html")
     ;; (images-dimensions) ;; Just print the meta data for images
     (target)
     ))

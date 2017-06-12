@@ -5,7 +5,7 @@
         [site.capstone.index]))
 
 (defn render-leah [{global-meta :meta
-               entries :entries}]
+                    entries :entries}]
   (html
     head-el
     [:body
@@ -276,10 +276,9 @@
          (for [n (range 4)]
            [:a-text.title_text {:value "Imagine Trees Like These
                                        \nBy Andres Cuervo
-                                       \nLook around by dragging your mouse
-                                       \nor moving your phone.
-                                       \nUse the button in the top right
-                                       \nto see 'About' info and more options."
+                                       \nLook around by dragging your mouse or moving your phone.
+                                       \nIf you have a keyboard: WASD or arrow keys moves you around the scene.
+                                       \nUse the button in the top right to see 'About' info and more options."
                                 :font "sourcecodepro"
                                 :align "center"
                                 :width 1
@@ -287,7 +286,7 @@
                                 :id (str "title-"n)
                                 :rotation  (make-rotation (nth rot n))
                                 :side "double"}
-            [:a-plane.clickable.title_plane {:position "0 -1.25 -1"
+            [:a-plane.clickable.title_plane {:position "0 -1.5 -1"
                                              :color "white"
                                              :fsm-event-trigger "event: removetitle;"
                                              }
