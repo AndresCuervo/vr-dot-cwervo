@@ -104,26 +104,6 @@
       [:a-sky {:material "color: #BEE;"}]
       ]]))
 
-(defn drag-and-drop [{global-meta :meta
-                      entries :entries}]
-  (html
-    ;; Put all this into a panorama-head fn or def?
-    (root-head-element "Drag & Drop!"
-                       ["<script src='https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js'></script>"
-                        "<script src='https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js'></script>"
-                        "<script src='https://unpkg.com/vue'></script>"
-                        "<script src='/js/drag-and-drop.js'></script>"
-                        "<link rel='stylesheet' href='/css/drag-and-drop.css'></link>"
-                        ])
-    [:body
-     [:div#hud
-      [:form#my-awesome-dropzone.dropzone {:action "#"}
-       [:span {:class "dz-message"} "Click on or drop files in this pink rectangle to change the background."]]]
-     [:a-scene {:embedded ""}
-      [:a-sky#bgImage {:src "/images/panoramas/earth_equirectangular.jpg"
-                       :rotation "0 -130 0"}]
-      [:a-camera#camera {:v-bind:fov "zRotation"}]]]))
-
 (defn point-cloud [{global-meta :meta
                       entries :entries}]
   (html

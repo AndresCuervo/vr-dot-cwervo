@@ -23,11 +23,11 @@
         "Here are some links to other VR things I've done:"
         [:ul.vr_list
          [:li
-          [:a {:href "/scenes/drag-and-drop/"}
+          [:a {:href "/utils/drag-and-drop/"}
            "Drag & Drop a VR photo"]]
          [:li
-          [:a {:href "/vive/controls-test/"}
-           "Simple Vive Example"]]
+          [:a {:href "/utils/vr-dat-gui/"}
+           "VR Dat.gui test"]]
           [:li
           [:a {:href "/scenes/point-cloud/"}
            "Baby's first point cloud test"]]
