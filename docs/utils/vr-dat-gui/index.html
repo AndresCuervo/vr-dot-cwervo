@@ -1,0 +1,32 @@
+<head><title>VR-Dat-Gui</title><script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script><script src='https://andrescuervo.github.io/twentyfourseven/js/three85.js'></script><script src='https://andrescuervo.github.io/twentyfourseven/js/utils/Detector.js'></script><script src='https://andrescuervo.github.io/twentyfourseven/js/utils/stats.min.js'></script><script src='https://andrescuervo.github.io/twentyfourseven/js/loaders/PLYLoader.js'></script><script src='https://andrescuervo.github.io/twentyfourseven/js/utils/dat.gui.min.js'></script><script src='/js/utils/datguivr.min.js'></script><script src='/js/scenes/day3.js'></script></head><body><div id="container"></div><a-scene make-point-cloud=""><a-sky material="color: black;"></a-sky><a-camera id="camera"></a-camera></a-scene><script src="https://andrescuervo.github.io/twentyfourseven/js/controls/TrackballControls.js"></script><script src="https://andrescuervo.github.io/twentyfourseven/js/effects/AnaglyphEffect.js"></script><script id="vertexshader" type="x-shader/x-vertex">attribute float size;
+    attribute vec3 customColor;
+
+    varying vec3 vColor;
+
+    void main() {
+
+        vColor = customColor;
+
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+
+        gl_PointSize = size * ( 300.0 / -mvPosition.z );
+
+        gl_Position = projectionMatrix * mvPosition;
+
+    }</script><script id="fragmentshader" type="x-shader/x-fragment">uniform vec3 color;
+    uniform sampler2D texture;
+
+    varying vec3 vColor;
+
+    void main() {
+
+        gl_FragColor = vec4( color * vColor, 1.0 );
+
+        gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );
+
+    }</script><script type="text/javascript"><!--
+    function toggle(id) {
+        var e = document.getElementById(id);
+        e.style.display == 'block' ? e.style.display = 'none' : e.style.display = 'block';
+    }
+    </script></body>
