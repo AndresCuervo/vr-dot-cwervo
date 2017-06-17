@@ -11,9 +11,8 @@ var guiData = {
 };
 
 // var gui = new dat.GUI();
-var gui = dat.GUIVR.create('Gui Data');
-gui.position.y = 2;
-gui.position.z = -1;
+var scene;
+// var camera;
 
 var stats;
 
@@ -93,14 +92,13 @@ function loaderGuts(geometry){
     document.querySelector('a-scene').object3D.add( particleSystem );
 
     geo = geometry;
-
-    var width = window.innerWidth || 2;
-    var height = window.innerHeight || 2;
-    effect = new THREE.AnaglyphEffect( renderer );
-    effect.setSize( width, height )
 }
 
-function addGuiElements(scene) {
+function addGuiElements(scene, camera, renderer) {
+    var gui = dat.GUIVR.create('Gui Data');
+    gui.position.y = 2;
+    gui.position.z = -1;
+
     gui.add(guiData, 'colorWhite');
     gui.add(guiData, 'moreCam');
     gui.add(guiData, 'delta', 0, 1000);
@@ -108,10 +106,22 @@ function addGuiElements(scene) {
     gui.add(guiData, 'sinFactor', 0, 0.1);
 
     scene.add(gui);
+
+    // Mouse input
+    dat.GUIVR.enableMouse( camera, renderer );
+
+    // VR input
+    // var controllerObject3D = THREE.ViveController;
+    // var input = dat.GUIVR.addInputObject( controllerObject3D );
+    var input = dat.GUIVR.addInputObject( THREE.ViveController );
+    scene.add( input ); // this will add helpers to your scene (laser & cursor)
+
+    // Gaze input?
+    var gazeInput = dat.GUIVR.addInputObject( camera );
+    scene.add( gazeInput.cursor ); //  only add the cursor, not the laser
 }
 
-function init(){
-    var scene = document.querySelector('a-scene').object3D;
+function init(scene, camera, renderer){
     var loader = new THREE.PLYLoader();
     loader.load( 'https://andrescuervo.github.io/twentyfourseven/assets/models/apse-simple.ply', loaderGuts);
 
@@ -126,7 +136,7 @@ function init(){
     stats = new Stats();
     container.appendChild( stats.dom );
 
-    addGuiElements(scene);
+    addGuiElements(scene, camera, renderer);
 
     // window.addEventListener( 'resize', onWindowResize, false );
 
@@ -188,7 +198,11 @@ function render() {
 
 AFRAME.registerComponent('make-point-cloud', {
     init: function () {
-        init();
+        var scene = document.querySelector('a-scene').object3D;
+        var camera = this.el.camera
+        var renderer = this.el.renderer
+        console.log({scene, camera, renderer});
+        init(scene, camera, renderer);
 		animate();
     }
 });
