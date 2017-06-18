@@ -126,34 +126,36 @@ function addGuiElements(scene, camera, renderer) {
         // https://github.com/dataarts/dat.guiVR/wiki/Input-Support-(Vive-Controllers,-Mouse,-etc)
         var vrInput = dat.GUIVR.addInputObject( object3D );
 
-        // Maybe go back to this? But check revied version below FIRST
+        // TODO : Figure out a way to iterate through these????
         // for (e in controllerDirections) {
         //     var dir = controllerDirections[e];
         //     console.log("doing: ", 'grip' + dir);
         //     console.log("vrInput: ", vrInput);
         //     controllerEl.addEventListener( 'grip' + dir, function(){ console.log("gripped " + dir +" !"); vrInput.gripped( dir != "down"); } );
         // }
-        // for (e in controllerDirections) {
-        //     var dir = controllerDirections[e];
-        //     console.log("doing: ", 'trigger' + dir);
-        //     console.log("vrInput: ", vrInput);
-        //     controllerEl.addEventListener( 'trigger' + dir, function(){ console.log("pressed " + dir +" !"); vrInput.pressed( dir != "down"); } );
-        // }
+
+        controllerEl.addEventListener('triggerdown', function () {console.log("pressed down"); vrInput.pressed(true);});
+        controllerEl.addEventListener('triggerup', function () {console.log("pressed up"); vrInput.pressed(false);});
+        controllerEl.addEventListener('trackpaddown', function () {console.log("pressed down"); vrInput.pressed(true);});
+        controllerEl.addEventListener('trackpadup', function () {console.log("pressed up"); vrInput.pressed(false);});
+        controllerEl.addEventListener('gripdown', function () {console.log("gripped down"); vrInput.gripped(true);});
+        controllerEl.addEventListener('gripup', function () {console.log("gripped up"); vrInput.gripped(false);});
 
         bindControllerToLaser(controllerEl, 'grip', vrInput, vrInput.gripped);
-        bindControllerToLaser(controllerEl, 'trigger', vrInput, vrInput.pressed);
+        // bindControllerToLaser(controllerEl, 'trigger', vrInput, vrInput.pressed);
         bindControllerToLaser(controllerEl, 'trackpad', vrInput, vrInput.pressed);
         scene.add(vrInput); // this will add helpers to your scene (laser & cursor)
     }
 }
 
+// TODO : For some reason this isn't iterating, only attaches and outputs "down" ???
 function bindControllerToLaser(controllerEl, baseEvent, vrInput, inputFn) {
     var controllerDirections = ['up', 'down'];
     for (i in controllerDirections) {
         var dir = controllerDirections[i];
         var value = (dir == "down");
         console.log("doing: ", baseEvent + dir + ", for: " + controllerEl.id + ", setting it to: " + value);
-        controllerEl.addEventListener( baseEvent + dir, function(){ console.log(baseEvent + "ed " + dir + " !"); inputFn.call(vrInput, value); } );
+        controllerEl.addEventListener( baseEvent + dir, function(){ console.log(baseEvent + "ed " + dir + " : " +value+ " !"); inputFn.call(vrInput, value); } );
     }
 }
 
