@@ -37,8 +37,8 @@
 
 (defn vr-dat-gui-test [{gloabl-meta :meta entries :entries}]
   (html
-    (root-head-element "VR-Dat-Gui"
-    ;; (root-6-head-element "VR-Dat-Gui"
+    ;; (root-head-element "VR-Dat-Gui"
+    (root-6-head-element "VR-Dat-Gui"
                        ["<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/Detector.js'></script>"
                        "<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/stats.min.js'></script>"
                        "<script src='https://andrescuervo.github.io/twentyfourseven/js/loaders/PLYLoader.js'></script>"
@@ -51,8 +51,7 @@
      [:div#container]
      [:a-scene {:make-point-cloud ""}
       (for [control ["left" "right"]]
-      [:a-entity {:id (str control "Control") :vive-controls control}]
-      [:a-entity {:id (str control "Control-hand") :hand-controls control}])
+        [:a-entity {:id (str control "Control") :hand-controls control}])
       [:a-sky {:material "color: black;"}]
       [:a-camera {:id "camera"}]]
      [:script {:src "https://andrescuervo.github.io/twentyfourseven/js/controls/TrackballControls.js"}]
