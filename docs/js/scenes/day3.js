@@ -131,9 +131,15 @@ function addGuiElements(scene, camera, renderer) {
         // https://github.com/dataarts/dat.guiVR/wiki/Input-Support-(Vive-Controllers,-Mouse,-etc)
         var laser = dat.GUIVR.addInputObject( object3D );
 
-        // ['up', 'down'].forEach(function (e) {
-        //     controllerEl.addEventListener( 'grip' + e, function(){ laser.gripped( e != "down"); } );
-        // })
+        ['up', 'down'].forEach(function (e) {
+            console.log("doing:", 'grip' + e);
+            controllerEl.addEventListener( 'grip' + e, function(){ laser.gripped(console.log("gripped" + e +" !") e != "down"); } );
+        });
+
+        ['up', 'down'].forEach(function (e) {
+            console.log("doing:", 'trigger' + e);
+            controllerEl.addEventListener( 'trigger' + e, function(){ console.log("pressed " + e +" !"); laser.pressed( e != "down"); } );
+        });
 
         // ['up', 'down'].forEach(function (e) {
         //     controllerEl.addEventListener( 'trigger' + e, function(){ laser.pressed( e != "down"); } );
