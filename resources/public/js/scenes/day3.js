@@ -133,7 +133,7 @@ function addGuiElements(scene, camera, renderer) {
         var object3D = controllerEl.object3D;
         // https://github.com/dataarts/dat.guiVR/wiki/Input-Support-(Vive-Controllers,-Mouse,-etc)
         var vrInput = dat.GUIVR.addInputObject( object3D );
-        vrinputs.push[vrInput];
+        vrinputs.push( vrInput );
 
         for (e in controllerDirections) {
             var dir = controllerDirections[e];
