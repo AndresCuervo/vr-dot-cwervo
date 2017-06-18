@@ -141,9 +141,9 @@ function addGuiElements(scene, camera, renderer) {
         controllerEl.addEventListener('gripdown', function () {console.log("gripped down"); vrInput.gripped(true);});
         controllerEl.addEventListener('gripup', function () {console.log("gripped up"); vrInput.gripped(false);});
 
-        bindControllerToLaser(controllerEl, 'grip', vrInput, vrInput.gripped);
+        // bindControllerToLaser(controllerEl, 'grip', vrInput, vrInput.gripped);
         // bindControllerToLaser(controllerEl, 'trigger', vrInput, vrInput.pressed);
-        bindControllerToLaser(controllerEl, 'trackpad', vrInput, vrInput.pressed);
+        // bindControllerToLaser(controllerEl, 'trackpad', vrInput, vrInput.pressed);
         scene.add(vrInput); // this will add helpers to your scene (laser & cursor)
     }
 }
