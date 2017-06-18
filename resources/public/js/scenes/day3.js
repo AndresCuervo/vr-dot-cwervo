@@ -124,6 +124,7 @@ function addGuiElements(scene, camera, renderer) {
     //     scene.add( input ); // this will add helpers to your scene (laser & cursor)
     // }
 
+    var controllerDirections = ['up', 'down'];
     for (var i = 0; i < controls.length ; i++) {
         var id = controls[i] + 'Control';
         var controllerEl = document.getElementById(id);
@@ -131,23 +132,22 @@ function addGuiElements(scene, camera, renderer) {
         // https://github.com/dataarts/dat.guiVR/wiki/Input-Support-(Vive-Controllers,-Mouse,-etc)
         var laser = dat.GUIVR.addInputObject( object3D );
 
-        ['up', 'down'].forEach(function (e) {
-            console.log("doing:", 'grip' + e);
-            controllerEl.addEventListener( 'grip' + e, function(){ console.log("gripped" + e +" !"); laser.gripped( e != "down"); } );
-        });
-
-        ['up', 'down'].forEach(function (e) {
-            console.log("doing:", 'trigger' + e);
+        for (e in controllerDirections) {
+            console.log("doing: ", 'grip' + e);
+            controllerEl.addEventListener( 'grip' + e, function(){ console.log("gripped " + e +" !"); laser.gripped( e != "down"); } );
+        }
+        for (e in controllerDirections) {
+            console.log("doing: ", 'trigger' + e);
             controllerEl.addEventListener( 'trigger' + e, function(){ console.log("pressed " + e +" !"); laser.pressed( e != "down"); } );
-        });
+        }
 
         // ['up', 'down'].forEach(function (e) {
         //     controllerEl.addEventListener( 'trigger' + e, function(){ laser.pressed( e != "down"); } );
         // })
 
-        bindControllerToLaser(controllerEl, 'grip', laser, laser.gripped);
-        bindControllerToLaser(controllerEl, 'trigger', laser, laser.pressed);
-        bindControllerToLaser(controllerEl, 'trackpad', laser, laser.pressed);
+        // bindControllerToLaser(controllerEl, 'grip', laser, laser.gripped);
+        // bindControllerToLaser(controllerEl, 'trigger', laser, laser.pressed);
+        // bindControllerToLaser(controllerEl, 'trackpad', laser, laser.pressed);
         scene.add(laser); // this will add helpers to your scene (laser & cursor)
     }
 }
