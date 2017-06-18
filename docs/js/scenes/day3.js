@@ -117,20 +117,28 @@ function addGuiElements(scene, camera, renderer) {
 
     // VR input
     var controls = ["left", "right"];
-    // for (var i = 0; i < controls.length ; i++) {
-    //     var controllerObject3D = new THREE.ViveController( i );
-    //     var input = dat.GUIVR.addInputObject( controllerObject3D );
-    //     scene.add(controllerObject3D)
-    //     scene.add( input ); // this will add helpers to your scene (laser & cursor)
-    // }
-
     var controllerDirections = ['up', 'down'];
+
     for (var i = 0; i < controls.length ; i++) {
         var id = controls[i] + 'Control';
         var controllerEl = document.getElementById(id);
         var object3D = controllerEl.object3D;
         // https://github.com/dataarts/dat.guiVR/wiki/Input-Support-(Vive-Controllers,-Mouse,-etc)
         var vrInput = dat.GUIVR.addInputObject( object3D );
+
+        // Maybe go back to this? But check revied version below FIRST
+        // for (e in controllerDirections) {
+        //     var dir = controllerDirections[e];
+        //     console.log("doing: ", 'grip' + dir);
+        //     console.log("vrInput: ", vrInput);
+        //     controllerEl.addEventListener( 'grip' + dir, function(){ console.log("gripped " + dir +" !"); vrInput.gripped( dir != "down"); } );
+        // }
+        // for (e in controllerDirections) {
+        //     var dir = controllerDirections[e];
+        //     console.log("doing: ", 'trigger' + dir);
+        //     console.log("vrInput: ", vrInput);
+        //     controllerEl.addEventListener( 'trigger' + dir, function(){ console.log("pressed " + dir +" !"); vrInput.pressed( dir != "down"); } );
+        // }
 
         bindControllerToLaser(controllerEl, 'grip', vrInput, vrInput.gripped);
         bindControllerToLaser(controllerEl, 'trigger', vrInput, vrInput.pressed);
@@ -139,16 +147,13 @@ function addGuiElements(scene, camera, renderer) {
     }
 }
 
-function bindControllerToLaser(controllerEl, baseEvent, vrInput, laserFn) {
-    // ['up', 'down'].forEach(function (e) {
-    //     controllerEl.addEventListener( 'trackpad' + e, function(){ vrInput.pressed( e != "down"); } );
-    // })
+function bindControllerToLaser(controllerEl, baseEvent, vrInput, inputFn) {
     var controllerDirections = ['up', 'down'];
-    for (e in controllerDirections) {
-        var dir = controllerDirections[e];
+    for (i in controllerDirections) {
+        var dir = controllerDirections[i];
         var value = (dir == "down");
         console.log("doing: ", baseEvent + dir + ", for: " + controllerEl.id + ", setting it to: " + value);
-        controllerEl.addEventListener( baseEvent + e, function(){ console.log(baseEvent + "ed " + dir + " !"); laserFn.call(laser, value); } );
+        controllerEl.addEventListener( baseEvent + dir, function(){ console.log(baseEvent + "ed " + dir + " !"); inputFn.call(vrInput, value); } );
     }
 }
 
