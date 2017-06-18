@@ -11,7 +11,7 @@ var guiData = {
 };
 
 // var gui = new dat.GUI();
-var scene;
+var scene, camera, renderer;
 // var camera;
 
 var stats;
@@ -89,7 +89,7 @@ function loaderGuts(geometry){
 
     particleSystem = new THREE.Points( geometry, shaderMaterial );
 
-    document.querySelector('a-scene').object3D.add( particleSystem );
+    scene.add( particleSystem );
 
     geo = geometry;
 }
@@ -139,7 +139,6 @@ function init(scene, camera, renderer){
     container.appendChild( stats.dom );
 
     addGuiElements(scene, camera, renderer);
-
     // window.addEventListener( 'resize', onWindowResize, false );
 
 }
@@ -200,9 +199,9 @@ function render() {
 
 AFRAME.registerComponent('make-point-cloud', {
     init: function () {
-        var scene = document.querySelector('a-scene').object3D;
-        var camera = this.el.camera
-        var renderer = this.el.renderer
+        scene = document.querySelector('a-scene').object3D;
+        camera = this.el.camera
+        renderer = this.el.renderer
         console.log({scene, camera, renderer});
         init(scene, camera, renderer);
 		animate();
