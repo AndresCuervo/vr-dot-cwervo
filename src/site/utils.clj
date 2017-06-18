@@ -51,7 +51,7 @@
      [:a-scene {:make-point-cloud ""}
       (for [hand ["left" "right"]]
       [:a-entity {:id (str hand "Control") :hand-controls hand}])
-      [:a-sky {:material "color: blue;"}]
+      [:a-sky {:material "color: black;"}]
       [:a-camera {:id "camera"}]]
      [:script {:src "https://andrescuervo.github.io/twentyfourseven/js/controls/TrackballControls.js"}]
      [:script {:src "https://andrescuervo.github.io/twentyfourseven/js/effects/AnaglyphEffect.js"}]
