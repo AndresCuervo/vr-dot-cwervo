@@ -95,6 +95,8 @@ function loaderGuts(geometry){
     geo = geometry;
 }
 
+var vrinputs = [];
+
 function addGuiElements(scene, camera, renderer) {
     gui = dat.GUIVR.create('Gui Data');
     gui.position.y = 2;
@@ -131,8 +133,8 @@ function addGuiElements(scene, camera, renderer) {
         var object3D = controllerEl.object3D;
         // https://github.com/dataarts/dat.guiVR/wiki/Input-Support-(Vive-Controllers,-Mouse,-etc)
         var vrInput = dat.GUIVR.addInputObject( object3D );
+        vrinputs.push[vrInput];
 
-        console.log("arbitrary change");
         for (e in controllerDirections) {
             var dir = controllerDirections[e];
             console.log("doing: ", 'grip' + dir);
