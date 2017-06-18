@@ -2,12 +2,16 @@
 var points, geo, oPositions;
 var colorAvg;
 var flashPoints = false;
+var eventList =  ['trackpadup', 'trackpaddown', 'gripup', 'gripdown', 'triggerup', 'triggerdown'] ;
 var guiData = {
     'colorWhite' : true,
     'moreCam' : false,
     'delta' : 130,
     'particleSize' : 1,
-    'sinFactor' : 0.01
+    'sinFactor' : 0.01,
+    'testControllerEvents' : function () {
+        eventList.forEach(function (e) {var event = new Event(e); console.log(e + " : "); document.getElementById('leftControl').dispatchEvent(event);});
+    }
 };
 
 // var gui = new dat.GUI();
@@ -106,6 +110,8 @@ function addGuiElements(scene, camera, renderer) {
     gui.add(guiData, 'particleSize', 0, 10);
     gui.add(guiData, 'sinFactor', 0, 0.1);
 
+    gui.add(guiData, 'testControllerEvents');
+
     scene.add(gui);
 
     // Mouse input
@@ -134,13 +140,17 @@ function addGuiElements(scene, camera, renderer) {
         //     controllerEl.addEventListener( 'grip' + dir, function(){ console.log("gripped " + dir +" !"); vrInput.gripped( dir != "down"); } );
         // }
 
-        controllerEl.addEventListener('triggerdown', function () {console.log("pressed down"); vrInput.pressed(true);});
-        controllerEl.addEventListener('triggerup', function () {console.log("pressed up"); vrInput.pressed(false);});
-        controllerEl.addEventListener('trackpaddown', function () {console.log("pressed down"); vrInput.pressed(true);});
-        controllerEl.addEventListener('trackpadup', function () {console.log("pressed up"); vrInput.pressed(false);});
-        controllerEl.addEventListener('gripdown', function () {console.log("gripped down"); vrInput.gripped(true);});
-        controllerEl.addEventListener('gripup', function () {console.log("gripped up"); vrInput.gripped(false);});
-
+        // TODO :
+        // TODO :
+        // TODO :
+        // TODO : if this works, clean this up! Delete the function below or whatever
+        ['trigger', 'trackpad', 'grip'].forEach(function (baseEvent) {
+            ['up', 'down'].forEach(function (e) { controllerEl.addEventListener(baseEvent + e, function(){
+                console.log((baseEvent === 'grip' ? 'gripped' : 'pressed') + " " + e);
+                var value = (e === "down");
+                (baseEvent === 'grip' ? vrInput.gripped(value) : vrInput.pressed(value));
+            })})
+        });
         // bindControllerToLaser(controllerEl, 'grip', vrInput, vrInput.gripped);
         // bindControllerToLaser(controllerEl, 'trigger', vrInput, vrInput.pressed);
         // bindControllerToLaser(controllerEl, 'trackpad', vrInput, vrInput.pressed);
