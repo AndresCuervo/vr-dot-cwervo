@@ -133,7 +133,7 @@ function addGuiElements(scene, camera, renderer) {
 
         ['up', 'down'].forEach(function (e) {
             console.log("doing:", 'grip' + e);
-            controllerEl.addEventListener( 'grip' + e, function(){ laser.gripped(console.log("gripped" + e +" !") e != "down"); } );
+            controllerEl.addEventListener( 'grip' + e, function(){ console.log("gripped" + e +" !"); laser.gripped( e != "down"); } );
         });
 
         ['up', 'down'].forEach(function (e) {
