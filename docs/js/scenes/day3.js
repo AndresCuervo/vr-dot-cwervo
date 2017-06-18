@@ -14,6 +14,11 @@ var guiData = {
     }
 };
 
+
+var debug = false;
+var urlParams = new URLSearchParams(window.location.search);
+var debug = debug || urlParams.get('debug') != null;
+
 // var gui = new dat.GUI();
 var gui;
 var scene, camera, renderer;
@@ -122,10 +127,14 @@ function addGuiElements(scene, camera, renderer) {
     // scene.add( gazeInput.cursor ); //  only add the cursor, not the laser
 
     // VR input
-    var controls = ["right", "left"];
+    var controls = ["left", "right"];
+    if (debug) {
+        console.log("debugging!"):
+        controls = ["right"];
+    }
 
-    for (var i = 0; i < controls.length ; i++) {
-        var id = controls[i] + 'Control';
+    controls.forEach(function (controllerSide) {
+        var id = controllerSide + 'Control';
         var controllerEl = document.getElementById(id);
         var object3D = controllerEl.object3D;
         // https://github.com/dataarts/dat.guiVR/wiki/Input-Support-(Vive-Controllers,-Mouse,-etc)
@@ -157,7 +166,7 @@ function addGuiElements(scene, camera, renderer) {
         // bindControllerToLaser(controllerEl, 'trigger', vrInput, vrInput.pressed);
         // bindControllerToLaser(controllerEl, 'trackpad', vrInput, vrInput.pressed);
         scene.add(vrInput); // this will add helpers to your scene (laser & cursor)
-    }
+    });
 }
 
 // TODO : For some reason this isn't iterating, only attaches and outputs "down" ???
