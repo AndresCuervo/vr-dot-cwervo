@@ -52,7 +52,7 @@
      [:a-scene {:make-point-cloud ""}
       ;; (for [control ["left" "right"]]
       ;; [:a-entity {:id (str control "Control") :vive-controls control}])
-      [:a-entity#leftControl {:vive-controls "left"}]
+      ;; [:a-entity#leftControl {:vive-controls "left"}]
       [:a-entity#rightControl {:vive-controls "right"}]
       [:a-sky {:material "color: black;"}]
       [:a-camera {:id "camera"}]]
