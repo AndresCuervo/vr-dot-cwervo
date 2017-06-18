@@ -46,14 +46,13 @@
                        "<script src='/js/vr/datguivr.min.js'></script>"
                        "<script src='/js/vr/ViveController.js'></script>"
                        ;; Port the following script and reroute where the assets are coming from!
-                       "<script src='/js/scenes/day3.js?v=9'></script>"])
+                       "<script src='/js/scenes/day3.js?v=10'></script>"])
     [:body
      [:div#container]
      [:a-scene {:make-point-cloud ""}
-      ;; (for [control ["left" "right"]]
-      ;; [:a-entity {:id (str control "Control") :vive-controls control}])
-      ;; [:a-entity#leftControl {:vive-controls "left"}]
-      [:a-entity#rightControl {:vive-controls "right"}]
+      (for [control ["left" "right"]]
+      [:a-entity {:id (str control "Control") :vive-controls control}]
+      [:a-entity {:id (str control "Control-hand") :hand-controls control}])
       [:a-sky {:material "color: black;"}]
       [:a-camera {:id "camera"}]]
      [:script {:src "https://andrescuervo.github.io/twentyfourseven/js/controls/TrackballControls.js"}]

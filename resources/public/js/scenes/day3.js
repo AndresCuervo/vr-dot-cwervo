@@ -128,11 +128,6 @@ function addGuiElements(scene, camera, renderer) {
 
     // VR input
     var controls = ["left", "right"];
-    if (debug) {
-        console.log("debugging!");
-        controls = ["right"];
-    }
-
     controls.forEach(function (controllerSide) {
         var id = controllerSide + 'Control';
         var controllerEl = document.getElementById(id);
