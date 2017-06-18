@@ -127,10 +127,10 @@ function init(scene, camera, renderer){
     var loader = new THREE.PLYLoader();
     loader.load( 'https://andrescuervo.github.io/twentyfourseven/assets/models/apse-simple.ply', loaderGuts);
 
-
-    renderer = new THREE.WebGLRenderer( { antialias: false } );
-    renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    // Remove this Three renderer for A-Frame's
+    // renderer = new THREE.WebGLRenderer( { antialias: false } );
+    // renderer.setPixelRatio( window.devicePixelRatio );
+    // renderer.setSize( window.innerWidth, window.innerHeight );
 
     var container = document.querySelector('body');
     // container.appendChild( renderer.domElement );
