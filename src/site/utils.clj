@@ -24,12 +24,21 @@
                        :rotation "0 -130 0"}]
       [:a-camera#camera {:v-bind:fov "zRotation"}]]]))
 
+(defn root-6-head-element
+  ([title]
+   [:head
+    [:title title]
+    [:script {:src "https://rawgit.com/aframevr/aframe/149586a/dist/aframe-master.min.js"}]])
+  ([title custom-scripts]
+   (conj
+     (into
+       (root-6-head-element title)
+       (concat custom-scripts)))))
 
 (defn vr-dat-gui-test [{gloabl-meta :meta entries :entries}]
   (html
-    (root-head-element "VR-Dat-Gui"
-                       ["<script src='https://andrescuervo.github.io/twentyfourseven/js/three85.js'></script>"
-                       "<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/Detector.js'></script>"
+    (root-6-head-element "VR-Dat-Gui"
+                       ["<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/Detector.js'></script>"
                        "<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/stats.min.js'></script>"
                        "<script src='https://andrescuervo.github.io/twentyfourseven/js/loaders/PLYLoader.js'></script>"
                        "<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/dat.gui.min.js'></script>"
@@ -42,7 +51,7 @@
      [:a-scene {:make-point-cloud ""}
       (for [hand ["left" "right"]]
       [:a-entity {:id (str hand "Control") :hand-controls hand}])
-      [:a-sky {:material "color: black;"}]
+      [:a-sky {:material "color: blue;"}]
       [:a-camera {:id "camera"}]]
      [:script {:src "https://andrescuervo.github.io/twentyfourseven/js/controls/TrackballControls.js"}]
      [:script {:src "https://andrescuervo.github.io/twentyfourseven/js/effects/AnaglyphEffect.js"}]
