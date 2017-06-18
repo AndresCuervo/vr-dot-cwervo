@@ -11,6 +11,7 @@ var guiData = {
 };
 
 // var gui = new dat.GUI();
+var gui;
 var scene, camera, renderer;
 // var camera;
 
@@ -95,7 +96,7 @@ function loaderGuts(geometry){
 }
 
 function addGuiElements(scene, camera, renderer) {
-    var gui = dat.GUIVR.create('Gui Data');
+    gui = dat.GUIVR.create('Gui Data');
     gui.position.y = 2;
     gui.position.z = -1;
 
@@ -116,17 +117,43 @@ function addGuiElements(scene, camera, renderer) {
 
     // VR input
     var controls = ["left", "right"];
-    for (var i = 0; i < controls.length ; i++) {
-        var controllerObject3D = new THREE.ViveController( i );
-        var input = dat.GUIVR.addInputObject( controllerObject3D );
-        scene.add(controllerObject3D)
-        scene.add( input ); // this will add helpers to your scene (laser & cursor)
-    }
-
-    // var controls = ["left", "right"];
     // for (var i = 0; i < controls.length ; i++) {
-    //     scene.add( dat.GUIVR.addInputObject( document.querySelector('#' + controls[i] + 'Control').object3D ) ); // this will add helpers to your scene (laser & cursor)
+    //     var controllerObject3D = new THREE.ViveController( i );
+    //     var input = dat.GUIVR.addInputObject( controllerObject3D );
+    //     scene.add(controllerObject3D)
+    //     scene.add( input ); // this will add helpers to your scene (laser & cursor)
     // }
+
+    for (var i = 0; i < controls.length ; i++) {
+        var id = controls[i] + 'Control';
+        var controllerEl = document.getElementById(id);
+        var object3D = controllerEl.object3D;
+        // https://github.com/dataarts/dat.guiVR/wiki/Input-Support-(Vive-Controllers,-Mouse,-etc)
+        var laser = dat.GUIVR.addInputObject( object3D );
+
+        // ['up', 'down'].forEach(function (e) {
+        //     controllerEl.addEventListener( 'grip' + e, function(){ laser.gripped( e != "down"); } );
+        // })
+
+        // ['up', 'down'].forEach(function (e) {
+        //     controllerEl.addEventListener( 'trigger' + e, function(){ laser.pressed( e != "down"); } );
+        // })
+
+        bindControllerToLaser(controllerEl, 'grip', laser, laser.gripped);
+        bindControllerToLaser(controllerEl, 'trigger', laser, laser.pressed);
+        bindControllerToLaser(controllerEl, 'trackpad', laser, laser.pressed);
+        scene.add(laser); // this will add helpers to your scene (laser & cursor)
+    }
+}
+
+function bindControllerToLaser(controllerEl, baseEvent, laser, laserFn) {
+        // ['up', 'down'].forEach(function (e) {
+        //     controllerEl.addEventListener( 'trackpad' + e, function(){ laser.pressed( e != "down"); } );
+        // })
+
+        ['up', 'down'].forEach(function (e) {
+            controllerEl.addEventListener( 'trackpad' + e, function(){ laserFn.call(laser, (e != "down")); } );
+        })
 }
 
 function init(scene, camera, renderer){
