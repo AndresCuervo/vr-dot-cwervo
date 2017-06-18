@@ -129,7 +129,7 @@ function addGuiElements(scene, camera, renderer) {
     // VR input
     var controls = ["left", "right"];
     if (debug) {
-        console.log("debugging!"):
+        console.log("debugging!");
         controls = ["right"];
     }
 
