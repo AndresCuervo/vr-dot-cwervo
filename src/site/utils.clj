@@ -46,7 +46,7 @@
                        "<script src='/js/vr/datguivr.min.js'></script>"
                        "<script src='/js/vr/ViveController.js'></script>"
                        ;; Port the following script and reroute where the assets are coming from!
-                       "<script src='/js/scenes/day3.js?v=5'></script>"])
+                       "<script src='/js/scenes/day3.js?v=6'></script>"])
     [:body
      [:div#container]
      [:a-scene {:make-point-cloud ""}
