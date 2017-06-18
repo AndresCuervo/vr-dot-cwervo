@@ -152,9 +152,10 @@ function addGuiElements(scene, camera, renderer) {
         // ¯\_(ツ)_/¯
         ['trigger', 'trackpad', 'grip'].forEach(function (baseEvent) {
             ['up', 'down'].forEach(function (e) { controllerEl.addEventListener(baseEvent + e, function(){
-                console.log((baseEvent === 'grip' ? 'gripped' : 'pressed') + " " + e);
+                var gripEvent = baseEvent === 'grip';
+                console.log((gripEvent ? 'gripped' : 'pressed') + " " + controllerSide + " " + e);
                 var value = (e === "down");
-                (baseEvent === 'grip' ? vrInput.gripped(value) : vrInput.pressed(value));
+                (gripEvent ? vrInput.gripped(value) : vrInput.pressed(value));
             })})
         });
         // bindControllerToLaser(controllerEl, 'grip', vrInput, vrInput.gripped);
