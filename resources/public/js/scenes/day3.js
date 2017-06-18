@@ -122,8 +122,7 @@ function addGuiElements(scene, camera, renderer) {
     // scene.add( gazeInput.cursor ); //  only add the cursor, not the laser
 
     // VR input
-    var controls = ["left", "right"];
-    var controllerDirections = ['up', 'down'];
+    var controls = ["right", "left"];
 
     for (var i = 0; i < controls.length ; i++) {
         var id = controls[i] + 'Control';
@@ -132,18 +131,21 @@ function addGuiElements(scene, camera, renderer) {
         // https://github.com/dataarts/dat.guiVR/wiki/Input-Support-(Vive-Controllers,-Mouse,-etc)
         var vrInput = dat.GUIVR.addInputObject( object3D );
 
-        // TODO : Figure out a way to iterate through these????
-        // for (e in controllerDirections) {
-        //     var dir = controllerDirections[e];
-        //     console.log("doing: ", 'grip' + dir);
-        //     console.log("vrInput: ", vrInput);
-        //     controllerEl.addEventListener( 'grip' + dir, function(){ console.log("gripped " + dir +" !"); vrInput.gripped( dir != "down"); } );
-        // }
-
-        // TODO :
         // TODO :
         // TODO :
         // TODO : if this works, clean this up! Delete the function below or whatever
+        // Abstract this into a component for yourself, so that it's reusable anywhere!
+        // and maybe figure out how to publish it on A-Frame registry?? :) Could be v useful for debugging!!!
+        //
+        // TODO :
+        // TODO : // TODO : // TODO : // TODO : // TODO :
+        // TODO : // TODO : // TODO : // TODO : // TODO :
+        // TODO : // TODO : // TODO : // TODO : // TODO :
+        // TODO : // TODO : // TODO : // TODO : // TODO :
+        // TODO : // TODO : // TODO : // TODO : // TODO :
+        // TODO : Actaully, bare minimum, tomorrow morning (AFTER tweeting a GIF of mouse and then VR adjustment of the point-cloud)
+        // throw it into a Gist (cleaned up obviously) and tweet it taggin A-Frame and Datgui team
+        // ¯\_(ツ)_/¯
         ['trigger', 'trackpad', 'grip'].forEach(function (baseEvent) {
             ['up', 'down'].forEach(function (e) { controllerEl.addEventListener(baseEvent + e, function(){
                 console.log((baseEvent === 'grip' ? 'gripped' : 'pressed') + " " + e);
@@ -159,8 +161,9 @@ function addGuiElements(scene, camera, renderer) {
 }
 
 // TODO : For some reason this isn't iterating, only attaches and outputs "down" ???
+
+var controllerDirections = ['up', 'down'];
 function bindControllerToLaser(controllerEl, baseEvent, vrInput, inputFn) {
-    var controllerDirections = ['up', 'down'];
     for (i in controllerDirections) {
         var dir = controllerDirections[i];
         var value = (dir == "down");
