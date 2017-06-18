@@ -115,14 +115,18 @@ function addGuiElements(scene, camera, renderer) {
     // scene.add( gazeInput.cursor ); //  only add the cursor, not the laser
 
     // VR input
-    // var controllerObject3D = new THREE.ViveController();
-    // var input = dat.GUIVR.addInputObject( controllerObject3D );
-    // scene.add( input ); // this will add helpers to your scene (laser & cursor)
-
     var controls = ["left", "right"];
     for (var i = 0; i < controls.length ; i++) {
-        scene.add( dat.GUIVR.addInputObject( document.querySelector('#' + controls[i] + 'Control').object3D ) ); // this will add helpers to your scene (laser & cursor)
+        var controllerObject3D = new THREE.ViveController( i );
+        var input = dat.GUIVR.addInputObject( controllerObject3D );
+        scene.add(controllerObject3D)
+        scene.add( input ); // this will add helpers to your scene (laser & cursor)
     }
+
+    // var controls = ["left", "right"];
+    // for (var i = 0; i < controls.length ; i++) {
+    //     scene.add( dat.GUIVR.addInputObject( document.querySelector('#' + controls[i] + 'Control').object3D ) ); // this will add helpers to your scene (laser & cursor)
+    // }
 }
 
 function init(scene, camera, renderer){

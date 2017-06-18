@@ -50,8 +50,8 @@
     [:body
      [:div#container]
      [:a-scene {:make-point-cloud ""}
-      (for [control ["left" "right"]]
-      [:a-entity {:id (str control "Control") :vive-controls control}])
+      ;; (for [control ["left" "right"]]
+      ;; [:a-entity {:id (str control "Control") :vive-controls control}])
       [:a-sky {:material "color: black;"}]
       [:a-camera {:id "camera"}]]
      [:script {:src "https://andrescuervo.github.io/twentyfourseven/js/controls/TrackballControls.js"}]
