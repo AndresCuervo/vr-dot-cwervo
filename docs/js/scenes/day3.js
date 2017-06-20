@@ -123,8 +123,8 @@ function addGuiElements(scene, camera, renderer) {
     dat.GUIVR.enableMouse( camera, renderer );
 
     // Gaze input?
-    // var gazeInput = dat.GUIVR.addInputObject( camera );
-    // scene.add( gazeInput.cursor ); //  only add the cursor, not the laser
+    var gazeInput = dat.GUIVR.addInputObject( camera );
+    scene.add( gazeInput.cursor ); //  only add the cursor, not the laser
 
     // VR input
     var controls = ["left", "right"];
@@ -135,21 +135,6 @@ function addGuiElements(scene, camera, renderer) {
         // https://github.com/dataarts/dat.guiVR/wiki/Input-Support-(Vive-Controllers,-Mouse,-etc)
         var vrInput = dat.GUIVR.addInputObject( object3D );
 
-        // TODO :
-        // TODO :
-        // TODO : if this works, clean this up! Delete the function below or whatever
-        // Abstract this into a component for yourself, so that it's reusable anywhere!
-        // and maybe figure out how to publish it on A-Frame registry?? :) Could be v useful for debugging!!!
-        //
-        // TODO :
-        // TODO : // TODO : // TODO : // TODO : // TODO :
-        // TODO : // TODO : // TODO : // TODO : // TODO :
-        // TODO : // TODO : // TODO : // TODO : // TODO :
-        // TODO : // TODO : // TODO : // TODO : // TODO :
-        // TODO : // TODO : // TODO : // TODO : // TODO :
-        // TODO : Actaully, bare minimum, tomorrow morning (AFTER tweeting a GIF of mouse and then VR adjustment of the point-cloud)
-        // throw it into a Gist (cleaned up obviously) and tweet it taggin A-Frame and Datgui team
-        // ¯\_(ツ)_/¯
         ['trigger', 'trackpad', 'grip'].forEach(function (baseEvent) {
             ['up', 'down'].forEach(function (e) { controllerEl.addEventListener(baseEvent + e, function(){
                 var gripEvent = baseEvent === 'grip';
@@ -158,23 +143,9 @@ function addGuiElements(scene, camera, renderer) {
                 (gripEvent ? vrInput.gripped(value) : vrInput.pressed(value));
             })})
         });
-        // bindControllerToLaser(controllerEl, 'grip', vrInput, vrInput.gripped);
-        // bindControllerToLaser(controllerEl, 'trigger', vrInput, vrInput.pressed);
-        // bindControllerToLaser(controllerEl, 'trackpad', vrInput, vrInput.pressed);
-        scene.add(vrInput); // this will add helpers to your scene (laser & cursor)
+
+        scene.add(vrInput);
     });
-}
-
-// TODO : For some reason this isn't iterating, only attaches and outputs "down" ???
-
-var controllerDirections = ['up', 'down'];
-function bindControllerToLaser(controllerEl, baseEvent, vrInput, inputFn) {
-    for (i in controllerDirections) {
-        var dir = controllerDirections[i];
-        var value = (dir == "down");
-        console.log("doing: ", baseEvent + dir + ", for: " + controllerEl.id + ", setting it to: " + value);
-        controllerEl.addEventListener( baseEvent + dir, function(){ console.log(baseEvent + "ed " + dir + " : " +value+ " !"); inputFn.call(vrInput, value); } );
-    }
 }
 
 function init(scene, camera, renderer){
