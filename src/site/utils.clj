@@ -42,7 +42,6 @@
                        ["<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/Detector.js'></script>"
                        "<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/stats.min.js'></script>"
                        "<script src='https://andrescuervo.github.io/twentyfourseven/js/loaders/PLYLoader.js'></script>"
-                       "<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/dat.gui.min.js'></script>"
                        "<script src='/js/vr/datguivr.min.js'></script>"
                        "<script src='/js/vr/ViveController.js'></script>"
                        ;; Port the following script and reroute where the assets are coming from!
