@@ -28,16 +28,16 @@
   ([title]
    [:head
     [:title title]
-    [:script {:src "https://rawgit.com/aframevr/aframe/149586a/dist/aframe-master.min.js"}]])
+    [:script {:src "https://cdnjs.cloudflare.com/ajax/libs/aframe/0.6.0/aframe-master.min.js"}]])
   ([title custom-scripts]
    (conj
      (into
        (root-6-head-element title)
        (concat custom-scripts)))))
 
-(defn vr-dat-gui-test [{gloabl-meta :meta entries :entries}]
+(defn vr-dat-gui-test [{global-meta :meta entries :entries}]
   (html
-    (root-head-element "VR-Dat-Gui"
+    (root-6-head-element "VR-Dat-Gui"
     ;; (root-6-head-element "VR-Dat-Gui"
                        ["<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/Detector.js'></script>"
                        "<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/stats.min.js'></script>"
@@ -59,3 +59,28 @@
      [:script {:type "x-shader/x-fragment", :id "fragmentshader"} "uniform vec3 color;\n    uniform sampler2D texture;\n\n    varying vec3 vColor;\n\n    void main() {\n\n        gl_FragColor = vec4( color * vColor, 1.0 );\n\n        gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );\n\n    }"]
      [:script {:type "text/javascript"} "<!--\n    function toggle(id) {\n        var e = document.getElementById(id);\n        e.style.display == 'block' ? e.style.display = 'none' : e.style.display = 'block';\n    }\n    "]]))
 
+
+(defn meme-bump-map-test [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "Bump Maps & Stuff"
+                         [])
+    [:body
+     [:div#container]
+     [:a-scene
+      [:a-assets
+       (for [m ["COLOR" "NRM" "DISP"]]
+         [:img {:id (str "meme" m)
+                :src (str "/assets/textures/foot-glove/foot-glove-sandals_" m ".png") }])]
+      (for [control ["left" "right"]]
+        [:a-entity {:id (str control "Control") :hand-controls control}])
+
+      [:a-box {:scale "1 1 1"
+               :position "0 1 -4" :material "color: #DAD;
+                                            src: #memeCOLOR;
+                                            normalMap: #memeNRM;
+                                            metalness: 0.5;
+                                            "}]
+
+      [:a-sky {:material "color: #2EAFAC;"}]
+      [:a-camera {:id "camera"}]]
+     ]))

@@ -57,6 +57,9 @@
            [:a {:href "/scenes/itlt/"}
             "Imagine Trees Like These"]]
           [:li
+           [:a {:href "/scenes/bump-test/"}
+            "Meme bump-map test!"]]
+          [:li
            [:a {:href "/scenes/vr-capstone.html"}
             "VR Capstone"]]
           [:li

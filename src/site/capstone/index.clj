@@ -11,7 +11,7 @@
    "https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js"
    ;; JS State Machine! :)
    ;; https://github.com/jakesgordon/javascript-state-machine
-   "https://cdn.rawgit.com/jakesgordon/javascript-state-machine/master/state-machine.js"
+   "https://cdnjs.cloudflare.com/ajax/libs/javascript-state-machine/2.0.0/state-machine.min.js"
 
    ;; <!-- Working with .ply models -->
    "https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js"
