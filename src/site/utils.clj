@@ -63,24 +63,56 @@
 (defn meme-bump-map-test [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Bump Maps & Stuff"
-                         [])
+                         ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='/js/spec-map.js'></script>"
+
+                          ])
     [:body
      [:div#container]
-     [:a-scene
-      [:a-assets
-       (for [m ["COLOR" "NRM" "DISP"]]
-         [:img {:id (str "meme" m)
-                :src (str "/assets/textures/foot-glove/foot-glove-sandals_" m ".png") }])]
-      (for [control ["left" "right"]]
-        [:a-entity {:id (str control "Control") :hand-controls control}])
+     (let [fname #_"/assets/textures/foot-glove/foot-glove-sandals_"
+                 "/assets/textures/concrete/concrete_"]
+       [:a-scene
+        [:a-assets
+         (for [m ["COLOR" "NRM"]]
+           [:img {:id (str "floor" m)
+                  :src (str fname m ".png") }])
+         ]
+        (for [control ["left" "right"]]
+          [:a-entity {:id (str control "Control")
+                      :position "0 0.6 0"
+                      :hand-controls control}])
+        [:a-entity {:light "type: ambient; color: #DAD"}]
+        (for [n (range -8 -4 0.5)
+              :let [z (+ (Math/sin n) 0.5) ]]
+          [:a-entity {:light "type: point; color: #2EAFAC; intensity: 0.1" :position (str "-4.5 1 " z)
+                      :animation (str
+                                   "property: position;
+                                   from: -4.5 1 " z
+                                   ";
+                                   to: 4.5 1 " z
+                                   ";
+                                   easing: linear;
+                                   dir: alternate;
+                                   loop: true;
+                                   dur: 3000;")}]
+          )
 
-      [:a-box {:scale "1 1 1"
-               :position "0 1 -4" :material "color: #DAD;
-                                            src: #memeCOLOR;
-                                            normalMap: #memeNRM;
-                                            metalness: 0.5;
-                                            "}]
-
-      [:a-sky {:material "color: #2EAFAC;"}]
-      [:a-camera {:id "camera"}]]
+        [:a-sphere {:light-shader ""
+                    :position "0 3.2 -2"
+                    :material "color: white"
+                    :radius "2"}]
+        [:a-plane#floor
+         {:scale "100 100 100"
+          :position "0 0 0"
+          :rotation "-90 0 0"
+          :roughness 0.4
+          ;; :shininess 30
+          :material "color: white;
+                    src: #floorCOLOR;
+                    normalMap: #floorNRM;
+                    "
+          :spec-map (str "src: " fname "SPEC.png")
+          }]
+        [:a-sky {:material "color: #2EAFAC;"}]
+        [:a-camera {:id "camera"}]])
      ]))
