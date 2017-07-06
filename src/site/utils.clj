@@ -38,19 +38,20 @@
 (defn vr-dat-gui-test [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "VR-Dat-Gui"
-    ;; (root-6-head-element "VR-Dat-Gui"
                        ["<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/Detector.js'></script>"
                        "<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/stats.min.js'></script>"
                        "<script src='https://andrescuervo.github.io/twentyfourseven/js/loaders/PLYLoader.js'></script>"
                        "<script src='/js/vr/datguivr.min.js'></script>"
                        "<script src='/js/vr/ViveController.js'></script>"
                        ;; Port the following script and reroute where the assets are coming from!
-                       "<script src='/js/scenes/day3.js?v=11'></script>"])
+                       "<script src='/js/scenes/day3.js?v=12'></script>"])
     [:body
      [:div#container]
-     [:a-scene {:make-point-cloud ""}
+     [:a-scene {:make-point-cloud ""
+                :dat-gui-controller "query: [hand-controls]"}
       (for [control ["left" "right"]]
-        [:a-entity {:id (str control "Control") :hand-controls control}])
+        [:a-entity {:id (str control "Control")
+                    :hand-controls control}])
       [:a-sky {:material "color: black;"}]
       [:a-camera {:id "camera"}]]
      [:script {:src "https://andrescuervo.github.io/twentyfourseven/js/controls/TrackballControls.js"}]
@@ -113,6 +114,40 @@
                     "
           :spec-map (str "src: " fname "SPEC.png")
           }]
+        [:a-sky {:material "color: #2EAFAC;"}]
+        [:a-camera {:id "camera"}]])
+     ]))
+
+(defn apainter6 [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "A-Painter 0.6.0"
+                         ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                         "<script src='https://cdn.rawgit.com/dmarcos/a-painter-loader-component/master/dist/a-painter-loader-component.min.js'></script>"
+                          "<script src='/js/spec-map.js'></script>"
+                          ])
+    [:body
+     [:div#container]
+     (let [_ "nada"]
+       [:a-scene
+        [:a-assets]
+        [:a-entity#ucareloader {:a-painter-loader "src: https://ucarecdn.com/f5653bf5-0f4f-4b80-8899-5a0a1227c8e8/"}]
+        [:a-sky {:material "color: #2EAFAC;"}]
+        [:a-camera {:id "camera"}]])
+     ]))
+
+(defn whatever [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "A-Painter 0.6.0"
+                         ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                         "<script src='https://cdn.rawgit.com/dmarcos/a-painter-loader-component/master/dist/a-painter-loader-component.min.js'></script>"
+                          "<script src='/js/spec-map.js'></script>"
+                          ])
+    [:body
+     [:div#container]
+     (let [_ "nada"]
+       [:a-scene
+        [:a-assets]
+        [:a-entity#ucareloader {:a-painter-loader "src: https://ucarecdn.com/f5653bf5-0f4f-4b80-8899-5a0a1227c8e8/"}]
         [:a-sky {:material "color: #2EAFAC;"}]
         [:a-camera {:id "camera"}]])
      ]))

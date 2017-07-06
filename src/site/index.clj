@@ -31,27 +31,6 @@
         [:ul.vr_list
          [:li.details-wrapper
           [:details
-          [:summary "Some utils for WebVR I've been cooking up!"]
-          [:li
-           [:a {:href "/utils/drag-and-drop/"}
-            "Drag & Drop a VR photo"]]
-          [:li
-           [:a {:href "/utils/vr-dat-gui/"}
-            "VR Dat.gui test"]]]]
-         ;; ------
-         [:li.details-wrapper
-          [:details
-          [:summary "Panoramas and such"]
-          (for [entry entries]
-           (when (and (contains? entry :title)
-                      ;; Wow, I can add my own metadata keys, so fun!
-                      (not (:draft? entry)))
-             [:li
-              [:a {:href (:permalink entry)}
-               (:title entry)]]))]]
-         ;; ------
-         [:li.details-wrapper
-          [:details
           [:summary "Some WebVR scenes"]
           [:li
            [:a {:href "/scenes/itlt/"}
@@ -74,6 +53,27 @@
           #_[:li
              [:a {:href "/scenes/three-test/"}
               "T e s t"]]]]
+
+         [:li.details-wrapper
+          [:details
+           [:summary "Panoramas and such"]
+           (for [entry entries]
+             (when (and (contains? entry :title)
+                        ;; Wow, I can add my own metadata keys, so fun!
+                        (not (:draft? entry)))
+               [:li
+                [:a {:href (:permalink entry)}
+                 (:title entry)]]))]]
+
+         [:li.details-wrapper
+          [:details
+           [:summary "Some utils for WebVR I've been cooking up!"]
+           [:li
+            [:a {:href "/utils/drag-and-drop/"}
+             "Drag & Drop a VR photo"]]
+           [:li
+            [:a {:href "/utils/vr-dat-gui/"}
+             "VR Dat.gui test"]]]]
          ]]
        [:span#contact "Contact:"]
        [:ul.vr_list

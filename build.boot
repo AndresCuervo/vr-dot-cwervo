@@ -43,6 +43,7 @@
     (static :renderer 'site.vive.base/controls-test :page "vive/controls-test/index.html")
     (static :renderer 'site.utils/vr-dat-gui-test :page "utils/vr-dat-gui/index.html")
     (static :renderer 'site.utils/meme-bump-map-test :page "scenes/bump-test/index.html")
+    (static :renderer 'site.utils/apainter6 :page "scenes/apainter6/index.html")
     ;; (images-dimensions) ;; Just print the meta data for images
     (target)
     ))

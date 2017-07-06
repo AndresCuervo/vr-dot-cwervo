@@ -163,7 +163,7 @@ function init(scene, camera, renderer){
     stats = new Stats();
     container.appendChild( stats.dom );
 
-    addGuiElements(scene, camera, renderer);
+    // addGuiElements(scene, camera, renderer);
     // window.addEventListener( 'resize', onWindowResize, false );
 
 }
@@ -230,5 +230,59 @@ AFRAME.registerComponent('make-point-cloud', {
         console.log({scene, camera, renderer});
         init(scene, camera, renderer);
 		animate();
+    }
+});
+
+AFRAME.registerComponent('dat-gui-controller', {
+    init : function () {
+        // need scene, camera, and renderer
+        console.log("wowee");
+        scene = sceneEl.object3D;
+        camera = this.el.camera
+        renderer = this.el.renderer
+
+        // Need a globally accessible variable "gui"
+
+        gui = dat.GUIVR.create('Gui Data');
+        gui.position.y = 2;
+        gui.position.z = -1;
+
+        gui.add(guiData, 'colorWhite');
+        gui.add(guiData, 'moreCam');
+        gui.add(guiData, 'delta', 0, 1000);
+        gui.add(guiData, 'particleSize', 0, 10);
+        gui.add(guiData, 'sinFactor', 0, 0.1);
+
+        gui.add(guiData, 'testControllerEvents');
+
+        scene.add(gui);
+
+        // Mouse input
+        dat.GUIVR.enableMouse( camera, renderer );
+
+        // Gaze input?
+        var gazeInput = dat.GUIVR.addInputObject( camera );
+        scene.add( gazeInput.cursor ); //  only add the cursor, not the laser
+
+        // VR input
+        var controls = ["left", "right"];
+        controls.forEach(function (controllerSide) {
+            var id = controllerSide + 'Control';
+            var controllerEl = document.getElementById(id);
+            var object3D = controllerEl.object3D;
+            // https://github.com/dataarts/dat.guiVR/wiki/Input-Support-(Vive-Controllers,-Mouse,-etc)
+            var vrInput = dat.GUIVR.addInputObject( object3D );
+
+            ['trigger', 'trackpad', 'grip'].forEach(function (baseEvent) {
+                ['up', 'down'].forEach(function (e) { controllerEl.addEventListener(baseEvent + e, function(){
+                    var gripEvent = baseEvent === 'grip';
+                    console.log((gripEvent ? 'gripped' : 'pressed') + " " + controllerSide + " " + e);
+                    var value = (e === "down");
+                    (gripEvent ? vrInput.gripped(value) : vrInput.pressed(value));
+                })})
+            });
+
+            scene.add(vrInput);
+        });
     }
 });
