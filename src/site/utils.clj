@@ -41,17 +41,21 @@
                        ["<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/Detector.js'></script>"
                        "<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/stats.min.js'></script>"
                        "<script src='https://andrescuervo.github.io/twentyfourseven/js/loaders/PLYLoader.js'></script>"
-                       "<script src='/js/vr/datguivr.min.js'></script>"
                        "<script src='/js/vr/ViveController.js'></script>"
+                       "<script src='/js/vr/datguivr.min.js'></script>"
+                       "<script src='/js/a-frame-js/datguivr.js'></script>"
                        ;; Port the following script and reroute where the assets are coming from!
                        "<script src='/js/scenes/day3.js?v=12'></script>"])
     [:body
      [:div#container]
      [:a-scene {:make-point-cloud ""
-                :dat-gui-controller "query: [hand-controls]"}
+                :dat-gui "query: [hand-controls]; objects: mySphere, cube; enableMouse: true;"}
       (for [control ["left" "right"]]
         [:a-entity {:id (str control "Control")
                     :hand-controls control}])
+      [:a-sphere#mySphere  {:material "color: pink"
+                            :position "0 0 -4"}]
+      [:a-box#cube {:material "color: blue" :position "-2 0 -4"}]
       [:a-sky {:material "color: black;"}]
       [:a-camera {:id "camera"}]]
      [:script {:src "https://andrescuervo.github.io/twentyfourseven/js/controls/TrackballControls.js"}]
@@ -135,19 +139,40 @@
         [:a-camera {:id "camera"}]])
      ]))
 
-(defn whatever [{global-meta :meta entries :entries}]
+(defn simple-vr-dat-gui-example [{global-meta :meta entries :entries}]
   (html
-    (root-6-head-element "A-Painter 0.6.0"
-                         ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
-                         "<script src='https://cdn.rawgit.com/dmarcos/a-painter-loader-component/master/dist/a-painter-loader-component.min.js'></script>"
-                          "<script src='/js/spec-map.js'></script>"
-                          ])
+    (root-6-head-element "VR-Dat-Gui"
+                       ["<script src='/js/vr/datguivr.min.js'></script>"
+                       "<script src='/js/a-frame-js/datguivr.js'></script>"])
     [:body
      [:div#container]
-     (let [_ "nada"]
-       [:a-scene
-        [:a-assets]
-        [:a-entity#ucareloader {:a-painter-loader "src: https://ucarecdn.com/f5653bf5-0f4f-4b80-8899-5a0a1227c8e8/"}]
-        [:a-sky {:material "color: #2EAFAC;"}]
-        [:a-camera {:id "camera"}]])
-     ]))
+     [:a-scene { :dat-gui "query: [hand-controls]; objects: box, plane; enableMouse: true;"}
+      (for [control ["left" "right"]]
+        [:a-entity {:id (str control "Control")
+                    :hand-controls control}])
+
+      [:a-box#box {:position "-1 0.5 -3" :rotation "0 45 0" :color "#4CC3D9"}]
+      [:a-sphere#sphere {:position "0 1.25 -5" :radius "1.25" :color "#EF2D5E"}]
+      [:a-cylinder#cylinder {:position "1 0.75 -3" :radius "0.5" :height "1.5" :color "#FFC65D"}]
+      [:a-plane#plane {:position "0 0 -4" :rotation "-90 0 0" :width "4" :height "4" :color "#7BC8A4"}]
+      [:a-sky {:color "#ECECEC"}]
+      [:a-camera {:id "camera"}]
+      ]]))
+
+(comment
+(defn simple-vr-dat-gui-example [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "Simple Dat.Gui VR Example"
+                         ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='/js/vr/datguivr.min.js'></script>"
+                          "<script src='/js/a-frame-js/datguivr.js'></script>"
+                          ])
+    [:body
+     [:a-scene {:dat-gui "query: [hand-controls]; objects: sphere; enableMouse: true;"}
+
+      (for [control ["left" "right"]]
+        [:a-entity {:id (str control "Control")
+                    :hand-controls control}])
+
+      ]]))
+  )

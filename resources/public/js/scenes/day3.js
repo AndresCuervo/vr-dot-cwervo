@@ -118,13 +118,6 @@ function addGuiElements(scene, camera, renderer) {
     gui.add(guiData, 'testControllerEvents');
 
     scene.add(gui);
-
-    // Mouse input
-    dat.GUIVR.enableMouse( camera, renderer );
-
-    // Gaze input?
-    var gazeInput = dat.GUIVR.addInputObject( camera );
-    scene.add( gazeInput.cursor ); //  only add the cursor, not the laser
 }
 
 function init(scene, camera, renderer){
@@ -142,7 +135,7 @@ function init(scene, camera, renderer){
     stats = new Stats();
     container.appendChild( stats.dom );
 
-    addGuiElements(scene, camera, renderer);
+    // addGuiElements(scene, camera, renderer);
     // window.addEventListener( 'resize', onWindowResize, false );
 
 }
@@ -210,33 +203,5 @@ AFRAME.registerComponent('make-point-cloud', {
 
         init(scene, camera, renderer);
         animate();
-    }
-});
-
-AFRAME.registerComponent('dat-gui-controller', {
-    schema : {
-        query : {default : ""}
-    },
-    init : function() {
-        scene = this.el.sceneEl.object3D;
-
-        var controls = document.querySelectorAll(this.data.query);
-
-        controls.forEach(function (controllerEl) {
-            var object3D = controllerEl.object3D;
-            // https://github.com/dataarts/dat.guiVR/wiki/Input-Support-(Vive-Controllers,-Mouse,-etc)
-            var vrInput = dat.GUIVR.addInputObject( object3D );
-
-            ['trigger', 'trackpad', 'grip'].forEach(function (baseEvent) {
-                ['up', 'down'].forEach(function (e) { controllerEl.addEventListener(baseEvent + e, function(){
-                    var gripEvent = baseEvent === 'grip';
-                    console.log((gripEvent ? 'gripped' : 'pressed') + " " + controllerEl + " " + e);
-                    var value = (e === "down");
-                    (gripEvent ? vrInput.gripped(value) : vrInput.pressed(value));
-                })})
-            });
-
-            scene.add(vrInput);
-        });
     }
 });

@@ -72,6 +72,9 @@
             [:a {:href "/utils/drag-and-drop/"}
              "Drag & Drop a VR photo"]]
            [:li
+            [:a {:href "/utils/simple-vr-dat-gui-example/"}
+             "My VR Dat.gui Component Basic Example"]]
+           [:li
             [:a {:href "/utils/vr-dat-gui/"}
              "VR Dat.gui test"]]]]
          ]]
