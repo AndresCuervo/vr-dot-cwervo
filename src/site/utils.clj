@@ -182,16 +182,17 @@
       [:a-assets
        [:a-asset-item {:id "poss" :src "https://andrescuervo.github.io/assets/poss-text/178_td.gltf"}]]
       (let [count 13
-            xy-pos "0 1.6 "]
+            xy-pos "0 1.6 "
+            scale-size 80]
         [:a-entity#memeContainer
          (for [n (range (inc count))]
            [:a-plane {:id (str "plane-" count)
                       :material (str "src: url(/images/meme-test/final_layers_"n".png); alphaTest: 0.5;")
-                      :position (str xy-pos  (- -0.5 (* (+ count n) 0.016666)))
+                      :position (str xy-pos  (- -30 (* (+ count n) 0.016666)))
                       :depth count
-                      :scale "1.6 1 0"}])
+                      :scale (str (* 1.6 (* 1.3 scale-size)) " " scale-size " 0")}])
          [:a-entity {:id "poss-text" :gltf-model "#poss"
-                     :position (str "-0.3 4 " 0.1)
-                     :animation "property: rotation; from: 0 0 0; to: 0 0.5 0; dir: alternate; loop: true; easing: linear;"
-                     :scale "60 60 60"}]])
+                     :position "-10 100 3"
+                     :animation "property: rotation; from: 0 0 0; to: 0 1 0; dir: alternate; loop: true; easing: linear;"
+                     :scale "2400 2400 2400"}]])
       [:a-sky {:material "color: black;"}]]]))
