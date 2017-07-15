@@ -146,11 +146,10 @@
                        "<script src='/js/a-frame-js/datguivr.js'></script>"])
     [:body
      [:div#container]
-     [:a-scene { :dat-gui "query: [hand-controls]; objects: box, plane; enableMouse: true;"}
+     [:a-scene {:dat-gui "query: [hand-controls]; objects: box, plane; enableMouse: true;"}
       (for [control ["left" "right"]]
         [:a-entity {:id (str control "Control")
                     :hand-controls control}])
-
       [:a-box#box {:position "-1 0.5 -3" :rotation "0 45 0" :color "#4CC3D9"}]
       [:a-sphere#sphere {:position "0 1.25 -5" :radius "1.25" :color "#EF2D5E"}]
       [:a-cylinder#cylinder {:position "1 0.75 -3" :radius "0.5" :height "1.5" :color "#FFC65D"}]
@@ -159,20 +158,40 @@
       [:a-camera {:id "camera"}]
       ]]))
 
-(comment
-(defn simple-vr-dat-gui-example [{global-meta :meta entries :entries}]
+(defn gltf-test [{global-meta :meta entries :entries}]
   (html
-    (root-6-head-element "Simple Dat.Gui VR Example"
-                         ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
-                          "<script src='/js/vr/datguivr.min.js'></script>"
-                          "<script src='/js/a-frame-js/datguivr.js'></script>"
-                          ])
+    (root-6-head-element "GLTF Test!"
+    ;; (root-head-element "GLTF Test!"
+                       ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"])
     [:body
-     [:a-scene {:dat-gui "query: [hand-controls]; objects: sphere; enableMouse: true;"}
+     [:a-scene
+      [:a-assets
+       [:a-asset-item {:id "jack" :src "https://andrescuervo.github.io/assets/jack-in-the-box/model.gltf"}]
+       [:a-asset-item {:id "jack2" :src "https://andrescuervo.github.io/assets/jack-in-the-box/model.obj"}]]
+      [:a-entity {:id "j" :gltf-model "#jack"}]
+      [:a-entity {:id "j2" :obj-model "#jack2"}]
+      [:a-sky {:material "color: #2EAFAC;"}]]]))
 
-      (for [control ["left" "right"]]
-        [:a-entity {:id (str control "Control")
-                    :hand-controls control}])
 
-      ]]))
-  )
+(defn meme-test [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "Meeeemee"
+                       ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"])
+    [:body
+     [:a-scene
+      [:a-assets
+       [:a-asset-item {:id "poss" :src "https://andrescuervo.github.io/assets/poss-text/178_td.gltf"}]]
+      (let [count 13
+            xy-pos "0 1.6 "]
+        [:a-entity#memeContainer
+         (for [n (range (inc count))]
+           [:a-plane {:id (str "plane-" count)
+                      :material (str "src: url(/images/meme-test/final_layers_"n".png); alphaTest: 0.5;")
+                      :position (str xy-pos  (- -0.5 (* (+ count n) 0.016666)))
+                      :depth count
+                      :scale "1.6 1 0"}])
+         [:a-entity {:id "poss-text" :gltf-model "#poss"
+                     :position (str "-0.3 4 " 0.1)
+                     :animation "property: rotation; from: 0 0 0; to: 0 0.5 0; dir: alternate; loop: true; easing: linear;"
+                     :scale "60 60 60"}]])
+      [:a-sky {:material "color: black;"}]]]))

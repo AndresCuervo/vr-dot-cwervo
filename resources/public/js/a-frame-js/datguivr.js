@@ -47,6 +47,7 @@ AFRAME.registerComponent('dat-gui', {
             console.log("selector ::", thisObjectId);
             var thisObject = document.getElementById(thisObjectId).object3D;
 
+            // Try multiple : true, and give the schema a
             ["x", "y", "z"].forEach(function(axis) {
                 gui.add(thisObject.scale, axis, 0, 10);
             });
@@ -73,4 +74,3 @@ AFRAME.registerComponent('dat-gui', {
         });
     }
 });
-
