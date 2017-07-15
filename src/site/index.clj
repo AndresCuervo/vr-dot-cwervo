@@ -33,6 +33,9 @@
           [:details
           [:summary "Some WebVR scenes"]
           [:li
+           [:a {:href "/scenes/meme-test/"}
+            "A collage meme in VR!"]]
+          [:li
            [:a {:href "/scenes/itlt/"}
             "Imagine Trees Like These"]]
           [:li
