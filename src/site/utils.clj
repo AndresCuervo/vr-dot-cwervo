@@ -191,7 +191,7 @@
                                   :scale "10 10 10"}
          (for [n (range (inc count))]
            [:a-plane {:id (str "plane-" count)
-                      :material (str "src: url(); alphaTest: 0.5;")
+                      :material (str "src: url(/images/meme-test/final_layers_"n".png); alphaTest: 0.5;")
                       :position (str xy-pos  (- -10 (* (+ count n) 1.6666)))
                       :depth count
                       :scale (clojure.string/join ", " (map #_(+ % (* n 10)) identity
