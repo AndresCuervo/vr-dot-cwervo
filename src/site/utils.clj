@@ -209,16 +209,27 @@
 (defn miami-scene [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "MIAMI"
-                         ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                          "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js'></script>"])
     [:body
      [:a-scene
       [:a-assets
-       [:a-asset-item {:id "miami-gltf"
+       #_[:a-asset-item {:id "miami-gltf"
+                       ;; :src "/assets/models/miami-gltf/miami.gltf"}]]
                        :src "/assets/models/miami-gltf/miami.gltf"}]]
       [:a-camera {:id "camera"}]
-      [:a-gltf-model {:src "#miami-gltf"
+      #_[:a-gltf-model {:src "#miami-gltf"
                       :position "0 1 0"}]
+      [:a-entity#cityContainer {:position "0 1 0"
+                                :rotation "-90 0 0"}
+       (for [model-name ["base" "buildings" "highway" "windows"]]
+         [:a-entity {:collada-model (str "src: url(/assets/models/miami-collada/" model-name ".dae)")}])]
+      #_[:a-entity#cityContainer {:position "0 1 0"}
+       (for [model-name ["base" "buildings" "highway" "windows"]]
+         [:a-entity {:gltf-model-next (str "src: url(/assets/models/miami-gltf2/" model-name ".gltf)")}])]
+      #_[:a-entity {:gltf-model-next "src: url(/assets/models/miami-gltf/miami.gltf)"
+                  :position "0 1 0"}]
       [:a-sky {:color "black"}]
       [:a-entity {:teleport-controls ""
                   :vive-controls "hand: left"}]
