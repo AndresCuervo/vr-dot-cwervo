@@ -224,7 +224,8 @@
       [:a-entity#cityContainer {:position "0 1 0"
                                 :rotation "-90 0 0"}
        (for [model-name ["base" "buildings" "highway" "windows"]]
-         [:a-entity {:collada-model (str "src: url(/assets/models/miami-collada/" model-name ".dae)")}])]
+         ;; TODO : Figure out how to load plys??
+         [:a-entity {:ply-model (str "src: url(/assets/models/miami-ply/" model-name ".ply)")}])]
       #_[:a-entity#cityContainer {:position "0 1 0"}
        (for [model-name ["base" "buildings" "highway" "windows"]]
          [:a-entity {:gltf-model-next (str "src: url(/assets/models/miami-gltf2/" model-name ".gltf)")}])]
