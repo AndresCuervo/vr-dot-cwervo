@@ -38,14 +38,14 @@
 (defn vr-dat-gui-test [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "VR-Dat-Gui"
-                       ["<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/Detector.js'></script>"
-                       "<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/stats.min.js'></script>"
-                       "<script src='https://andrescuervo.github.io/twentyfourseven/js/loaders/PLYLoader.js'></script>"
-                       "<script src='/js/vr/ViveController.js'></script>"
-                       "<script src='/js/vr/datguivr.min.js'></script>"
-                       "<script src='/js/a-frame-js/datguivr.js'></script>"
-                       ;; Port the following script and reroute where the assets are coming from!
-                       "<script src='/js/scenes/day3.js?v=12'></script>"])
+                         ["<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/Detector.js'></script>"
+                          "<script src='https://andrescuervo.github.io/twentyfourseven/js/utils/stats.min.js'></script>"
+                          "<script src='https://andrescuervo.github.io/twentyfourseven/js/loaders/PLYLoader.js'></script>"
+                          "<script src='/js/vr/ViveController.js'></script>"
+                          "<script src='/js/vr/datguivr.min.js'></script>"
+                          "<script src='/js/a-frame-js/datguivr.js'></script>"
+                          ;; Port the following script and reroute where the assets are coming from!
+                          "<script src='/js/scenes/day3.js?v=12'></script>"])
     [:body
      [:div#container]
      [:a-scene {:make-point-cloud ""
@@ -75,7 +75,7 @@
     [:body
      [:div#container]
      (let [fname #_"/assets/textures/foot-glove/foot-glove-sandals_"
-                 "/assets/textures/concrete/concrete_"]
+           "/assets/textures/concrete/concrete_"]
        [:a-scene
         [:a-assets
          (for [m ["COLOR" "NRM"]]
@@ -126,7 +126,7 @@
   (html
     (root-6-head-element "A-Painter 0.6.0"
                          ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
-                         "<script src='https://cdn.rawgit.com/dmarcos/a-painter-loader-component/master/dist/a-painter-loader-component.min.js'></script>"
+                          "<script src='https://cdn.rawgit.com/dmarcos/a-painter-loader-component/master/dist/a-painter-loader-component.min.js'></script>"
                           "<script src='/js/spec-map.js'></script>"
                           ])
     [:body
@@ -142,8 +142,8 @@
 (defn simple-vr-dat-gui-example [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "VR-Dat-Gui"
-                       ["<script src='/js/vr/datguivr.min.js'></script>"
-                       "<script src='/js/a-frame-js/datguivr.js'></script>"])
+                         ["<script src='/js/vr/datguivr.min.js'></script>"
+                          "<script src='/js/a-frame-js/datguivr.js'></script>"])
     [:body
      [:div#container]
      [:a-scene {:dat-gui "query: [hand-controls]; objects: box, plane; enableMouse: true;"}
@@ -161,8 +161,8 @@
 (defn gltf-test [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "GLTF Test!"
-    ;; (root-head-element "GLTF Test!"
-                       ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"])
+                         ;; (root-head-element "GLTF Test!"
+                         ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"])
     [:body
      [:a-scene
       [:a-assets
@@ -176,7 +176,7 @@
 (defn meme-test [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Meeeemee"
-                       ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"])
+                         ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"])
     [:body
      [:a-scene
       [:a-assets
@@ -204,3 +204,23 @@
                      :animation "property: rotation; from: 0 0 0; to: 0 1 0; dir: alternate; loop: true; easing: linear;"
                      :scale "2400 2400 2400"}]])
       [:a-sky {:material "color: black;"}]]]))
+
+
+(defn miami-scene [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "MIAMI"
+                         ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js'></script>"])
+    [:body
+     [:a-scene
+      [:a-assets
+       [:a-asset-item {:id "miami-gltf"
+                       :src "/assets/models/miami-gltf/miami.gltf"}]]
+      [:a-camera {:id "camera"}]
+      [:a-gltf-model {:src "#miami-gltf"
+                      :position "0 1 0"}]
+      [:a-sky {:color "black"}]
+      [:a-entity {:teleport-controls ""
+                  :vive-controls "hand: left"}]
+      [:a-entity {:teleport-controls "type: line"
+                  :vive-controls "hand: right"}]]]))
