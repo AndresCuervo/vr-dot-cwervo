@@ -202,30 +202,35 @@
      [:a-scene
       [:a-assets
        [:a-asset-item#waterCloth {:src "/assets/models/water_cloth/water_cloth.gltf"}]
-       [:a-mixin#infoText {:color "white" :position "0 -0.5 1"} ]
+       [:a-mixin#infoText {:color "white"
+                           :position "-1 -1 0"
+                           :height "0.5"} ]
        ]
       [:a-camera {:id "camera"}]
 
       [:a-entity#models {:position "0 0 0"}
        [:a-entity {:gltf-model "#waterCloth"
-                   :position "0 1 -2"}
-       [:a-text {:value "Water cloth model \n Generated with: Blender \n Loaded with: a-gltf-model"
+                   :position "0 1 -6"
+                   :scale "3 3 3"}
+       [:a-text {:value "Water cloth model \n Generated with: Blender OBJ -> Meshlab to Collada -> collada2gltf \n Loaded with: a-gltf core component"
                  :mixin "infoText"}]]
 
       [:a-entity#buster {:gltf-model-next "src: url(/assets/models/buster/busterDrone.gltf)"
                          :position "-4 1 -2"
                          :animation-mixer "busterDrone"
-                         :scale "1 1 1"
+                         :scale "0.5 0.5 0.5"
                          :rotation "0 45 0"}
-       [:a-text {:value "Buster Drone model \n Generated with: Unity 5.6.1f1 \n Loaded with: gltf-model-next component"
-                 :mixin "infoText"}]]
+       [:a-entity#busterTextWrapper {:position "2 2 0"}
+        [:a-text {:value "Buster Drone model \n Generated with: Unity 5.6.1f1 \n Loaded with: gltf-model-next a-frame-extras component"
+                  :scale "2 2 2"
+                  :mixin "infoText"}]]]
 
       [:a-entity#duck {:gltf-model-next "src: url(/assets/models/duck/duck.gltf)"
-                         :position "4 1 -2"
+                         :position "4 1 0"
                          ;; :animation-mixer "duckDrone"
                          :scale "1 1 1"
-                         :rotation "0 -45 0"}
-       [:a-text {:value "Duck model \n Generated with: Khronos Blender glTF 2.0 exporter \n Loaded with: gltf-model-next component"
+                         :rotation "0 -90 0"}
+       [:a-text {:value "Duck model \n Generated with: Khronos Blender glTF 2.0 exporter \n Loaded with: gltf-model-next a-frame-extras component"
                  :mixin "infoText"}]]]
 
       [:a-sky {:color "black"}]
