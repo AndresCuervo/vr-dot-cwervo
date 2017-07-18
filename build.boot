@@ -45,9 +45,8 @@
     (static :renderer 'site.utils/simple-vr-dat-gui-example :page "utils/simple-vr-dat-gui-example/index.html")
     (static :renderer 'site.utils/meme-bump-map-test :page "scenes/bump-test/index.html")
     (static :renderer 'site.utils/apainter6 :page "scenes/apainter6/index.html")
-    (static :renderer 'site.utils/gltf-test :page "scenes/gltf-test/index.html")
     (static :renderer 'site.utils/meme-test :page "scenes/meme-test/index.html")
-    (static :renderer 'site.utils/miami-scene :page "scenes/miami-scene/index.html")
+    (static :renderer 'site.utils/gltf-tests :page "utils/gltf-tests/index.html")
     ;; (images-dimensions) ;; Just print the meta data for images
     (target)
     ))

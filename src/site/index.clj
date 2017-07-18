@@ -75,6 +75,9 @@
             [:a {:href "/utils/drag-and-drop/"}
              "Drag & Drop a VR photo"]]
            [:li
+            [:a {:href "/utils/gltf-tests/"}
+             "Testing a few gltf models in A-Frame !"]]
+           [:li
             [:a {:href "/utils/simple-vr-dat-gui-example/"}
              "My VR Dat.gui Component Basic Example"]]
            [:li

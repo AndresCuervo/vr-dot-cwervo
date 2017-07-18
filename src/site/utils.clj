@@ -19,7 +19,7 @@
      [:div#hud
       [:form#my-awesome-dropzone.dropzone {:action "#"}
        [:span {:class "dz-message"} "Click on or drop files in this pink rectangle to change the background."]]]
-     [:a-scene {:embedded ""}
+     [:a-scene {:embeded ""}
       [:a-sky#bgImage {:src "/images/panoramas/earth_equirectangular.jpg"
                        :rotation "0 -130 0"}]
       [:a-camera#camera {:v-bind:fov "zRotation"}]]]))
@@ -49,7 +49,7 @@
     [:body
      [:div#container]
      [:a-scene {:make-point-cloud ""
-                :dat-gui "query: [hand-controls]; objects: mySphere, cube; enableMouse: true;"}
+                :dat-gui "query: [hand-controls]; objects: mySphere cube; enableMouse: true;"}
       (for [control ["left" "right"]]
         [:a-entity {:id (str control "Control")
                     :hand-controls control}])
@@ -60,8 +60,8 @@
       [:a-camera {:id "camera"}]]
      [:script {:src "https://andrescuervo.github.io/twentyfourseven/js/controls/TrackballControls.js"}]
      [:script {:src "https://andrescuervo.github.io/twentyfourseven/js/effects/AnaglyphEffect.js"}]
-     [:script {:type "x-shader/x-vertex", :id "vertexshader"} "attribute float size;\n    attribute vec3 customColor;\n\n    varying vec3 vColor;\n\n    void main() {\n\n        vColor = customColor;\n\n        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );\n\n        gl_PointSize = size * ( 300.0 / -mvPosition.z );\n\n        gl_Position = projectionMatrix * mvPosition;\n\n    }"]
-     [:script {:type "x-shader/x-fragment", :id "fragmentshader"} "uniform vec3 color;\n    uniform sampler2D texture;\n\n    varying vec3 vColor;\n\n    void main() {\n\n        gl_FragColor = vec4( color * vColor, 1.0 );\n\n        gl_FragColor = gl_FragColor * texture2D( texture, gl_PointCoord );\n\n    }"]
+     [:script {:type "x-shader/x-vertex" :id "vertexshader"} "attribute float size;\n    attribute vec3 customColor;\n\n    varying vec3 vColor;\n\n    void main() {\n\n        vColor = customColor;\n\n        vec4 mvPosition = modelViewMatrix * vec4( position 1.0 );\n\n        gl_PointSize = size * ( 300.0 / -mvPosition.z );\n\n        gl_Position = projectionMatrix * mvPosition;\n\n    }"]
+     [:script {:type "x-shader/x-fragment" :id "fragmentshader"} "uniform vec3 color;\n    uniform sampler2D texture;\n\n    varying vec3 vColor;\n\n    void main() {\n\n        gl_FragColor = vec4( color * vColor 1.0 );\n\n        gl_FragColor = gl_FragColor * texture2D( texture gl_PointCoord );\n\n    }"]
      [:script {:type "text/javascript"} "<!--\n    function toggle(id) {\n        var e = document.getElementById(id);\n        e.style.display == 'block' ? e.style.display = 'none' : e.style.display = 'block';\n    }\n    "]]))
 
 
@@ -146,7 +146,7 @@
                           "<script src='/js/a-frame-js/datguivr.js'></script>"])
     [:body
      [:div#container]
-     [:a-scene {:dat-gui "query: [hand-controls]; objects: box, plane; enableMouse: true;"}
+     [:a-scene {:dat-gui "query: [hand-controls]; objects: box plane; enableMouse: true;"}
       (for [control ["left" "right"]]
         [:a-entity {:id (str control "Control")
                     :hand-controls control}])
@@ -158,21 +158,6 @@
       [:a-camera {:id "camera"}]
       ]]))
 
-(defn gltf-test [{global-meta :meta entries :entries}]
-  (html
-    (root-6-head-element "GLTF Test!"
-                         ;; (root-head-element "GLTF Test!"
-                         ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"])
-    [:body
-     [:a-scene
-      [:a-assets
-       [:a-asset-item {:id "jack" :src "https://andrescuervo.github.io/assets/jack-in-the-box/model.gltf"}]
-       [:a-asset-item {:id "jack2" :src "https://andrescuervo.github.io/assets/jack-in-the-box/model.obj"}]]
-      [:a-entity {:id "j" :gltf-model "#jack"}]
-      [:a-entity {:id "j2" :obj-model "#jack2"}]
-      [:a-sky {:material "color: #2EAFAC;"}]]]))
-
-
 (defn meme-test [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Meeeemee"
@@ -180,9 +165,9 @@
     [:body
      [:a-scene
       [:a-assets
-       ;; Asset-cache the images, they're so fucking big
+       ;; Asset-cache the images they're so fucking big
        ;;
-       ;; also, move the let up around the scene!
+       ;; also move the let up around the scene!
        [:a-asset-item {:id "poss" :src "https://andrescuervo.github.io/assets/poss-text/178_td.gltf"}]]
       (let [count 13
             xy-pos "0 1.6 "
@@ -194,7 +179,7 @@
                       :material (str "src: url(/images/meme-test/final_layers_"n".png); alphaTest: 0.5;")
                       :position (str xy-pos  (- -10 (* (+ count n) 1.6666)))
                       :depth count
-                      :scale (clojure.string/join ", " (map #_(+ % (* n 10)) identity
+                      :scale (clojure.string/join " " (map #_(+ % (* n 10)) identity
                                                             [(* 1.6 (* 1.3 scale-size))
                                                              scale-size
                                                              0]))
@@ -206,31 +191,43 @@
       [:a-sky {:material "color: black;"}]]]))
 
 
-(defn miami-scene [{global-meta :meta entries :entries}]
+(defn gltf-tests [{global-meta :meta entries :entries}]
   (html
-    (root-6-head-element "MIAMI"
+    (root-6-head-element "GLTF Test!"
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='/js/model-texture.js'></script>"
                           "<script src='https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js'></script>"])
     [:body
      [:a-scene
       [:a-assets
-       #_[:a-asset-item {:id "miami-gltf"
-                       ;; :src "/assets/models/miami-gltf/miami.gltf"}]]
-                       :src "/assets/models/miami-gltf/miami.gltf"}]]
+       [:a-asset-item#waterCloth {:src "/assets/models/water_cloth/water_cloth.gltf"}]
+       [:a-mixin#infoText {:color "white" :position "0 -0.5 1"} ]
+       ]
       [:a-camera {:id "camera"}]
-      #_[:a-gltf-model {:src "#miami-gltf"
-                      :position "0 1 0"}]
-      [:a-entity#cityContainer {:position "0 1 0"
-                                :rotation "-90 0 0"}
-       (for [model-name ["base" "buildings" "highway" "windows"]]
-         ;; TODO : Figure out how to load plys??
-         [:a-entity {:ply-model (str "src: url(/assets/models/miami-ply/" model-name ".ply)")}])]
-      #_[:a-entity#cityContainer {:position "0 1 0"}
-       (for [model-name ["base" "buildings" "highway" "windows"]]
-         [:a-entity {:gltf-model-next (str "src: url(/assets/models/miami-gltf2/" model-name ".gltf)")}])]
-      #_[:a-entity {:gltf-model-next "src: url(/assets/models/miami-gltf/miami.gltf)"
-                  :position "0 1 0"}]
+
+      [:a-entity#models {:position "0 0 0"}
+       [:a-entity {:gltf-model "#waterCloth"
+                   :position "0 1 -2"}
+       [:a-text {:value "Water cloth model \n Generated with: Blender \n Loaded with: a-gltf-model"
+                 :mixin "infoText"}]]
+
+      [:a-entity#buster {:gltf-model-next "src: url(/assets/models/buster/busterDrone.gltf)"
+                         :position "-4 1 -2"
+                         :animation-mixer "busterDrone"
+                         :scale "1 1 1"
+                         :rotation "0 45 0"}
+       [:a-text {:value "Buster Drone model \n Generated with: Unity 5.6.1f1 \n Loaded with: gltf-model-next component"
+                 :mixin "infoText"}]]
+
+      [:a-entity#duck {:gltf-model-next "src: url(/assets/models/duck/duck.gltf)"
+                         :position "4 1 -2"
+                         ;; :animation-mixer "duckDrone"
+                         :scale "1 1 1"
+                         :rotation "0 -45 0"}
+       [:a-text {:value "Duck model \n Generated with: Khronos Blender glTF 2.0 exporter \n Loaded with: gltf-model-next component"
+                 :mixin "infoText"}]]]
+
       [:a-sky {:color "black"}]
       [:a-entity {:teleport-controls ""
                   :vive-controls "hand: left"}]
