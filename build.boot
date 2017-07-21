@@ -47,6 +47,8 @@
     (static :renderer 'site.utils/apainter6 :page "scenes/apainter6/index.html")
     (static :renderer 'site.utils/meme-test :page "scenes/meme-test/index.html")
     (static :renderer 'site.utils/gltf-tests :page "utils/gltf-tests/index.html")
+    (static :renderer 'site.utils/generative-train :page "scenes/generative-train/index.html")
+    (static :renderer 'site.utils/sofia3D :page "scenes/sofia3D/index.html")
     ;; (images-dimensions) ;; Just print the meta data for images
     (target)
     ))

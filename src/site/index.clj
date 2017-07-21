@@ -1,7 +1,7 @@
 (ns site.index
   (:use [hiccup.core :only (html)]
         [hiccup.page :only (html5)]
-        [clojure.string :as str]))
+        [clojure.string :as s-t-r]))
 
 (defn make-social-list-item [href icon-string display-name]
         [:li [:a {:href href :target "_blank"} [:i {:class (str "fa fa-" icon-string) :aria-hidden "true"}] (str " " display-name)]])

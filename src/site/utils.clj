@@ -238,3 +238,116 @@
                   :vive-controls "hand: left"}]
       [:a-entity {:teleport-controls "type: line"
                   :vive-controls "hand: right"}]]]))
+
+(defn generative-train [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "Making a train????"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                          "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
+                          "<script src='/js/model-texture.js'></script>"
+                          "<script src='https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js'></script>"
+                          "<script src='https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js'></script>"
+                          "<script src='https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js'></script>"
+                          "<script src='/js/fix-train.js'></script>"
+                          ])
+    [:body
+     [:a-scene
+      [:a-assets
+       [:a-mixin#red {:material "color: red;"}]
+       [:a-mixin#box {:geometry "primitive: box;"}]
+       [:a-mixin#smallBox {:geometry "height:0.1; width:0.1; depth:0.1"}]]
+      ;; [:a-curve {:id "track1"}
+      ;;  [:a-curve-point {:position "-2 1 -3" :mixin "red box smallBox"}]
+      ;;  [:a-curve-point {:position "0 1 -5" :mixin "red box smallBox" :color "blue"}]
+      ;;  [:a-curve-point {:position "2 1 -3" :mixin "red box smallBox"}]]
+      ;; [:a-box {:color "#ff0000" :width "0.1" :height "0.3" :depth "0.1" :alongpath "curve: #track1; loop:true; dur:6000; rotate:true;"} ]
+      #_(let [duration 6000]
+          [:a-entity#one
+           [:a-curve#track1 {:rotation "0 0 0"
+                             :type "QuadraticBezier"
+                             ;; :type "Line"
+                             :curve "closed: false;"}
+            ;; [:a-curve-point {:position "-2 0 -2"}]
+            ;; [:a-curve-point {:position "0.5 1 -2"}]
+            ;; [:a-curve-point {:position "2 0 -3"}]
+            (for [n (range 10)]
+                (cond
+                  (odd? n)  [:a-curve-point {:position (str "2 0 " (- 0 n))}]
+                  (even? n) [:a-curve-point {:position (str "-2 0 " (- 0 n))}]
+                  ))
+            #_(for [n (range 7)
+                    :let [scale 10
+                          x (* (Math/cos n) scale)
+                          z (- (* (Math/sin n) scale) 15)]]
+                [:a-curve-point {:id (str "curve-point-"n)
+                                 :position (str/join " " [x 0 z])}])]
+           [:a-entity#train {:gltf-model-next "src: url(/assets/models/myFirstTrain/myFristTrain_from_blender.gltf)"
+                             :alongpath (str "curve: #track1;
+                                             loop: true;
+                                             rotate: true;
+                                             dur:" duration ";")
+                             :material "color: blue;
+                                       src: url(/assets/textures/metal.jpg)"
+                             :rotation "0 180 0"
+                             :scale "1 1 1"
+                             :fix-train-rotation ""
+                             }]]
+          [:a-draw-curve {:curveref "#track1" :material "shader: line; color: red;"}]
+          )
+      [:a-entity {:position "0 0 -4"
+               :make-spiral ""
+               :make-spiral__2 ""
+               :make-spiral__3 ""
+               :make-spiral__4 ""
+               }]
+      #_[:a-entity {:clone-along-curve "curve: #track1; spacing: 0.2; scale: 1 1 1; rotation: 90 0 0;"
+                  :geometry "primitive: box; height:0.1; width:0.8; depth:0.2"
+                  :material "color: brown"}]
+      [:a-sky {:color "black"}]]]))
+
+(defn sofia3D [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "¿?¿?¿"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                          "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js'></script>"])
+    [:body
+     (let [animate? false]
+       [:a-scene
+      [:a-assets
+       [:a-mixin#meme3D {:ply-model "src: /assets/models/180/180.ply"}]
+       ]
+      [:a-camera {:id "camera"}]
+
+      (for [attrs [
+                   {:pos "0 -1 -10"
+                    :rot "90 0 0"}
+                   {:pos "0 -1 10"
+                    :rot "90 180 0"}
+                   {:pos "10 -1 0"
+                    :rot (str "90 " (* 3 90) " 0")}
+                   {:pos "-10 -1 0"
+                    :rot (str (* -3 90) " " -90 " " 180)}
+                   {:pos "0 10 0"
+                    :rot "180 0 0"}
+                   {:pos "0 -10 0"
+                    :rot (str (* -3 90) " 0 0")}
+                   ]]
+        [:a-entity#oneeighty {:mixin "meme3D"
+                              :position (:pos attrs)
+                              :scale "0.5 0.5 0.5"
+                              :rotation (:rot attrs)
+                              :animation (when animate?
+                                           "property: rotation;
+                                           from: 0 0 0;
+                                           to: 360 0 0;
+                                           loop: true;
+                                           easing: easeInOutSine;
+                                           dur: 12000;")}])
+
+      [:a-sky {:color "black"}]
+      [:a-entity {:teleport-controls ""
+                  :vive-controls "hand: left"}]
+      [:a-entity {:teleport-controls "type: line"
+                  :vive-controls "hand: right"}]])]))
