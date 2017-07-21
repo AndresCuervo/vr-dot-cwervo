@@ -315,39 +315,39 @@
     [:body
      (let [animate? false]
        [:a-scene
-      [:a-assets
-       [:a-mixin#meme3D {:ply-model "src: /assets/models/180/180.ply"}]
-       ]
-      [:a-camera {:id "camera"}]
+        [:a-assets
+         [:a-mixin#meme3D {:ply-model "src: /assets/models/180/180.ply"}]
+         ]
+        [:a-camera {:id "camera"}]
 
-      (for [attrs [
-                   {:pos "0 -1 -10"
-                    :rot "90 0 0"}
-                   {:pos "0 -1 10"
-                    :rot "90 180 0"}
-                   {:pos "10 -1 0"
-                    :rot (str "90 " (* 3 90) " 0")}
-                   {:pos "-10 -1 0"
-                    :rot (str (* -3 90) " " -90 " " 180)}
-                   ;; {:pos "0 10 0"
-                   ;;  :rot "180 0 0"}
-                   ;; {:pos "0 -10 0"
-                   ;;  :rot (str (* -3 90) " 0 0")}
-                   ]]
-        [:a-entity#oneeighty {:mixin "meme3D"
-                              :position (:pos attrs)
-                              :scale "0.5 0.5 0.5"
-                              :rotation (:rot attrs)
-                              :animation (when animate?
-                                           "property: rotation;
-                                           from: 0 0 0;
-                                           to: 360 0 0;
-                                           loop: true;
-                                           easing: easeInOutSine;
-                                           dur: 12000;")}])
+        (for [attrs [
+                     {:pos "0 -1 -10"
+                      :rot "90 0 0"}
+                     {:pos "0 -1 10"
+                      :rot "90 180 0"}
+                     {:pos "10 -1 0"
+                      :rot (str "90 " (* 3 90) " 0")}
+                     {:pos "-10 -1 0"
+                      :rot (str (* -3 90) " " -90 " " 180)}
+                     ;; {:pos "0 10 0"
+                     ;;  :rot "180 0 0"}
+                     ;; {:pos "0 -10 0"
+                     ;;  :rot (str (* -3 90) " 0 0")}
+                     ]]
+          [:a-entity#oneeighty {:mixin "meme3D"
+                                :position (:pos attrs)
+                                :scale "0.5 0.5 0.5"
+                                :rotation (:rot attrs)
+                                :animation (when animate?
+                                             "property: rotation;
+                                             from: 0 0 0;
+                                             to: 360 0 0;
+                                             loop: true;
+                                             easing: easeInOutSine;
+                                             dur: 12000;")}])
 
-      [:a-sky {:color "black"}]
-      [:a-entity {:teleport-controls ""
-                  :vive-controls "hand: left"}]
-      [:a-entity {:teleport-controls "type: line"
-                  :vive-controls "hand: right"}]])]))
+        [:a-sky {:color "black"}]
+        [:a-entity {:teleport-controls ""
+                    :vive-controls "hand: left"}]
+        [:a-entity {:teleport-controls "type: line"
+                    :vive-controls "hand: right"}]])]))
