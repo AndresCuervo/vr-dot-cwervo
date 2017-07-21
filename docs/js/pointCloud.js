@@ -119,7 +119,7 @@ AFRAME.registerComponent('make-point-cloud', {
 
                 var label = document.createElement('label')
                 label.htmlFor = checkboxID;
-                label.appendChild(document.createTextNode('Flash the size of the points?'));
+                label.appendChild(document.createTextNode('flash the size of the points? (warning: flashes v fast, seizure warning!)'));
 
                 checkbox.className += "generated-checkbox";
                 label.className += "generated-label";
