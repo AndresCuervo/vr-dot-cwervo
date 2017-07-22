@@ -49,6 +49,8 @@
     (static :renderer 'site.utils/gltf-tests :page "utils/gltf-tests/index.html")
     (static :renderer 'site.utils/generative-train :page "scenes/generative-train/index.html")
     (static :renderer 'site.utils/sofia3D :page "scenes/sofia3D/index.html")
+    (static :renderer 'site.utils/maxprentisvisual-1 :page "scenes/maxprentisvisual-1/index.html")
+
     ;; (images-dimensions) ;; Just print the meta data for images
     (target)
     ))

@@ -3,7 +3,8 @@
         [hiccup.core :only (html)]
         [hiccup.page :only (html5)])
   (:require [clojure.pprint :refer [pprint]]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [clojure.java.io :as io]))
 (defn drag-and-drop [{global-meta :meta
                       entries :entries}]
   (html
@@ -350,4 +351,49 @@
         [:a-entity {:teleport-controls ""
                     :vive-controls "hand: left"}]
         [:a-entity {:teleport-controls "type: line"
+                    :vive-controls "hand: right"}]])]))
+
+(defn maxprentisvisual-1 [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "¿?¿?¿"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                          "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js'></script>"])
+    [:body
+     (let []
+       [:a-scene
+        [:a-assets
+         ]
+        [:a-camera {:id "camera"}]
+
+        (let [web-path-prefix "images/3Dmemes/maxprentisvisual_1"
+              relative-path (str "resources/public/" web-path-prefix)
+              file-list (.list (io/file relative-path))
+              file-count (count file-list)
+              xy-pos "0 1 "
+              scale-size 80]
+          [:a-entity#memeContainer {:position "0 0 -10"
+                                    :scale "10 10 10"}
+           (for [n (range (dec file-count))
+                 :let [file-path (str "/" web-path-prefix "/layer_"n".png")]]
+             [:a-plane {:id (str "plane-" n)
+                        :material (str "src: url(" file-path "); alphaTest: 0.5;")
+                        ;; :position (str xy-pos  (+ -20 (* -5 n)))
+                        :position (str xy-pos  (* -0.25 n))
+                        :depth n
+                        :scale "2.5 2.5 2.5"
+                        #_(clojure.string/join " " (map #_(+ % (* n 10)) identity
+                                                             [(* 1.6 (* 1.3 scale-size))
+                                                              scale-size
+                                                              0]))
+                        }])
+           #_[:a-entity {:id "poss-text" :gltf-model "#poss"
+                       :position "-10 100 13"
+                       :animation "property: rotation; from: 0 0 0; to: 0 1 0; dir: alternate; loop: true; easing: linear;"
+                       :scale "2400 2400 2400"}]])
+
+        [:a-sky {:color "black"}]
+        [:a-entity {:teleport-controls ""
+                    :vive-controls "hand: left"}]
+        [:a-entity {:teleport-controls ""
                     :vive-controls "hand: right"}]])]))
