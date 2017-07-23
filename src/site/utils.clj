@@ -91,7 +91,7 @@
         (for [n (range -8 -4 0.5)
               :let [z (+ (Math/sin n) 0.5) ]]
           [:a-entity {:light "type: point; color: #2EAFAC; intensity: 0.1" :position (str "-4.5 1 " z)
-                      :animation (str
+                      :animation_ (str
                                    "property: position;
                                    from: -4.5 1 " z
                                    ";
@@ -187,7 +187,7 @@
                       }])
          [:a-entity {:id "poss-text" :gltf-model "#poss"
                      :position "-10 100 13"
-                     :animation "property: rotation; from: 0 0 0; to: 0 1 0; dir: alternate; loop: true; easing: linear;"
+                     :animation_ "property: rotation; from: 0 0 0; to: 0 1 0; dir: alternate; loop: true; easing: linear;"
                      :scale "2400 2400 2400"}]])
       [:a-sky {:material "color: black;"}]]]))
 
@@ -218,7 +218,7 @@
 
       [:a-entity#buster {:gltf-model-next "src: url(/assets/models/buster/busterDrone.gltf)"
                          :position "-4 1 -2"
-                         :animation-mixer "busterDrone"
+                         :animation_-mixer "busterDrone"
                          :scale "0.5 0.5 0.5"
                          :rotation "0 45 0"}
        [:a-entity#busterTextWrapper {:position "2 2 0"}
@@ -228,7 +228,7 @@
 
       [:a-entity#duck {:gltf-model-next "src: url(/assets/models/duck/duck.gltf)"
                          :position "4 1 0"
-                         ;; :animation-mixer "duckDrone"
+                         ;; :animation_-mixer "duckDrone"
                          :scale "1 1 1"
                          :rotation "0 -90 0"}
        [:a-text {:value "Duck model \n Generated with: Khronos Blender glTF 2.0 exporter \n Loaded with: gltf-model-next a-frame-extras component"
@@ -339,7 +339,7 @@
                                 :position (:pos attrs)
                                 :scale "0.5 0.5 0.5"
                                 :rotation (:rot attrs)
-                                :animation (when animate?
+                                :animation_ (when animate?
                                              "property: rotation;
                                              from: 0 0 0;
                                              to: 360 0 0;
@@ -355,44 +355,64 @@
 
 (defn maxprentisvisual-1 [{global-meta :meta entries :entries}]
   (html
-    (root-6-head-element "¿?¿?¿"
+    (root-6-head-element "Illustrated planes"
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='/js/move-camera-max-present.js'></script>"
                           "<script src='https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js'></script>"])
     [:body
      (let []
        [:a-scene
         [:a-assets
          ]
-        [:a-camera {:id "camera"}]
+        [:a-camera {:id "camera"
+                    :move-camera ""}]
 
         (let [web-path-prefix "images/3Dmemes/maxprentisvisual_1"
               relative-path (str "resources/public/" web-path-prefix)
               file-list (.list (io/file relative-path))
               file-count (count file-list)
-              xy-pos "0 1 "
+              x-pos 0
+              y-pos 1
+              displace-first-pic -3
               scale-size 80]
-          [:a-entity#memeContainer {:position "0 0 -10"
+          [:a-entity#memeContainer {:position "0 -0.5 -10"
                                     :scale "10 10 10"}
            (for [n (range (dec file-count))
-                 :let [file-path (str "/" web-path-prefix "/layer_"n".png")]]
+                 :let [file-path (str "/" web-path-prefix "/layer_"n".png")
+                       position (clojure.string/join " " [#_(if (= n 0) displace-first-pic x-pos )
+                                                          x-pos
+                                                          y-pos
+                                                          (if (= n 0) 0 (* -0.25 n))
+                                                          ])]]
              [:a-plane {:id (str "plane-" n)
                         :material (str "src: url(" file-path "); alphaTest: 0.5;")
-                        ;; :position (str xy-pos  (+ -20 (* -5 n)))
-                        :position (str xy-pos  (* -0.25 n))
+                        :position position
                         :depth n
                         :scale "2.5 2.5 2.5"
-                        #_(clojure.string/join " " (map #_(+ % (* n 10)) identity
-                                                             [(* 1.6 (* 1.3 scale-size))
-                                                              scale-size
-                                                              0]))
+                        :offset-plane (str "n: "n)
+                        :animation__offset (str
+                                             "property: material.offset.x;
+                                             from: 10;
+                                             to: 0;
+                                             loop: true;")
+                        #_#_:animation__move_first (when (= n 0)
+                                     (str "property: position;"
+                                          "easing: linear;"
+                                          "dur: 100000;"
+                                          "loop: true;"
+                                          "from: " position ";"
+                                          "to: " (clojure.string/join " " [(* -1 displace-first-pic)
+                                                                             y-pos
+                                                                             0]) ";"
+                                          ))
                         }])
            #_[:a-entity {:id "poss-text" :gltf-model "#poss"
                        :position "-10 100 13"
-                       :animation "property: rotation; from: 0 0 0; to: 0 1 0; dir: alternate; loop: true; easing: linear;"
+                       :animation_ "property: rotation; from: 0 0 0; to: 0 1 0; dir: alternate; loop: true; easing: linear;"
                        :scale "2400 2400 2400"}]])
 
-        [:a-sky {:color "black"}]
+        [:a-sky {:color "#000"}]
         [:a-entity {:teleport-controls ""
                     :vive-controls "hand: left"}]
         [:a-entity {:teleport-controls ""

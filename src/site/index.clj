@@ -23,8 +23,8 @@
      [:div#wrapper.center
       [:section
        [:span
-        "Oh, hello there! :) I'm Andres"
-        [:a {:href "https://cwervo.com/"} " Cuervo"]]
+        "👋🏼 I'm Andres"
+        [:a {:href "https://cwervo.com/"} " Cwervo"]]
 
        [:p
         "Here are some links to other VR things I've done:"
