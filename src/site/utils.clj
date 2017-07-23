@@ -374,7 +374,7 @@
               file-count (count file-list)
               x-pos 0
               y-pos 1
-              displace-first-pic -3
+              displace-first-pic -0.05
               scale-size 80]
           [:a-entity#memeContainer {:position "0 -0.5 -10"
                                     :scale "10 10 10"}
@@ -391,11 +391,31 @@
                         :depth n
                         :scale "2.5 2.5 2.5"
                         :offset-plane (str "n: "n)
-                        :animation__offset (str
+                        #_#_:animation__offset (str
                                              "property: material.offset.x;
                                              from: 10;
                                              to: 0;
                                              loop: true;")
+                        :animation__hover_first_x (when (= n 0)
+                                                  (str "property: position;"
+                                                       "easing: linear;"
+                                                       "dur: 3000;"
+                                                       "loop: true;"
+                                                       "from: "  displace-first-pic " " y-pos " 0;"
+                                                       "to: " (* -1 displace-first-pic) " " y-pos " 0;"
+                                                       "dir: alternate;"
+                                                       "loop: true;"
+                                                       ))
+                        ;; :animation__hover_first_y (when (= n 0)
+                        ;;                           (str "property: rotation;"
+                        ;;                                "easing: linear;"
+                        ;;                                "dur: 5000;"
+                        ;;                                "loop: true;"
+                        ;;                                "from: 0 -5 0;"
+                        ;;                                "to: 0 5 0;"
+                        ;;                                "dir: alternate;"
+                        ;;                                "loop: true;"
+                        ;;                                ))
                         #_#_:animation__move_first (when (= n 0)
                                      (str "property: position;"
                                           "easing: linear;"
