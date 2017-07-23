@@ -1,0 +1,10 @@
+<head><title>Illustrated planes</title><script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.6.0/aframe-master.min.js"></script><script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script><script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script><script src='/js/move-camera-max-present.js'></script><script src='https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js'></script></head><body><a-scene><a-assets></a-assets><a-camera id="camera" move-camera=""></a-camera><a-entity id="memeContainer" position="0 -0.5 -10" scale="10 10 10"><a-plane animation__offset="property: material.offset.x;
+                                             from: 10;
+                                             to: 0;
+                                             loop: true;" depth="0" id="plane-0" material="src: url(/images/3Dmemes/maxprentisvisual_1/layer_0.png); alphaTest: 0.5;" offset-plane="n: 0" position="0 1 0" scale="2.5 2.5 2.5"></a-plane><a-plane animation__offset="property: material.offset.x;
+                                             from: 10;
+                                             to: 0;
+                                             loop: true;" depth="1" id="plane-1" material="src: url(/images/3Dmemes/maxprentisvisual_1/layer_1.png); alphaTest: 0.5;" offset-plane="n: 1" position="0 1 -0.25" scale="2.5 2.5 2.5"></a-plane><a-plane animation__offset="property: material.offset.x;
+                                             from: 10;
+                                             to: 0;
+                                             loop: true;" depth="2" id="plane-2" material="src: url(/images/3Dmemes/maxprentisvisual_1/layer_2.png); alphaTest: 0.5;" offset-plane="n: 2" position="0 1 -0.5" scale="2.5 2.5 2.5"></a-plane></a-entity><a-sky color="#000"></a-sky><a-entity teleport-controls="" vive-controls="hand: left"></a-entity><a-entity teleport-controls="" vive-controls="hand: right"></a-entity></a-scene></body>
