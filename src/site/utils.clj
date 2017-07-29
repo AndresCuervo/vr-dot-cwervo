@@ -29,6 +29,8 @@
   ([title]
    [:head
     [:title title]
+    [:meta {:http-equiv "Content-Type"
+            :content "text/html; charset=UTF-8"}]
     [:script {:src "https://cdnjs.cloudflare.com/ajax/libs/aframe/0.6.0/aframe-master.min.js"}]])
   ([title custom-scripts]
    (conj
@@ -246,23 +248,45 @@
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
+                          ;; "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
+                          "<script src='https://cdn.rawgit.com/dataarts/dat.guiVR/master/build/datguivr.min.js'></script>"
                           "<script src='/js/model-texture.js'></script>"
                           "<script src='https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js'></script>"
                           "<script src='https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js'></script>"
                           "<script src='https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js'></script>"
+                          "<script src='/js/grid-glitch-material.js'></script>"
                           "<script src='/js/fix-train.js'></script>"
+                          "<script src='https://rawgit.com/mayognaise/aframe-draw-shader/master/dist/aframe-draw-shader.min.js'></script>"
+                          "<script src='/js/draw-shader-noise-test.js'></script>"
+                          "<script src='https://cdn.rawgit.com/wizgrav/aframe-effects/master/dist/aframe-effects.min.js'></script>"
                           ])
     [:body
-     [:a-scene
+     [:a-scene {:antialias "true"
+                :effects "noise-effect-2"
+                :noise-effect-2 ""
+                ;; :effects "outline"
+                ;; :outline ""
+                ;; :effects="bloom"
+                ;; :bloom ""
+                }
       [:a-assets
        [:a-mixin#red {:material "color: red;"}]
        [:a-mixin#box {:geometry "primitive: box;"}]
+       [:a-mixin#craneShader {:crane-shader ""}]
        [:a-mixin#smallBox {:geometry "height:0.1; width:0.1; depth:0.1"}]]
-      ;; [:a-curve {:id "track1"}
-      ;;  [:a-curve-point {:position "-2 1 -3" :mixin "red box smallBox"}]
-      ;;  [:a-curve-point {:position "0 1 -5" :mixin "red box smallBox" :color "blue"}]
-      ;;  [:a-curve-point {:position "2 1 -3" :mixin "red box smallBox"}]]
-      ;; [:a-box {:color "#ff0000" :width "0.1" :height "0.3" :depth "0.1" :alongpath "curve: #track1; loop:true; dur:6000; rotate:true;"} ]
+      #_[:a-curve {:id "track1"}
+         [:a-curve-point {:position "-2 1 -3" :mixin "red box smallBox"}]
+         [:a-curve-point {:position "0 1 -5" :mixin "red box smallBox" :color "blue"}]
+         [:a-curve-point {:position "2 1 -3" :mixin "red box smallBox"}]]
+      [:a-box {:crane-shader ""
+               ;; :material "shader:draw;"
+               ;; :noise ""
+               :position "0 0 -2"
+               ;; :animation "property: position; from: 0 0 -2; to: -3 0 -2; loop: true; easing: linear; dur: 4000;"} ]
+               :animation "property: rotation; from: 0 0 0; to: 360 0 0; loop: true; easing: linear; dur: 4000;"} ]
+      [:a-plane#floor {:rotation "-90 0 0"
+                  :color "#010101"
+                  :scale "40 40 40"}]
       #_(let [duration 6000]
           [:a-entity#one
            [:a-curve#track1 {:rotation "0 0 0"
@@ -294,18 +318,25 @@
                              :scale "1 1 1"
                              :fix-train-rotation ""
                              }]]
-          [:a-draw-curve {:curveref "#track1" :material "shader: line; color: red;"}]
+          #_[:a-draw-curve {:curveref "#track1" :material "shader: line; color: red;"}]
           )
-      [:a-entity {:position "0 0 -4"
-               :make-spiral ""
-               :make-spiral__2 ""
-               :make-spiral__3 ""
-               :make-spiral__4 ""
-               }]
+      #_[:a-datgui {:name "settings" :position "0 2 -2"}
+       [:a-gui-slider {:id "colorControl" :name "color" :step "0.01" :min "0.01" :max "4"}]]
+      (let [scale {:x 5 :z 5}]
+        (println (:x scale))
+        [:a-entity {:position "0 0 -4"
+               ;; TODO Adjust rotation with an override of each
+               :make-crane (str "n: 40; position: " (* -3 (:x scale)) " " 0 " " (* -4 (:z scale)))
+               :make-crane__2 (str "n: 40; position: " (* -2.5 (:x scale)) " " 0 " " (* -3 (:z scale)))
+               :make-crane__3 (str "n: 45; position: " (* -1.5 (:x scale)) " " 0 " " (* -3.75 (:z scale)))
+               :make-crane__4 (str "n: 24; position: " (* -0.5 (:x scale)) " " 0 " " (* -3 (:z scale)))
+               }])
       #_[:a-entity {:clone-along-curve "curve: #track1; spacing: 0.2; scale: 1 1 1; rotation: 90 0 0;"
                   :geometry "primitive: box; height:0.1; width:0.8; depth:0.2"
+                  :mixin "craneShader"
                   :material "color: brown"}]
-      [:a-sky {:color "black"}]]]))
+      [:a-camera#camera]
+      [:a-sky {:color "#101010"}]]]))
 
 (defn sofia3D [{global-meta :meta entries :entries}]
   (html
@@ -319,7 +350,8 @@
         [:a-assets
          [:a-mixin#meme3D {:ply-model "src: /assets/models/180/180.ply"}]
          ]
-        [:a-camera {:id "camera"}]
+        [:a-camera {:id "camera"
+                    :fov "10"}]
 
         (for [attrs [
                      {:pos "0 -1 -10"

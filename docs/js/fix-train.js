@@ -77,22 +77,24 @@ AFRAME.registerComponent("make-spiral", {
 
         var lines = new THREE.Group();
 
-            var geometry = new THREE.Geometry();
-            connect(geometry, 1, this.data.n, dotGeometry.vertices);
-            connect(geometry, 4, this.data.n, dotGeometry.vertices);
+        var geometry = new THREE.Geometry();
+        connect(geometry, 1, this.data.n, dotGeometry.vertices);
+        connect(geometry, 4, this.data.n, dotGeometry.vertices);
 
-            var line = new MeshLine();
-            line.setGeometry( geometry, function( p ) { return 0.01; } );
-            // line.setGeometry( geometry, function( p ) { return 2; } ); // makes width 2 * lineWidth
+        var line = new MeshLine();
+        line.setGeometry( geometry, function( p ) { return 0.01; } );
+        // line.setGeometry( geometry, function( p ) { return 2; } ); // makes width 2 * lineWidth
 
-            // var material = new MeshLineMaterial({color : new THREE.Color( 0xFF0000 )});
-            var material = new MeshLineMaterial({color : new THREE.Color(0x2EAFAC)});
-            var mesh = new THREE.Mesh( line.geometry, material ); // this syntax could definitely be improved!
-            lines.add( mesh );
+        // var material = new MeshLineMaterial({color : new THREE.Color( 0xFF0000 )});
+        var material = new MeshLineMaterial({color : new THREE.Color(0x2EAFAC)});
+        console.log("MeshLineMaterial material", material);
+        var mesh = new THREE.Mesh( line.geometry, material ); // this syntax could definitely be improved!
+        lines.add( mesh );
 
         // lines.position.set( this.data.position.x, this.data.position.y, this.data.position.z);
         lines.position.set( this.data.position.x, 0, this.data.position.z);
         scene.add( lines );
+        console.log("ugh")
     },
     tick : function () {
         // this.obj.rotation.z += 0.05;
