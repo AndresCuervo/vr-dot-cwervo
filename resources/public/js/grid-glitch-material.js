@@ -44,13 +44,20 @@ AFRAME.registerComponent('listen-for-color', {
         });
         gui.position.y = "1.6";
         gui.position.z = "-1";
-        // scene.add(gui);
+        scene.add(gui);
 
         // var input = dat.GUIVR.addInputObject( controllerObject3D );
         // scene.add( input ); // this will add helpers to your scene (laser & cursor)
         dat.GUIVR.enableMouse( camera, renderer );
     }
 });
+
+
+var globalGui = {
+    lineColor : new THREE.Color(0,0,1),
+    tubeRadius : 0.0125,
+    craneWidth : 0.5
+}
 
 AFRAME.registerComponent('material-grid-glitch', {
     schema: {color: {type: 'color'}},

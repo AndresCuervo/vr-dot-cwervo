@@ -94,15 +94,15 @@
               :let [z (+ (Math/sin n) 0.5) ]]
           [:a-entity {:light "type: point; color: #2EAFAC; intensity: 0.1" :position (str "-4.5 1 " z)
                       :animation_ (str
-                                   "property: position;
-                                   from: -4.5 1 " z
-                                   ";
-                                   to: 4.5 1 " z
-                                   ";
-                                   easing: linear;
-                                   dir: alternate;
-                                   loop: true;
-                                   dur: 3000;")}]
+                                    "property: position;
+                                    from: -4.5 1 " z
+                                    ";
+                                    to: 4.5 1 " z
+                                    ";
+                                    easing: linear;
+                                    dir: alternate;
+                                    loop: true;
+                                    dur: 3000;")}]
           )
 
         [:a-sphere {:light-shader ""
@@ -183,9 +183,9 @@
                       :position (str xy-pos  (- -10 (* (+ count n) 1.6666)))
                       :depth count
                       :scale (clojure.string/join " " (map #_(+ % (* n 10)) identity
-                                                            [(* 1.6 (* 1.3 scale-size))
-                                                             scale-size
-                                                             0]))
+                                                           [(* 1.6 (* 1.3 scale-size))
+                                                            scale-size
+                                                            0]))
                       }])
          [:a-entity {:id "poss-text" :gltf-model "#poss"
                      :position "-10 100 13"
@@ -215,26 +215,26 @@
        [:a-entity {:gltf-model "#waterCloth"
                    :position "0 1 -6"
                    :scale "3 3 3"}
-       [:a-text {:value "Water cloth model \n Generated with: Blender OBJ -> Meshlab to Collada -> collada2gltf \n Loaded with: a-gltf core component"
-                 :mixin "infoText"}]]
+        [:a-text {:value "Water cloth model \n Generated with: Blender OBJ -> Meshlab to Collada -> collada2gltf \n Loaded with: a-gltf core component"
+                  :mixin "infoText"}]]
 
-      [:a-entity#buster {:gltf-model-next "src: url(/assets/models/buster/busterDrone.gltf)"
-                         :position "-4 1 -2"
-                         :animation_-mixer "busterDrone"
-                         :scale "0.5 0.5 0.5"
-                         :rotation "0 45 0"}
-       [:a-entity#busterTextWrapper {:position "2 2 0"}
-        [:a-text {:value "Buster Drone model \n Generated with: Unity 5.6.1f1 \n Loaded with: gltf-model-next a-frame-extras component"
-                  :scale "2 2 2"
+       [:a-entity#buster {:gltf-model-next "src: url(/assets/models/buster/busterDrone.gltf)"
+                          :position "-4 1 -2"
+                          :animation_-mixer "busterDrone"
+                          :scale "0.5 0.5 0.5"
+                          :rotation "0 45 0"}
+        [:a-entity#busterTextWrapper {:position "2 2 0"}
+         [:a-text {:value "Buster Drone model \n Generated with: Unity 5.6.1f1 \n Loaded with: gltf-model-next a-frame-extras component"
+                   :scale "2 2 2"
+                   :mixin "infoText"}]]]
+
+       [:a-entity#duck {:gltf-model-next "src: url(/assets/models/duck/duck.gltf)"
+                        :position "4 1 0"
+                        ;; :animation_-mixer "duckDrone"
+                        :scale "1 1 1"
+                        :rotation "0 -90 0"}
+        [:a-text {:value "Duck model \n Generated with: Khronos Blender glTF 2.0 exporter \n Loaded with: gltf-model-next a-frame-extras component"
                   :mixin "infoText"}]]]
-
-      [:a-entity#duck {:gltf-model-next "src: url(/assets/models/duck/duck.gltf)"
-                         :position "4 1 0"
-                         ;; :animation_-mixer "duckDrone"
-                         :scale "1 1 1"
-                         :rotation "0 -90 0"}
-       [:a-text {:value "Duck model \n Generated with: Khronos Blender glTF 2.0 exporter \n Loaded with: gltf-model-next a-frame-extras component"
-                 :mixin "infoText"}]]]
 
       [:a-sky {:color "black"}]
       [:a-entity {:teleport-controls ""
@@ -285,8 +285,8 @@
                ;; :animation "property: position; from: 0 0 -2; to: -3 0 -2; loop: true; easing: linear; dur: 4000;"} ]
                :animation "property: rotation; from: 0 0 0; to: 360 0 0; loop: true; easing: linear; dur: 4000;"} ]
       [:a-plane#floor {:rotation "-90 0 0"
-                  :color "#010101"
-                  :scale "40 40 40"}]
+                       :color "#010101"
+                       :scale "40 40 40"}]
       #_(let [duration 6000]
           [:a-entity#one
            [:a-curve#track1 {:rotation "0 0 0"
@@ -297,10 +297,10 @@
             ;; [:a-curve-point {:position "0.5 1 -2"}]
             ;; [:a-curve-point {:position "2 0 -3"}]
             (for [n (range 10)]
-                (cond
-                  (odd? n)  [:a-curve-point {:position (str "2 0 " (- 0 n))}]
-                  (even? n) [:a-curve-point {:position (str "-2 0 " (- 0 n))}]
-                  ))
+              (cond
+                (odd? n)  [:a-curve-point {:position (str "2 0 " (- 0 n))}]
+                (even? n) [:a-curve-point {:position (str "-2 0 " (- 0 n))}]
+                ))
             #_(for [n (range 7)
                     :let [scale 10
                           x (* (Math/cos n) scale)
@@ -321,20 +321,20 @@
           #_[:a-draw-curve {:curveref "#track1" :material "shader: line; color: red;"}]
           )
       #_[:a-datgui {:name "settings" :position "0 2 -2"}
-       [:a-gui-slider {:id "colorControl" :name "color" :step "0.01" :min "0.01" :max "4"}]]
+         [:a-gui-slider {:id "colorControl" :name "color" :step "0.01" :min "0.01" :max "4"}]]
       (let [scale {:x 5 :z 5}]
         (println (:x scale))
         [:a-entity {:position "0 0 -4"
-               ;; TODO Adjust rotation with an override of each
-               :make-crane (str "n: 40; position: " (* -3 (:x scale)) " " 0 " " (* -4 (:z scale)))
-               :make-crane__2 (str "n: 40; position: " (* -2.5 (:x scale)) " " 0 " " (* -3 (:z scale)))
-               :make-crane__3 (str "n: 45; position: " (* -1.5 (:x scale)) " " 0 " " (* -3.75 (:z scale)))
-               :make-crane__4 (str "n: 24; position: " (* -0.5 (:x scale)) " " 0 " " (* -3 (:z scale)))
-               }])
+                    ;; TODO Adjust rotation with an override of each
+                    :make-crane (str "n: 40; position: " (* -3 (:x scale)) " " 0 " " (* -4 (:z scale)))
+                    :make-crane__2 (str "n: 40; position: " (* -2.5 (:x scale)) " " 0 " " (* -3 (:z scale)))
+                    :make-crane__3 (str "n: 45; position: " (* -1.5 (:x scale)) " " 0 " " (* -3.75 (:z scale)))
+                    :make-crane__4 (str "n: 24; position: " (* -0.5 (:x scale)) " " 0 " " (* -3 (:z scale)))
+                    }])
       #_[:a-entity {:clone-along-curve "curve: #track1; spacing: 0.2; scale: 1 1 1; rotation: 90 0 0;"
-                  :geometry "primitive: box; height:0.1; width:0.8; depth:0.2"
-                  :mixin "craneShader"
-                  :material "color: brown"}]
+                    :geometry "primitive: box; height:0.1; width:0.8; depth:0.2"
+                    :mixin "craneShader"
+                    :material "color: brown"}]
       [:a-camera#camera]
       [:a-sky {:color "#101010"}]]]))
 
@@ -372,12 +372,12 @@
                                 :scale "0.5 0.5 0.5"
                                 :rotation (:rot attrs)
                                 :animation_ (when animate?
-                                             "property: rotation;
-                                             from: 0 0 0;
-                                             to: 360 0 0;
-                                             loop: true;
-                                             easing: easeInOutSine;
-                                             dur: 12000;")}])
+                                              "property: rotation;
+                                              from: 0 0 0;
+                                              to: 360 0 0;
+                                              loop: true;
+                                              easing: easeInOutSine;
+                                              dur: 12000;")}])
 
         [:a-sky {:color "black"}]
         [:a-entity {:teleport-controls ""
@@ -424,20 +424,20 @@
                         :scale "2.5 2.5 2.5"
                         :offset-plane (str "n: "n)
                         #_#_:animation__offset (str
-                                             "property: material.offset.x;
-                                             from: 10;
-                                             to: 0;
-                                             loop: true;")
+                                                 "property: material.offset.x;
+                                                 from: 10;
+                                                 to: 0;
+                                                 loop: true;")
                         :animation__hover_first_x (when (= n 0)
-                                                  (str "property: position;"
-                                                       "easing: linear;"
-                                                       "dur: 3000;"
-                                                       "loop: true;"
-                                                       "from: "  displace-first-pic " " y-pos " 0;"
-                                                       "to: " (* -1 displace-first-pic) " " y-pos " 0;"
-                                                       "dir: alternate;"
-                                                       "loop: true;"
-                                                       ))
+                                                    (str "property: position;"
+                                                         "easing: linear;"
+                                                         "dur: 3000;"
+                                                         "loop: true;"
+                                                         "from: "  displace-first-pic " " y-pos " 0;"
+                                                         "to: " (* -1 displace-first-pic) " " y-pos " 0;"
+                                                         "dir: alternate;"
+                                                         "loop: true;"
+                                                         ))
                         ;; :animation__hover_first_y (when (= n 0)
                         ;;                           (str "property: rotation;"
                         ;;                                "easing: linear;"
@@ -449,23 +449,64 @@
                         ;;                                "loop: true;"
                         ;;                                ))
                         #_#_:animation__move_first (when (= n 0)
-                                     (str "property: position;"
-                                          "easing: linear;"
-                                          "dur: 100000;"
-                                          "loop: true;"
-                                          "from: " position ";"
-                                          "to: " (clojure.string/join " " [(* -1 displace-first-pic)
-                                                                             y-pos
-                                                                             0]) ";"
-                                          ))
+                                                     (str "property: position;"
+                                                          "easing: linear;"
+                                                          "dur: 100000;"
+                                                          "loop: true;"
+                                                          "from: " position ";"
+                                                          "to: " (clojure.string/join " " [(* -1 displace-first-pic)
+                                                                                           y-pos
+                                                                                           0]) ";"
+                                                          ))
                         }])
            #_[:a-entity {:id "poss-text" :gltf-model "#poss"
-                       :position "-10 100 13"
-                       :animation_ "property: rotation; from: 0 0 0; to: 0 1 0; dir: alternate; loop: true; easing: linear;"
-                       :scale "2400 2400 2400"}]])
+                         :position "-10 100 13"
+                         :animation_ "property: rotation; from: 0 0 0; to: 0 1 0; dir: alternate; loop: true; easing: linear;"
+                         :scale "2400 2400 2400"}]])
 
         [:a-sky {:color "#000"}]
         [:a-entity {:teleport-controls ""
                     :vive-controls "hand: left"}]
         [:a-entity {:teleport-controls ""
                     :vive-controls "hand: right"}]])]))
+
+(defn note-styled [container]
+  [:div.note {:style "position: absolute;
+                     top: 1%;
+                     left: 1%;
+                     color: black;
+                     text-shadow:
+                     -1px -1px 0 #BBB,
+                     1px -1px 0 #BBB,
+                     -1px 1px 0 #BBB,
+                     1px 1px 0 #BBB;
+                     "} container])
+
+(defn ar-refraction [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "Some simple boxes as a first AR test!"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
+                          "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
+                          "<script src='https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js'></script>"
+                          "<script src='https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js'></script>"
+                          "<script src='/js/grid-glitch-material.js'></script>"
+                          "<script src='/js/refraction-shader.js'></script>"
+                          ])
+    [:body
+     (note-styled [:span "Thanks to " [:a {:href "https://twitter.com/jerome_etienne"} "Jerome Etienne"]
+                  "for " [:a {:href "https://github.com/jeromeetienne/AR.js"} "AR.js and this refraction shader!"]])
+     [:a-scene {:artoolkit "sourceType: webcam;"
+                :style "pointer-events: none;"}
+     ;; [:a-scene {:artoolkit "debug: true; sourceType: image; sourceUrl: /images/hiro-placeholder.png;"}
+      [:a-torus {:position "0 0 0"
+                 ;; :material-grid-glitch "color: red"
+                 :refraction-shader ""
+                 :scale "1 1 1"
+                 ;; :animation "property: position; from: 0 0 0; to: -3 0 0; loop: true; easing: linear; dur: 4000;"
+                 :animation__rot "property: rotation; from: 0 0 0; to: 360 0 0; loop: true; easing: linear; dur: 4000;"
+                 }]
+      [:a-marker-camera {:preset "hiro"}]
+      ]]))
