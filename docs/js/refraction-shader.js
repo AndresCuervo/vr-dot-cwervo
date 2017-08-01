@@ -5,38 +5,34 @@
 
 AFRAME.registerComponent('refraction-shader', {
     schema: {color: {type: 'color'}},
-    /**
-     * Creates a new THREE.ShaderMaterial using the two shaders defined
-     * in vertex.glsl and fragment.glsl.
-     */
     init: function () {
         const data = this.data;
 
 
         const vertexShader = `varying vec3 vRefract;
-uniform float refractionRatio;
+        uniform float refractionRatio;
 
-void main() {
-    vec4 mPosition = modelMatrix * vec4( position, 1.0 );
-    vec3 nWorld = normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );
-    vRefract = normalize( refract( normalize( mPosition.xyz - cameraPosition ), nWorld, refractionRatio ) );
+        void main() {
+            vec4 mPosition = modelMatrix * vec4( position, 1.0 );
+            vec3 nWorld = normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );
+            vRefract = normalize( refract( normalize( mPosition.xyz - cameraPosition ), nWorld, refractionRatio ) );
 
-    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-}`
+            gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+        }`
 
         const fragShader = `uniform sampler2D texture;
-varying vec3 vRefract;
-// experiment with distance to the video plane. should do real ray-plane-intersection!
-uniform float distance;
+        varying vec3 vRefract;
+        // experiment with distance to the video plane. should do real ray-plane-intersection!
+        uniform float distance;
 
-void main(void) {
-    // 2d video plane lookup
-    // todo: ! here we could raytrace the ray into the _markerplane_! we know this ("reasonable area around the marker")
-    vec2 p = vec2(vRefract.x*distance + 0.5, vRefract.y*distance + 0.5);
+        void main(void) {
+            // 2d video plane lookup
+            // todo: ! here we could raytrace the ray into the _markerplane_! we know this ("reasonable area around the marker")
+            vec2 p = vec2(vRefract.x*distance + 0.5, vRefract.y*distance + 0.5);
 
-    vec3 color = texture2D( texture, p ).rgb;
-    gl_FragColor = vec4( color, 1.0 );
-}`
+            vec3 color = texture2D( texture, p ).rgb;
+            gl_FragColor = vec4( color, 1.0 );
+        }`
 
 
         // // Ripped from AR.js source, to get an instace of arToolkitSource, should be a better way
