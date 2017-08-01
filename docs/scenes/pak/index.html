@@ -1,0 +1,10 @@
+<head><title>B&W test :)</title><meta content="text/html; charset=UTF-8" http-equiv="Content-Type" /><script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.6.0/aframe-master.min.js"></script><script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script><script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script><script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script></head><body><div class="note" style="position: absolute;
+                     top: 1%;
+                     left: 1%;
+                     color: black;
+                     text-shadow:
+                     -1px -1px 0 #BBB,
+                     1px -1px 0 #BBB,
+                     -1px 1px 0 #BBB,
+                     1px 1px 0 #BBB;
+                     "><span>You'll need to have<a href="https://jeromeetienne.github.io/AR.js/data/images/HIRO.jpg">this image</a>printed or just displaying on your phone!</span></div><a-scene artoolkit="sourceType: webcam;" style="pointer-events: none;"><a-assets><a-asset-item id="cube-obj" src="/assets/models/pak_1/cube.obj"></a-asset-item><a-asset-item id="plane-obj" src="/assets/models/pak_1/plane.obj"></a-asset-item><a-asset-item id="sphere-obj" src="/assets/models/pak_1/sphere.obj"></a-asset-item><a-asset-item id="cube-mtl" src="/assets/models/pak_1/cube.mtl"></a-asset-item><a-asset-item id="plane-mtl" src="/assets/models/pak_1/plane.mtl"></a-asset-item><a-asset-item id="sphere-mtl" src="/assets/models/pak_1/sphere.mtl"></a-asset-item></a-assets><a-entity obj-model="obj: #cube-obj; mtl: #cube-mtl"></a-entity><a-entity obj-model="obj: #plane-obj; mtl: #plane-mtl"></a-entity><a-entity obj-model="obj: #sphere-obj; mtl: #sphere-mtl"></a-entity><a-marker-camera liquid-marker="" preset="hiro"></a-marker-camera></a-scene></body>
