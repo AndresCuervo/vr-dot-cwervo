@@ -1,3 +1,4 @@
+// Saved funny version of liquidmarker.js — Andres Cuervo, 2017-08-01 15:25
 // This is all based off Jerome Etienne's work, and he originally linked to
 // these two sources, so I'll do the same here:
 // http://http.developer.nvidia.com/CgTutorial/cg_tutorial_chapter07.html
@@ -5,10 +6,6 @@
 
 AFRAME.registerComponent('liquid-marker', {
     schema: {color: {type: 'color'}},
-    /**
-     * Creates a new THREE.ShaderMaterial using the two shaders defined
-     * in vertex.glsl and fragment.glsl.
-     */
     init: function () {
         // console.log("OH?", this.el.components.arjsmarker._markerRoot)
         var videoTexture = new THREE.VideoTexture(this.el.sceneEl.systems.arjs.arToolkitSource.domElement)

@@ -482,6 +482,9 @@
                      1px 1px 0 #BBB;
                      "} container])
 
+(defn hiro-message [& args]
+  (note-styled [:span "You'll need to have " [:a {:href "https://jeromeetienne.github.io/AR.js/data/images/HIRO.jpg"} "this image"] " printed or just displaying on your phone! " [:br] args]))
+
 (defn ar-refraction [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
@@ -495,8 +498,8 @@
                           "<script src='/js/refraction-shader.js'></script>"
                           ])
     [:body
-     (note-styled [:span "Thanks to " [:a {:href "https://twitter.com/jerome_etienne"} "Jerome Etienne"]
-                   "for " [:a {:href "https://github.com/jeromeetienne/AR.js"} "AR.js and this refraction shader!"]])
+     (hiro-message "Thanks to " [:a {:href "https://twitter.com/jerome_etienne"} "Jerome Etienne"]
+                   " for " [:a {:href "https://github.com/jeromeetienne/AR.js"} "AR.js and this refraction shader!"])
      [:a-scene {:artoolkit "sourceType: webcam;"
                 :style "pointer-events: none;"}
       ;; [:a-scene {:artoolkit "debug: true; sourceType: image; sourceUrl: /images/hiro-placeholder.png;"}
@@ -509,6 +512,25 @@
       [:a-marker-camera {:preset "hiro"}]
       ]]))
 
+(defn liquid-marker-weird [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "Some simple boxes as a first AR test!"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='/js/threex-arliquidmarker.js'></script>"
+                          "<script src='/js/refraction-shader.js'></script>"
+                          "<script src='/js/liquidmarker_weird.js'></script>"
+                          ])
+    [:body
+
+     (hiro-message)
+     [:a-scene {:artoolkit "sourceType: webcam;"
+                :style "pointer-events: none;"
+                }
+      [:a-marker-camera {:preset "hiro"
+                         :liquid-marker ""
+                         }]
+      ]]))
 
 (defn liquid-marker [{global-meta :meta entries :entries}]
   (html
@@ -526,7 +548,7 @@
                           ])
     [:body
 
-     (note-styled [:span "You'll need to have" [:a {:href "https://jeromeetienne.github.io/AR.js/data/images/HIRO.jpg"} "this image"] "printed or just displaying on your phone!"])
+     (hiro-message)
      [:a-scene {:artoolkit "sourceType: webcam;"
                 :style "pointer-events: none;"
                 }
@@ -555,7 +577,7 @@
                           ;; "<script src='/js/liquidmarker.js'></script>"
                           ])
     [:body
-     (note-styled [:span "You'll need to have" [:a {:href "https://jeromeetienne.github.io/AR.js/data/images/HIRO.jpg"} "this image"] "printed or just displaying on your phone!"])
+     (hiro-message)
      (let [nameList ["cube" "plane" "sphere"]
            basePath "/assets/models/pak_1/"]
        [:a-scene {:artoolkit "sourceType: webcam;"
