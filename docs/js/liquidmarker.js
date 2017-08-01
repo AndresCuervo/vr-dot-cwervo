@@ -61,6 +61,7 @@ AFRAME.registerComponent('liquid-marker', {
         }, 1000*period)
 
         function triggerBoing(){
+            console.log("triggered the boing:", block)
             block.x -= 200
         }
         document.body.addEventListener('click', triggerBoing)
