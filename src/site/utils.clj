@@ -492,17 +492,15 @@
                           "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
                           "<script src='https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js'></script>"
                           "<script src='https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js'></script>"
-                          "<script src='/js/grid-glitch-material.js'></script>"
                           "<script src='/js/refraction-shader.js'></script>"
                           ])
     [:body
      (note-styled [:span "Thanks to " [:a {:href "https://twitter.com/jerome_etienne"} "Jerome Etienne"]
-                  "for " [:a {:href "https://github.com/jeromeetienne/AR.js"} "AR.js and this refraction shader!"]])
+                   "for " [:a {:href "https://github.com/jeromeetienne/AR.js"} "AR.js and this refraction shader!"]])
      [:a-scene {:artoolkit "sourceType: webcam;"
                 :style "pointer-events: none;"}
-     ;; [:a-scene {:artoolkit "debug: true; sourceType: image; sourceUrl: /images/hiro-placeholder.png;"}
+      ;; [:a-scene {:artoolkit "debug: true; sourceType: image; sourceUrl: /images/hiro-placeholder.png;"}
       [:a-torus {:position "0 0 0"
-                 ;; :material-grid-glitch "color: red"
                  :refraction-shader ""
                  :scale "1 1 1"
                  ;; :animation "property: position; from: 0 0 0; to: -3 0 0; loop: true; easing: linear; dur: 4000;"
@@ -510,3 +508,73 @@
                  }]
       [:a-marker-camera {:preset "hiro"}]
       ]]))
+
+
+(defn liquid-marker [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "Some simple boxes as a first AR test!"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
+                          "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
+                          "<script src='https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js'></script>"
+                          "<script src='https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js'></script>"
+                          "<script src='/js/threex-arliquidmarker.js'></script>"
+                          "<script src='/js/refraction-shader.js'></script>"
+                          "<script src='/js/liquidmarker.js'></script>"
+                          ])
+    [:body
+
+     (note-styled [:span "You'll need to have" [:a {:href "https://jeromeetienne.github.io/AR.js/data/images/HIRO.jpg"} "this image"] "printed or just displaying on your phone!"])
+     [:a-scene {:artoolkit "sourceType: webcam;"
+                :style "pointer-events: none;"
+                }
+      ;; [:a-entity {}]
+      ;; [:a-scene {:artoolkit "debug: true; sourceType: image; sourceUrl: /images/hiro-placeholder.png;"}
+      #_[:a-torus {:position "0 0 0"
+                   :refraction-shader ""
+                   :scale "1 1 1"
+                   ;; :animation "property: position; from: 0 0 0; to: -3 0 0; loop: true; easing: linear; dur: 4000;"
+                   :animation__rot "property: rotation; from: 0 0 0; to: 360 0 0; loop: true; easing: linear; dur: 4000;"
+                   }]
+      [:a-marker-camera {:preset "hiro"
+                         :liquid-marker ""
+                         }]
+      ]]))
+
+
+(defn pak [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "B&W test :)"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          ;; "<script src='/js/threex-arliquidmarker.js'></script>"
+                          ;; "<script src='/js/refraction-shader.js'></script>"
+                          ;; "<script src='/js/liquidmarker.js'></script>"
+                          ])
+    [:body
+     (note-styled [:span "You'll need to have" [:a {:href "https://jeromeetienne.github.io/AR.js/data/images/HIRO.jpg"} "this image"] "printed or just displaying on your phone!"])
+     (let [nameList ["cube" "plane" "sphere"]
+           basePath "/assets/models/pak_1/"]
+       [:a-scene {:artoolkit "sourceType: webcam;"
+                  :style "pointer-events: none;"}
+
+        [:a-assets
+         ;; Add OBJs:
+         (for [baseName nameList]
+           [:a-asset-item {:id (str baseName "-obj")
+                           :src (str basePath baseName ".obj")}])
+         ;; Add MTLs:
+         (for [baseName nameList]
+           [:a-asset-item {:id (str baseName "-mtl")
+                           :src (str basePath baseName ".mtl")}])]
+        ;;;;;;;;;
+        ;; Scene actually starts:
+        ;;;;;;;;;
+        (for [baseName nameList]
+          [:a-entity {:obj-model (str  "obj: #" baseName "-obj; mtl: #" baseName "-mtl")}])
+        [:a-marker-camera {:preset "hiro"
+                           :liquid-marker ""
+                           }]])]))
