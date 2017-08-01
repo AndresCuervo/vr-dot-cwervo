@@ -52,10 +52,21 @@
             "[AnotherWorld]"]]
           [:li
            [:a {:href "/scenes/point-cloud/"}
-            "Baby's first point cloud test"]]
-          #_[:li
-             [:a {:href "/scenes/three-test/"}
-              "T e s t"]]]]
+            "Baby's first point cloud test"]]]]
+
+         [:li.details-wrapper
+          [:details
+           [:summary "Web-based AR experiences"]
+           [:li
+            [:a {:href "/scenes/ar-refraction/"}
+             "My first AR refraction test"]
+            ", based off "
+            [:a {:href "https://twitter.com/jerome_etienne"} "Jerome Etienne's work."]]
+           [:li
+            [:a {:href "https://ar-aframe-shader-test.glitch.me/"}
+             "A-Frame + AR.js with a custom displacement shader"]
+            " written by  "
+            [:a {:href "http://sagejenson.com"} "Sage Jenson."]]]]
 
          [:li.details-wrapper
           [:details
