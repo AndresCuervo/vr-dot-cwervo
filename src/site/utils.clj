@@ -496,17 +496,19 @@
                           "<script src='https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js'></script>"
                           "<script src='https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js'></script>"
                           "<script src='/js/refraction-shader.js'></script>"
-                          "<script src='/js/ar-refraction-misc.js'></script>"
+                          "<script src='/js/ar-refraction-gui.js'></script>"
                           ])
     [:body
      (hiro-message "Thanks to " [:a {:href "https://twitter.com/jerome_etienne"} "Jerome Etienne"]
                    " for " [:a {:href "https://github.com/jeromeetienne/AR.js"} "AR.js and this refraction shader!"])
      [:a-scene {:artoolkit "sourceType: webcam;"
-                :style "pointer-events: none;"}
+                :style "pointer-events: none;"
+                :add-refraction-shader-gui ""}
       ;; [:a-scene {:artoolkit "debug: true; sourceType: image; sourceUrl: /images/hiro-placeholder.png;"}
       [:a-torus#clearTorus {:position "0 0 0"
                             :refraction-shader ""
                             :scale "1 1 1"
+                            :rotation "0 0 0"
                             ;; :animation "property: position; from: 0 0 0; to: -3 0 0; loop: true; easing: linear; dur: 4000;"
                             :animation__rot "property: rotation; from: 0 0 0; to: 360 0 0; loop: true; easing: linear; dur: 10000;"
                             }]
@@ -525,7 +527,6 @@
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
                           "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
                           "<script src='/js/threex-arliquidmarker.js'></script>"
-                          "<script src='/js/refraction-shader.js'></script>"
                           "<script src='/js/liquidmarker_weird.js'></script>"
                           ])
     [:body
@@ -548,7 +549,6 @@
                           "<script src='https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js'></script>"
                           "<script src='https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js'></script>"
                           "<script src='/js/threex-arliquidmarker.js'></script>"
-                          "<script src='/js/refraction-shader.js'></script>"
                           "<script src='/js/liquidmarker.js'></script>"
                           ])
     [:body
@@ -575,9 +575,6 @@
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
                           "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
-                          ;; "<script src='/js/threex-arliquidmarker.js'></script>"
-                          ;; "<script src='/js/refraction-shader.js'></script>"
-                          ;; "<script src='/js/liquidmarker.js'></script>"
                           ])
     [:body
      (hiro-message)
@@ -615,21 +612,51 @@
                           "<script src='https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js'></script>"
                           "<script src='https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js'></script>"
                           "<script src='/js/refraction-shader.js'></script>"
+                          "<script src='/js/reflection-shader.js'></script>"
                           "<script src='/js/ar-bubbles.js'></script>"])
     [:body
-     (hiro-message)
+     (hiro-message "Tap or click on the screen to make bubbles appear!")
      [:a-scene {:artoolkit "sourceType: webcam;"
                 :style "pointer-events: none;"
-                :physics "debug: false; gravity: 0.4;"}
+                :physics "debug: false; gravity: 0.025;"}
       [:a-plane#bubbleFeedback {:height "4"
                                 ;; :refraction-shader ""
                                 :width "2"
                                 :color "#2EAFAC"
                                 :static-body ""
                                 :rotation "-90 0 0"}]
-      #_[:a-sphere {:color "#2EAFAC"
-                    :refraction-shader ""
-                    :dynamic-body ""}]
+      ;; [:a-sphere {:color "#2EAFAC"
+      ;;             :refraction-shader ""
+      ;;             :scale "0.25 0.25 0.25"
+      ;;             :static-body ""}]
+      ;; [:a-sphere {:color "#2EAFAC"
+      ;;             :reflection-shader ""
+      ;;             :position "-1 0 0"
+      ;;             :scale "0.25 0.25 0.25"
+      ;;             :static-body ""}]
       [:a-entity {:make-bubbles ""}]
-      [:a-marker-camera {:preset "hiro"
-                         }]]]))
+      [:a-marker-camera {:preset "hiro"}]]]))
+
+(defn ar-reflection [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "Some simple boxes as a first AR test!"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
+                          "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
+                          "<script src='https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js'></script>"
+                          "<script src='https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js'></script>"
+                          "<script src='/js/reflection-shader.js'></script>"
+                          ])
+    [:body
+     (hiro-message)
+     [:a-scene {:artoolkit "sourceType: webcam;"
+                :style "pointer-events: none;"}
+      [:a-box {:position "0 0 0"
+                            :reflection-shader ""
+                            :scale "1 1 1"
+                            :rotation "90 0 0"
+                            :animation__rot "property: rotation; from: 90 0 0; to: 90 360 0; loop: true; easing: linear; dur: 4000;"
+                            }]
+      [:a-marker-camera {:preset "hiro"}]]]))

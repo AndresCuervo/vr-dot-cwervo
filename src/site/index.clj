@@ -58,10 +58,16 @@
           [:details
            [:summary "Web-based AR experiences"]
            [:li
+            [:a {:href "/scenes/ar-bubbles/"}
+             "AR bubbles demo (tap or click on your screen!)"]]
+           [:li
             [:a {:href "/scenes/ar-refraction/"}
              "My first AR refraction test"]
             ", based off "
             [:a {:href "https://twitter.com/jerome_etienne"} "Jerome Etienne's work."]]
+           [:li
+            [:a {:href "/scenes/ar-refraction/"}
+             "(WIP) AR Reflection box"]]
            [:li
             [:a {:href "https://ar-aframe-shader-test.glitch.me/"}
              "A-Frame + AR.js with a custom displacement shader"]

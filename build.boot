@@ -51,6 +51,7 @@
     (static :renderer 'site.utils/sofia3D :page "scenes/sofia3D/index.html")
     (static :renderer 'site.utils/maxprentisvisual-1 :page "scenes/maxprentisvisual-1/index.html")
     (static :renderer 'site.utils/ar-refraction :page "scenes/ar-refraction/index.html")
+    (static :renderer 'site.utils/ar-reflection :page "scenes/ar-reflection/index.html")
     (static :renderer 'site.utils/liquid-marker :page "scenes/liquid-marker/index.html")
     (static :renderer 'site.utils/liquid-marker-weird :page "scenes/liquid-marker-weird/index.html")
     (static :renderer 'site.utils/pak :page "scenes/pak/index.html")

@@ -77,6 +77,5 @@ AFRAME.registerComponent('refraction-shader', {
         this.material.uniforms.time.value = t / 1000
         this.material.uniforms.refractionIndex.value = this.data.refractionIndex
         this.material.uniforms.distance.value = this.data.distance
-        // console.log(this.material.uniforms.refractionIndex.value, this.data.refractionIndex)
     }
 })

@@ -6,7 +6,10 @@
 AFRAME.registerComponent('refraction-shader', {
     schema: {
         refractionIndex: { type : 'number', default: 0.9 },
-        distance: { type : 'number', default: 1 }
+        distance: { type : 'number', default: 1 },
+        // TODO :  add tint color to *= the color of gl_FragColor :)
+        tintColor : { default : [255, 255, 255] },
+        opacity: { default : 1 }
     },
     init: function () {
         // Mostly from Jerome Etienne, except refractionRatio -> refractionIndex because that makes more sense to me
@@ -24,7 +27,11 @@ AFRAME.registerComponent('refraction-shader', {
         const fragShader = `uniform sampler2D texture;
         varying vec3 vRefract;
         // experiment with distance to the video plane. should do real ray-plane-intersection!
+
         uniform float distance;
+        uniform float opacity;
+
+        uniform vec3 tintColor;
 
         void main(void) {
             // 2d video plane lookup
@@ -32,8 +39,17 @@ AFRAME.registerComponent('refraction-shader', {
             vec2 p = vec2(vRefract.x*distance + 0.5, vRefract.y*distance + 0.5);
 
             vec3 color = texture2D( texture, p ).rgb;
-            // color.r *= 2.0;
-            gl_FragColor = vec4( color, 1.0 );
+
+            // float mixThresh = 0.05;
+            // color.r = mix(color.r, normalize(tintColor.r), mixThresh);
+            // color.g = mix(color.g, normalize(tintColor.g), mixThresh);
+            // color.b = mix(color.b, normalize(tintColor.b), mixThresh);
+
+            // color.r = normalize(color.r * tintColor.r);
+            // color.g = normalize(color.g * tintColor.g);
+            // color.b = normalize(color.b * tintColor.b);
+            gl_FragColor = vec4(color, opacity );
+            // gl_FragColor = vec4(normalize(tintColor), opacity );
         }`
 
         var texture = new THREE.VideoTexture(this.el.sceneEl.systems.arjs.arToolkitSource.domElement)
@@ -49,7 +65,9 @@ AFRAME.registerComponent('refraction-shader', {
                 // This is actually the inverse of the refraction index:
                 refractionIndex: { type: 'f', value: this.data.refractionIndex },
                 // experiment to adjust offset to video-plane. set to 1 for no effect
-                distance: { type: 'f', value: this.data.distance }
+                distance: { type: 'f', value: this.data.distance },
+                tintColor: { type: 'vec3', value: new THREE.Color(this.data.tintColor.r, this.data.tintColor.g, this.data.tintColor.b)},
+                opacity: { type: 'f', value: this.data.opacity},
             },
             // Note, idk why exactly, but it appears that you NEED to explicitly
             // name the vertexShader & fragmentShader arguments and not just as:
@@ -77,6 +95,7 @@ AFRAME.registerComponent('refraction-shader', {
         this.material.uniforms.time.value = t / 1000
         this.material.uniforms.refractionIndex.value = this.data.refractionIndex
         this.material.uniforms.distance.value = this.data.distance
-        // console.log(this.material.uniforms.refractionIndex.value, this.data.refractionIndex)
+        this.material.uniforms.tintColor.value = this.data.tintColor
+        this.material.uniforms.opacity.value = this.data.opacity
     }
 })
