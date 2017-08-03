@@ -64,9 +64,9 @@ AFRAME.registerComponent('liquid-marker', {
             console.log("triggered the boing:", block)
             block.x -= 200
         }
-        document.body.addEventListener('click', triggerBoing)
-        document.body.addEventListener('touchstart', triggerBoing)
-        document.body.addEventListener('keypress', triggerBoing)
+        document.addEventListener('click', triggerBoing)
+        document.addEventListener('touchstart', triggerBoing)
+        document.addEventListener('keypress', triggerBoing)
 
         // liquidMarker.object3d.visible = false
 
