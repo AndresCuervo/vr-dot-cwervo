@@ -37,7 +37,7 @@ AFRAME.registerComponent('make-bubbles', {
 
             var scale = getRandomArbitrary(1, 2.5)
             var randomPos = getRandomArbitrary(scale, scale*2)
-            newEl.setAttribute('position', `${randomPos} 0 ${-2 * Math.random()}`)
+            newEl.setAttribute('position', `${-1 + randomPos} 0 0`)
 
             // Resize scale for the actualy scale to grow to lol
             scale *= 0.55
