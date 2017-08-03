@@ -1,10 +1,14 @@
 const bubbleClass = "temp-bubble"
 
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+
 AFRAME.registerComponent('make-bubbles', {
     schema : {
         n : {default : 1},
         tag : {default : 'a-box'},
-        color : {default : 'blue'},
         wiggleAmount : {default : 1.25},
         rowN : {default : 2},
         maxBubbles : {default : 4},
@@ -15,25 +19,45 @@ AFRAME.registerComponent('make-bubbles', {
         document.addEventListener('click', this.makeBubble)
     },
     makeBubble : function () {
-        var newEl = document.createElement("a-sphere")
         var target = document.getElementById('bubbleFeedback')
 
-        newEl.setAttribute('data-live', 5 + Math.random(10) * 20)
-        newEl.setAttribute('dynamic-body', "")
-        newEl.setAttribute('refraction-shader', "refractionIndex: " + Math.random())
-        newEl.classList.add(bubbleClass)
-        var scale = 0.8 * (Math.random())
-        newEl.setAttribute('scale', `${scale} ${scale} ${scale}`)
-        newEl.setAttribute('position', `${scale * Math.random(3)} ${0.25 + (scale * Math.random(3))} ${scale * Math.random(3)}`)
-        AFRAME.scenes[0].appendChild(newEl)
+        var bubbleAmount = 3
 
-        console.log('%c ' +'Bubble is: ' + scale, 'color: #2EAFAC');
+        for (var i = 0; i < bubbleAmount; i++) {
+            var newEl = document.createElement("a-sphere")
+            newEl.setAttribute('data-live', 5 + Math.random(10) * 20)
+            newEl.setAttribute('dynamic-body', 'shape: sphere;')
+            // newEl.setAttribute('refraction-shader', `refractionIndex: ${0.15 + Math.random()}; distance: ${0.55};`)
+            newEl.setAttribute('refraction-shader', `refractionIndex: ${0.15 + Math.random()}; distance: ${0.33}; opacity: 0.65`)
+            // newEl.setAttribute('reflection-shader', '')
+            newEl.classList.add(bubbleClass)
+
+            // var scale = 0.8 * (Math.random())
+            // newEl.setAttribute('scale', `${scale} ${scale} ${scale}`)
+
+            var scale = getRandomArbitrary(1, 2.5)
+            var randomPos = getRandomArbitrary(scale, scale*2)
+            newEl.setAttribute('position', `${randomPos} 0 ${-2 * Math.random()}`)
+
+            // Resize scale for the actualy scale to grow to lol
+            scale *= 0.55
+
+            newEl.setAttribute('animation__grow', `property: scale;
+                                                  from: 0 0 0;
+                                                  to: ${scale} ${scale} ${scale};
+                                                  elasticity: 1000;
+                                                  easing: easeInOutElastic;
+                                                  dur: ${Math.random() * 1200}`)
+            AFRAME.scenes[0].appendChild(newEl)
+        }
+
+        // console.log('%c ' +'Bubble is: ' + scale, 'color: #2EAFAC');
 
         target.setAttribute('color', '#BEE')
         setTimeout( function () {
             target.setAttribute('color', '#2EAFAC')
         }
-        , 250)
+            , 250)
 
         // TODO make the plane have an animation-start trigger that flashes its opacity real quick :)
         // Then take a video of it from the iPhone and post to FB & Twitter & Slack! :)
