@@ -4,18 +4,19 @@
 // https://www.clicktorelease.com/code/streetViewReflectionMapping/#51.50700703827454,-0.12791916931155356
 
 AFRAME.registerComponent('refraction-shader', {
-    schema: {color: {type: 'color'}},
+    schema: {
+        refractionIndex: { type : 'number', default: 0.9 },
+        distance: { type : 'number', default: 1 }
+    },
     init: function () {
-        const data = this.data;
-
-
+        // Mostly from Jerome Etienne, except refractionRatio -> refractionIndex because that makes more sense to me
         const vertexShader = `varying vec3 vRefract;
-        uniform float refractionRatio;
+        uniform float refractionIndex;
 
         void main() {
             vec4 mPosition = modelMatrix * vec4( position, 1.0 );
             vec3 nWorld = normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );
-            vRefract = normalize( refract( normalize( mPosition.xyz - cameraPosition ), nWorld, refractionRatio ) );
+            vRefract = normalize( refract( normalize( mPosition.xyz - cameraPosition ), nWorld, refractionIndex ) );
 
             gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
         }`
@@ -31,18 +32,10 @@ AFRAME.registerComponent('refraction-shader', {
             vec2 p = vec2(vRefract.x*distance + 0.5, vRefract.y*distance + 0.5);
 
             vec3 color = texture2D( texture, p ).rgb;
+            // color.r *= 2.0;
             gl_FragColor = vec4( color, 1.0 );
         }`
 
-
-        // // Ripped from AR.js source, to get an instace of arToolkitSource, should be a better way
-        // // to grab the source setup by the A-Frame+AR.js library
-        // // setup artoolkitProfile
-        // var artoolkitProfile = new THREEx.ArToolkitProfile();
-        // artoolkitProfile.sourceWebcam();
-        // var arToolkitSource = new THREEx.ArToolkitSource(artoolkitProfile.sourceParameters);
-
-        // AFRAME.scenes[0].systems.arjs.arToolkitSource
         var texture = new THREE.VideoTexture(this.el.sceneEl.systems.arjs.arToolkitSource.domElement)
         texture.minFilter =  THREE.NearestFilter
 
@@ -51,9 +44,12 @@ AFRAME.registerComponent('refraction-shader', {
                 time: { value: 0.0 },
                 texture: { type: 't', value: texture },
                 // pull to see the throshold: 0.7-ish solid glass/water ("upsidevdown"), 0.8+ thinner glass ("magnifying glass")
-                refractionRatio: { type: 'f', value: 0.9 },
+                // refractionIndex: { type: 'f', value: 0.7 },
+
+                // This is actually the inverse of the refraction index:
+                refractionIndex: { type: 'f', value: this.data.refractionIndex },
                 // experiment to adjust offset to video-plane. set to 1 for no effect
-                distance: { type: 'f', value: 1 }
+                distance: { type: 'f', value: this.data.distance }
             },
             // Note, idk why exactly, but it appears that you NEED to explicitly
             // name the vertexShader & fragmentShader arguments and not just as:
@@ -69,13 +65,6 @@ AFRAME.registerComponent('refraction-shader', {
         this.el.addEventListener('model-loaded', () => this.applyToMesh());
     },
     /**
-     * Update the ShaderMaterial when component data changes.
-     */
-    update: function () {
-        // this.material.uniforms.color.value.set(this.data.color);
-    },
-
-    /**
      * Apply the material to the current entity.
      */
     applyToMesh: function() {
@@ -84,11 +73,10 @@ AFRAME.registerComponent('refraction-shader', {
             mesh.material = this.material;
         }
     },
-    /**
-     * On each frame, update the 'time' uniform in the shaders.
-     */
     tick: function (t) {
-        this.material.uniforms.time.value = t / 1000;
+        this.material.uniforms.time.value = t / 1000
+        this.material.uniforms.refractionIndex.value = this.data.refractionIndex
+        this.material.uniforms.distance.value = this.data.distance
+        // console.log(this.material.uniforms.refractionIndex.value, this.data.refractionIndex)
     }
-
 })

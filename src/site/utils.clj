@@ -496,6 +496,7 @@
                           "<script src='https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js'></script>"
                           "<script src='https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js'></script>"
                           "<script src='/js/refraction-shader.js'></script>"
+                          "<script src='/js/ar-refraction-misc.js'></script>"
                           ])
     [:body
      (hiro-message "Thanks to " [:a {:href "https://twitter.com/jerome_etienne"} "Jerome Etienne"]
@@ -503,14 +504,20 @@
      [:a-scene {:artoolkit "sourceType: webcam;"
                 :style "pointer-events: none;"}
       ;; [:a-scene {:artoolkit "debug: true; sourceType: image; sourceUrl: /images/hiro-placeholder.png;"}
-      [:a-torus {:position "0 0 0"
-                 :refraction-shader ""
-                 :scale "1 1 1"
-                 ;; :animation "property: position; from: 0 0 0; to: -3 0 0; loop: true; easing: linear; dur: 4000;"
-                 :animation__rot "property: rotation; from: 0 0 0; to: 360 0 0; loop: true; easing: linear; dur: 4000;"
-                 }]
-      [:a-marker-camera {:preset "hiro"}]
-      ]]))
+      [:a-torus#clearTorus {:position "0 0 0"
+                            :refraction-shader ""
+                            :scale "1 1 1"
+                            ;; :animation "property: position; from: 0 0 0; to: -3 0 0; loop: true; easing: linear; dur: 4000;"
+                            :animation__rot "property: rotation; from: 0 0 0; to: 360 0 0; loop: true; easing: linear; dur: 10000;"
+                            }]
+      ;; TODO Duck doesn't get remapped with current comopnent, idk why, check what the material on document.querySelector("#duck") is???
+      ;; [:a-entity#duck {:gltf-model-next "src: url(/assets/models/duck/duck.gltf)"
+      ;;                  :position "2 1 0"
+      ;;                  :scale "1 1 1"
+      ;;                  :rotation "0 -90 0"}]
+      ;; [:a-entity {:obj-model (str "obj: url(/assets/models/pak_1/sphere.obj);")
+      ;;             :refraction-shader ""}]
+      [:a-marker-camera {:preset "hiro"}]]]))
 
 (defn liquid-marker-weird [{global-meta :meta entries :entries}]
   (html
@@ -528,9 +535,7 @@
                 :style "pointer-events: none;"
                 }
       [:a-marker-camera {:preset "hiro"
-                         :liquid-marker ""
-                         }]
-      ]]))
+                         :liquid-marker ""}]]]))
 
 (defn liquid-marker [{global-meta :meta entries :entries}]
   (html
@@ -561,9 +566,7 @@
                    :animation__rot "property: rotation; from: 0 0 0; to: 360 0 0; loop: true; easing: linear; dur: 4000;"
                    }]
       [:a-marker-camera {:preset "hiro"
-                         :liquid-marker ""
-                         }]
-      ]]))
+                         :liquid-marker ""}]]]))
 
 
 (defn pak [{global-meta :meta entries :entries}]
@@ -598,5 +601,35 @@
         (for [baseName nameList]
           [:a-entity {:obj-model (str  "obj: #" baseName "-obj; mtl: #" baseName "-mtl")}])
         [:a-marker-camera {:preset "hiro"
-                           :liquid-marker ""
-                           }]])]))
+                           :liquid-marker ""}]])]))
+
+(defn ar-bubbles [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "Some simple boxes as a first AR test!"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
+                          "<script src='//cdn.rawgit.com/donmccurdy/aframe-physics-system/v1.4.3/dist/aframe-physics-system.min.js'></script>"
+                          "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
+                          "<script src='https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js'></script>"
+                          "<script src='https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js'></script>"
+                          "<script src='/js/refraction-shader.js'></script>"
+                          "<script src='/js/ar-bubbles.js'></script>"])
+    [:body
+     (hiro-message)
+     [:a-scene {:artoolkit "sourceType: webcam;"
+                :style "pointer-events: none;"
+                :physics "debug: false; gravity: 0.4;"}
+      [:a-plane#bubbleFeedback {:height "4"
+                                ;; :refraction-shader ""
+                                :width "2"
+                                :color "#2EAFAC"
+                                :static-body ""
+                                :rotation "-90 0 0"}]
+      #_[:a-sphere {:color "#2EAFAC"
+                    :refraction-shader ""
+                    :dynamic-body ""}]
+      [:a-entity {:make-bubbles ""}]
+      [:a-marker-camera {:preset "hiro"
+                         }]]]))

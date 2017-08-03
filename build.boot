@@ -54,6 +54,7 @@
     (static :renderer 'site.utils/liquid-marker :page "scenes/liquid-marker/index.html")
     (static :renderer 'site.utils/liquid-marker-weird :page "scenes/liquid-marker-weird/index.html")
     (static :renderer 'site.utils/pak :page "scenes/pak/index.html")
+    (static :renderer 'site.utils/ar-bubbles :page "scenes/ar-bubbles/index.html")
 
     ;; (images-dimensions) ;; Just print the meta data for images
     (target)

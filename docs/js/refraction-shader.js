@@ -4,18 +4,18 @@
 // https://www.clicktorelease.com/code/streetViewReflectionMapping/#51.50700703827454,-0.12791916931155356
 
 AFRAME.registerComponent('refraction-shader', {
-    schema: {color: {type: 'color'}},
+    schema: {
+        refractionIndex: { type : 'number', default: 0.8 }
+    },
     init: function () {
-        const data = this.data;
-
-
+        // Mostly from Jerome Etienne, except refractionRatio -> refractionIndex because that makes more sense to me
         const vertexShader = `varying vec3 vRefract;
-        uniform float refractionRatio;
+        uniform float refractionIndex;
 
         void main() {
             vec4 mPosition = modelMatrix * vec4( position, 1.0 );
             vec3 nWorld = normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );
-            vRefract = normalize( refract( normalize( mPosition.xyz - cameraPosition ), nWorld, refractionRatio ) );
+            vRefract = normalize( refract( normalize( mPosition.xyz - cameraPosition ), nWorld, refractionIndex ) );
 
             gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
         }`
@@ -31,6 +31,7 @@ AFRAME.registerComponent('refraction-shader', {
             vec2 p = vec2(vRefract.x*distance + 0.5, vRefract.y*distance + 0.5);
 
             vec3 color = texture2D( texture, p ).rgb;
+            color.r *= 2;
             gl_FragColor = vec4( color, 1.0 );
         }`
 
@@ -51,7 +52,8 @@ AFRAME.registerComponent('refraction-shader', {
                 time: { value: 0.0 },
                 texture: { type: 't', value: texture },
                 // pull to see the throshold: 0.7-ish solid glass/water ("upsidevdown"), 0.8+ thinner glass ("magnifying glass")
-                refractionRatio: { type: 'f', value: 0.9 },
+                // refractionIndex: { type: 'f', value: 0.7 },
+                refractionIndex: { type: 'f', value: this.data.refractionIndex },
                 // experiment to adjust offset to video-plane. set to 1 for no effect
                 distance: { type: 'f', value: 1 }
             },
@@ -67,12 +69,12 @@ AFRAME.registerComponent('refraction-shader', {
         this.material.uniforms.texture.value.wrapS = this.material.uniforms.texture.value.wrapT = THREE.ClampToEdgeWrapping;
         this.applyToMesh();
         this.el.addEventListener('model-loaded', () => this.applyToMesh());
+        console.log(this.data.refractionIndex)
     },
     /**
      * Update the ShaderMaterial when component data changes.
      */
-    update: function () {
-        // this.material.uniforms.color.value.set(this.data.color);
+    update: function (oldData) {
     },
 
     /**
@@ -84,11 +86,9 @@ AFRAME.registerComponent('refraction-shader', {
             mesh.material = this.material;
         }
     },
-    /**
-     * On each frame, update the 'time' uniform in the shaders.
-     */
     tick: function (t) {
-        this.material.uniforms.time.value = t / 1000;
+        this.material.uniforms.time.value = t / 1000
+        this.material.uniforms.refractionIndex.value = this.data.refractionIndex
+        console.log(this.data.refractionIndex, this.material.uniforms.refractionIndex.value)
     }
-
 })
