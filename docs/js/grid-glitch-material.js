@@ -40,7 +40,6 @@ AFRAME.registerComponent('listen-for-color', {
         gui.add(globalGui.lineColor, 'b');
         gui.add(globalGui, 'tubeRadius').onChange( function(val) {
             console.log(val);
-            document.get
         });
         gui.position.y = "1.6";
         gui.position.z = "-1";
@@ -78,28 +77,6 @@ AFRAME.registerComponent('material-grid-glitch', {
         });
         this.applyToMesh();
         this.el.addEventListener('model-loaded', () => this.applyToMesh());
-
-        // console.log("???", this.material.uniforms.color);
-        // colorCtrl = document.querySelector('#colorControl');
-        // var c = this.material.uniforms.color;
-        // colorCtrl.addEventListener('onChanged', function (e) {
-        //     c = new THREE.Color(0,0, e.detail.value);
-        // });
-        // console.log("BLUE??", document.getElementById('').material.uniforms.color.value.b);
-        // this.el.sceneEl.addEventListener("render-target-loaded", () => {
-        //     camera = this.el.sceneEl.camera;
-        //     renderer = this.el.sceneEl.renderer;
-        //     scene = this.el.sceneEl.object3D;
-        //     var gui = dat.GUIVR.create( 'Hellooo' );
-        //     gui.add(this.material.uniforms.color.value, 'b');
-        //     gui.position.y = "1.6";
-        //     scene.add(gui);
-        //
-        //     // var input = dat.GUIVR.addInputObject( controllerObject3D );
-        //     // scene.add( input ); // this will add helpers to your scene (laser & cursor)
-        //     dat.GUIVR.enableMouse( camera, renderer );
-        // });
-
     },
     /**
      * Update the ShaderMaterial when component data changes.
@@ -107,14 +84,18 @@ AFRAME.registerComponent('material-grid-glitch', {
     update: function () {
         this.material.uniforms.color.value.set(this.data.color);
     },
-
     /**
      * Apply the material to the current entity.
      */
     applyToMesh: function() {
-        const mesh = this.el.getObject3D('mesh');
+        const mesh = this.el.getObject3D('mesh')
         if (mesh) {
-            mesh.material = this.material;
+            var mat = this.material
+            mesh.traverse(function (node) {
+                if (node.isMesh) {
+                    node.material = mat
+                }
+            })
         }
     },
     /**
