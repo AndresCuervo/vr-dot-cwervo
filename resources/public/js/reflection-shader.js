@@ -1,6 +1,4 @@
 AFRAME.registerComponent('reflection-shader', {
-    schema: {
-    },
     init: function () {
         const vertexShader = `varying vec3 vReflect;
 
@@ -43,13 +41,14 @@ AFRAME.registerComponent('reflection-shader', {
      * Apply the material to the current entity.
      */
     applyToMesh: function() {
-        const mesh = this.el.getObject3D('mesh');
+        const mesh = this.el.getObject3D('mesh')
         if (mesh) {
-            mesh.material = this.material;
+            var mat = this.material
+            mesh.traverse(function (node) {
+                if (node.isMesh) {
+                    node.material = mat
+                }
+            })
         }
-    },
-    tick: function (t) {
-        this.material.uniforms.time.value = t / 1000
     }
 })
-

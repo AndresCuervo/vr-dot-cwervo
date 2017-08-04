@@ -1,27 +1,28 @@
-// This is all based off Jerome Etienne's work, and he originally linked to
-// these two sources, so I'll do the same here:
-// http://http.developer.nvidia.com/CgTutorial/cg_tutorial_chapter07.html
-// https://www.clicktorelease.com/code/streetViewReflectionMapping/#51.50700703827454,-0.12791916931155356
-
-AFRAME.registerComponent('refraction-shader', {
+// Based off my refraction shader
+AFRAME.registerComponent('stretchy-glass-shader', {
     schema: {
-        refractionIndex: { type : 'number', default: 0.9 },
+        refractionIndex: { type : 'number', default: 0.33 },
         distance: { type : 'number', default: 1 },
         // TODO :  add tint color to *= the color of gl_FragColor :)
         tintColor : { default : [255, 255, 255] },
-        opacity: { default : 1 }
+        // opacity: { default : 1 }
+        opacity: { default : 0.80 }
     },
     init: function () {
         // Mostly from Jerome Etienne, except refractionRatio -> refractionIndex because that makes more sense to me
         const vertexShader = `varying vec3 vRefract;
         uniform float refractionIndex;
+        uniform float time;
 
         void main() {
             vec4 mPosition = modelMatrix * vec4( position, 1.0 );
             vec3 nWorld = normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );
             vRefract = normalize( refract( normalize( mPosition.xyz - cameraPosition ), nWorld, refractionIndex ) );
 
-            gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+            // position.x += sin(time);
+            vec3 newPos = position;
+            newPos.x += sin(time) + position.x;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(newPos, 1.0 );
         }`
 
         const fragShader = `uniform sampler2D texture;
@@ -102,5 +103,75 @@ AFRAME.registerComponent('refraction-shader', {
         this.material.uniforms.distance.value = this.data.distance
         this.material.uniforms.tintColor.value = this.data.tintColor
         this.material.uniforms.opacity.value = this.data.opacity
+    }
+})
+
+AFRAME.registerShader('hello-world-shader', {
+    schema: {
+        color: { type: 'vec3', default: '0.5 0.5 0.5', is: 'uniform' }
+    },
+
+    vertexShader: [
+        'void main() {',
+        '  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0 );',
+        '}'
+    ].join('\n'),
+
+    fragmentShader: [
+        'uniform vec3 color;',
+        'void main() {',
+        '  gl_FragColor = vec4(color, 1.0);',
+        '}'
+    ].join('\n')
+});
+
+
+AFRAME.registerComponent('hello-shader', {
+    schema: {
+        color: { type: 'vec3', default: '0.8 0 0.8'}
+    },
+    init: function () {
+        // Mostly from Jerome Etienne, except refractionRatio -> refractionIndex because that makes more sense to me
+        const vertexShader = [
+            'void main() {',
+            '  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0 );',
+            '}'
+        ].join('\n')
+
+
+        const fragShader = [
+            'uniform vec3 color;',
+            'void main() {',
+            '  gl_FragColor = vec4(color, 1.0);',
+            '}'
+        ].join('\n')
+
+        var texture = new THREE.VideoTexture(this.el.sceneEl.systems.arjs.arToolkitSource.domElement)
+        texture.minFilter =  THREE.NearestFilter
+
+        this.material  = new THREE.ShaderMaterial({
+            uniforms: {
+                color: { type: 'vec3', value: this.data.color}
+            },
+            vertexShader : vertexShader,
+            fragmentShader : fragShader
+        });
+        this.el.getObject3D.material = new THREE.MeshPhongMaterial( { color: 0xDDAADD } )
+        this.applyToMesh();
+        this.el.addEventListener('model-loaded', () => this.applyToMesh());
+    },
+    /**
+     * Apply the material to the current entity.
+     */
+    applyToMesh: function() {
+        const mesh = this.el.getObject3D('mesh')
+        if (mesh) {
+            var mat = this.material
+            mesh.traverse(function (node) {
+                if (node.isMesh) {
+                    node.material = mat
+                }
+            })
+        }
     }
 })

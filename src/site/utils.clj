@@ -654,9 +654,44 @@
      [:a-scene {:artoolkit "sourceType: webcam;"
                 :style "pointer-events: none;"}
       [:a-box {:position "0 0 0"
-                            :reflection-shader ""
-                            :scale "1 1 1"
-                            :rotation "90 0 0"
-                            :animation__rot "property: rotation; from: 90 0 0; to: 90 360 0; loop: true; easing: linear; dur: 4000;"
-                            }]
+               :reflection-shader ""
+               :scale "1 1 1"
+               :rotation "90 0 0"
+               :animation__rot "property: rotation; from: 90 0 0; to: 90 360 0; loop: true; easing: linear; dur: 4000;"
+               }]
+      [:a-marker-camera {:preset "hiro"}]]]))
+
+(defn ar-medusa-refraction [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "Some simple boxes as a first AR test!"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
+                          "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
+                          "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
+                          "<script src='https://rawgit.com/protyze/aframe-curve-component/master/dist/aframe-curve-component.min.js'></script>"
+                          "<script src='https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js'></script>"
+                          "<script src='/js/refraction-shader.js'></script>"
+                          "<script src='/js/grid-glitch-material.js'></script>"
+                          "<script src='/js/stretchy-glass-shader.js'></script>"
+                          "<script src='https://threejs.org/examples/js/controls/OrbitControls.js'></script>"
+                          "<script src='/js/ar-medusa-misc.js'></script>"
+                          "<script src='https://rawgit.com/andreasplesch/aframe-meshline-component/master/dist/aframe-meshline-component.min.js'></script>"
+                          ])
+    [:body
+     (hiro-message)
+     [:a-scene {:artoolkit "sourceType: webcam;"
+                :style "pointer-events: none;"
+                }
+      [:a-entity#medusa {:position "0.5 0 0"
+                         :obj-model "obj: url(https://andrescuervo.github.io/assets/medusa/medusa_reduced_meshlab.obj)"
+                         :scale "0.015 0.015 0.015"
+                         :rotation "180 0 0"
+                         ;; :obj-model (str "obj: url(/assets/models/pak_1/sphere.obj);")
+                         ;; :scale "2 2 2"
+                         ;; :stretchy-glass-shader ""
+                         ;; :material-grid-glitch ""
+                         :refraction-shader ""
+                         }]
+      ;; [:a-entity {:meshline "lineWidth: 20; path: -2 -1 0, 0 -2 0, 2 -1; color: #E20049"}]
       [:a-marker-camera {:preset "hiro"}]]]))
