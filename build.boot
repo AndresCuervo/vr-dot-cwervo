@@ -57,6 +57,7 @@
     (static :renderer 'site.utils/pak :page "scenes/pak/index.html")
     (static :renderer 'site.utils/ar-bubbles :page "scenes/ar-bubbles/index.html")
     (static :renderer 'site.utils/ar-medusa-refraction :page "scenes/ar-medusa-refraction/index.html")
+    (static :renderer 'site.utils/ar-stretchy-glass :page "scenes/ar-stretchy-glass/index.html")
 
     ;; (images-dimensions) ;; Just print the meta data for images
     (target)

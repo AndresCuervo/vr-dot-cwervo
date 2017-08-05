@@ -19,9 +19,11 @@ AFRAME.registerComponent('stretchy-glass-shader', {
             vec3 nWorld = normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );
             vRefract = normalize( refract( normalize( mPosition.xyz - cameraPosition ), nWorld, refractionIndex ) );
 
-            // position.x += sin(time);
             vec3 newPos = position;
-            newPos.x += sin(time) + position.x;
+            newPos.x += position.x * sin(time);
+            // newPos.x += sin(time) + position.x;
+            // newPos.x = sin( time * 0.55*position.x)+0.5;
+            // newPos.y = sin( time * position.x )+0.5;
             gl_Position = projectionMatrix * modelViewMatrix * vec4(newPos, 1.0 );
         }`
 
@@ -103,75 +105,5 @@ AFRAME.registerComponent('stretchy-glass-shader', {
         this.material.uniforms.distance.value = this.data.distance
         this.material.uniforms.tintColor.value = this.data.tintColor
         this.material.uniforms.opacity.value = this.data.opacity
-    }
-})
-
-AFRAME.registerShader('hello-world-shader', {
-    schema: {
-        color: { type: 'vec3', default: '0.5 0.5 0.5', is: 'uniform' }
-    },
-
-    vertexShader: [
-        'void main() {',
-        '  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0 );',
-        '}'
-    ].join('\n'),
-
-    fragmentShader: [
-        'uniform vec3 color;',
-        'void main() {',
-        '  gl_FragColor = vec4(color, 1.0);',
-        '}'
-    ].join('\n')
-});
-
-
-AFRAME.registerComponent('hello-shader', {
-    schema: {
-        color: { type: 'vec3', default: '0.8 0 0.8'}
-    },
-    init: function () {
-        // Mostly from Jerome Etienne, except refractionRatio -> refractionIndex because that makes more sense to me
-        const vertexShader = [
-            'void main() {',
-            '  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0 );',
-            '}'
-        ].join('\n')
-
-
-        const fragShader = [
-            'uniform vec3 color;',
-            'void main() {',
-            '  gl_FragColor = vec4(color, 1.0);',
-            '}'
-        ].join('\n')
-
-        var texture = new THREE.VideoTexture(this.el.sceneEl.systems.arjs.arToolkitSource.domElement)
-        texture.minFilter =  THREE.NearestFilter
-
-        this.material  = new THREE.ShaderMaterial({
-            uniforms: {
-                color: { type: 'vec3', value: this.data.color}
-            },
-            vertexShader : vertexShader,
-            fragmentShader : fragShader
-        });
-        this.el.getObject3D.material = new THREE.MeshPhongMaterial( { color: 0xDDAADD } )
-        this.applyToMesh();
-        this.el.addEventListener('model-loaded', () => this.applyToMesh());
-    },
-    /**
-     * Apply the material to the current entity.
-     */
-    applyToMesh: function() {
-        const mesh = this.el.getObject3D('mesh')
-        if (mesh) {
-            var mat = this.material
-            mesh.traverse(function (node) {
-                if (node.isMesh) {
-                    node.material = mat
-                }
-            })
-        }
     }
 })

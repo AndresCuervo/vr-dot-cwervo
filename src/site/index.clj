@@ -58,6 +58,9 @@
           [:details
            [:summary "Web-based AR experiences"]
            [:li
+            [:a {:href "/scenes/ar-medusa-refraction/"}
+             "A bust of Medusa made refractive in AR 💡🔮"]]
+           [:li
             [:a {:href "/scenes/ar-bubbles/"}
              "AR bubbles demo (tap or click on your screen!)"]]
            [:li
