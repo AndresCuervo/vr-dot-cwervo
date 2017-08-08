@@ -730,3 +730,35 @@
                          :stretchy-glass-shader ""
                          }]
       [:a-marker-camera {:preset "hiro"}]]]))
+
+(defn floating-panels-reaching1 [{global-meta :meta entries :entries}]
+  (html
+    (root-6-head-element "Reaching1"
+                         ["<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"])
+    [:body
+     [:a-scene
+      [:a-assets
+       ;; Asset-cache the images they're so fucking big
+       ;;
+       ;; also move the let up around the scene!
+       [:a-asset-item {:id "poss" :src "https://andrescuervo.github.io/assets/poss-text/178_td.gltf"}]]
+      (let [count 13
+            xy-pos "0 1.6 "
+            scale-size 80]
+        [:a-entity#memeContainer {:position "0 0 -10"
+                                  :scale "10 10 10"}
+         (for [n (range (inc count))]
+           [:a-plane {:id (str "plane-" count)
+                      :material (str "src: url(/images/meme-test/final_layers_"n".png); alphaTest: 0.5;")
+                      :position (str xy-pos  (- -10 (* (+ count n) 1.6666)))
+                      :depth count
+                      :scale (clojure.string/join " " (map #_(+ % (* n 10)) identity
+                                                           [(* 1.6 (* 1.3 scale-size))
+                                                            scale-size
+                                                            0]))
+                      }])
+         [:a-entity {:id "poss-text" :gltf-model "#poss"
+                     :position "-10 100 13"
+                     :animation_ "property: rotation; from: 0 0 0; to: 0 1 0; dir: alternate; loop: true; easing: linear;"
+                     :scale "2400 2400 2400"}]])
+      [:a-sky {:material "color: black;"}]]]))

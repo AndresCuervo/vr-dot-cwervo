@@ -33,6 +33,12 @@
           [:details
           [:summary "Some WebVR scenes"]
           [:li
+           [:a {:href "https://codepen.io/cwervo/pen/LjWdBM"}
+            "Trying out transparent GIFs, a way to billboard animations in VR!"]]
+          [:li
+           [:a {:href "https://codepen.io/cwervo/pen/zdZKpV"}
+            "A tiny demo for a couple of skies in the same scene, which can envelope the viewer!"]]
+          [:li
            [:a {:href "/scenes/meme-test/"}
             "A collage meme in VR!"]]
           [:li
