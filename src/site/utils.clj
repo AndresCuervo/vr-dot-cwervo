@@ -487,7 +487,7 @@
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
-                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
                           "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
@@ -523,7 +523,7 @@
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
-                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='/js/threex-arliquidmarker.js'></script>"
                           "<script src='/js/liquidmarker_weird.js'></script>"
                           ])
@@ -540,7 +540,7 @@
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
-                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
                           "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
@@ -571,7 +571,7 @@
   (html
     (root-6-head-element "B&W test :)"
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
-                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           ])
     [:body
@@ -602,7 +602,7 @@
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
-                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
                           "<script src='//cdn.rawgit.com/donmccurdy/aframe-physics-system/v1.4.3/dist/aframe-physics-system.min.js'></script>"
@@ -639,7 +639,7 @@
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
-                          "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
+                          "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
                           "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
@@ -664,7 +664,7 @@
     (root-6-head-element "Some simple boxes as a first AR test!"
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
                           ;; "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
-                          "<script src='/js/arjs/aframe-ar_edited.js'></script>"
+                          "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
                           "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
@@ -702,7 +702,7 @@
     (root-6-head-element "Some simple boxes as a first AR test!"
                          ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
                           ;; "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
-                          "<script src='/js/arjs/aframe-ar_edited.js'></script>"
+                          "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
                           "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
