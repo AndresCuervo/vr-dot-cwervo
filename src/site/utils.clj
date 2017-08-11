@@ -687,7 +687,8 @@
       ;;                  debug: false;
       ;;                  sourceUrl: /images/hiro-placeholder.png;" :style "pointer-events: none;"}
       [:a-entity#medusa {:position "0 0 0"
-                         :obj-model "obj: url(https://andrescuervo.github.io/assets/medusa/medusa_reduced_meshlab.obj)"
+                         :geometry "primitive: box;"
+                         ;; :obj-model "obj: url(https://andrescuervo.github.io/assets/medusa/medusa_reduced_meshlab.obj)"
                          :scale "0.015 0.015 0.015"
                          :rotation "180 0 0"
                          ;; :scale "2 2 2"

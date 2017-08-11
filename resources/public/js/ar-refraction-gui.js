@@ -7,7 +7,7 @@ AFRAME.registerComponent('add-refraction-shader-gui', {
             gui.add(torus.components['refraction-shader'].data, 'refractionIndex', 0, 1, 0.01)
             gui.add(torus.components['refraction-shader'].data, 'distance', 0, 4, 0.05)
             gui.add(torus.object3D.position, 'x', 0, 90)
-            gui.add(torus.object3D.position, 'y', -10, 10. 0.1)
+            gui.add(torus.object3D.position, 'y', -10, 10, 0.1)
             // gui.addColor(torus.components['refraction-shader'].data, 'tintColor')
             gui.add(torus.components['refraction-shader'].data, 'opacity', 0, 1, 0.01)
     }
