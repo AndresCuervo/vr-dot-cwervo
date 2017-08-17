@@ -10,7 +10,7 @@
   (html
     ;; Put all this into a panorama-head fn or def?
     (root-head-element "Drag & Drop!"
-                       ["<script src='https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js'></script>"
+                       ["https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js"
                         "<script src='https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.js'></script>"
                         "<script src='https://unpkg.com/vue'></script>"
                         "<script src='/js/drag-and-drop.js'></script>"
@@ -197,7 +197,7 @@
 (defn gltf-tests [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "GLTF Test!"
-                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='/js/model-texture.js'></script>"
                           "<script src='https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js'></script>"])
@@ -245,7 +245,7 @@
 (defn generative-train [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Making a train????"
-                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           ;; "<script src='https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js'></script>"
                           "<script src='https://cdn.rawgit.com/dataarts/dat.guiVR/master/build/datguivr.min.js'></script>"
@@ -339,7 +339,7 @@
 (defn sofia3D [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "¿?¿?¿"
-                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js'></script>"])
     [:body
@@ -386,7 +386,7 @@
 (defn maxprentisvisual-1 [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Illustrated planes"
-                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='/js/move-camera-max-present.js'></script>"
                           "<script src='https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js'></script>"])
@@ -486,7 +486,7 @@
 (defn ar-refraction [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
-                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js'></script>"
                           "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
@@ -522,7 +522,7 @@
 (defn liquid-marker-weird [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
-                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js'></script>"
                           "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='/js/threex-arliquidmarker.js'></script>"
                           "<script src='/js/liquidmarker_weird.js'></script>"
@@ -539,7 +539,7 @@
 (defn liquid-marker [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
-                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js'></script>"
                           "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
@@ -570,7 +570,7 @@
 (defn pak [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "B&W test :)"
-                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js'></script>"
                           "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           ])
@@ -601,7 +601,7 @@
 (defn ar-bubbles [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
-                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js'></script>"
                           "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
@@ -638,7 +638,7 @@
 (defn ar-reflection [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
-                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js'></script>"
                           "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
                           "<script src='https://cdn.rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js'></script>"
@@ -662,7 +662,7 @@
 (defn ar-medusa-refraction [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
-                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js'></script>"
                           ;; "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
                           "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
@@ -700,7 +700,7 @@
 (defn ar-stretchy-glass [{global-meta :meta entries :entries}]
   (html
     (root-6-head-element "Some simple boxes as a first AR test!"
-                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.8.6/dist/aframe-extras.min.js'></script>"
+                         ["<script src='//cdn.rawgit.com/donmccurdy/aframe-extras/v3.10.0/dist/aframe-extras.min.js'></script>"
                           ;; "<script src='https://rawgit.com/jeromeetienne/ar.js/master/aframe/build/aframe-ar.js'></script>"
                           "<script src='/js/arjs/aframe-ar-before-rewrite.js'></script>"
                           "<script src='https://rawgit.com/ngokevin/aframe-animation-component/master/dist/aframe-animation-component.min.js'></script>"
@@ -749,7 +749,7 @@
                                   :scale "10 10 10"}
          (for [n (range (inc count))]
            [:a-plane {:id (str "plane-" count)
-                      :material (str "src: url(/images/meme-test/final_layers_"n".png); alphaTest: 0.5;")
+                      :material (str "src: url(/images/meme-test/final_layers_"n".png); alphaTest: 0.5; npot: true;")
                       :position (str xy-pos  (- -10 (* (+ count n) 1.6666)))
                       :depth count
                       :scale (clojure.string/join " " (map #_(+ % (* n 10)) identity
